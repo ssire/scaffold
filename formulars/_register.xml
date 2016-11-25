@@ -1,0 +1,39 @@
+<Formulars>
+  <Formular>
+    <Name>Demo (test purpose)</Name>
+    <Form>forms/demo</Form>
+  </Formular>
+  <Formular>
+    <Name>Stage (home)</Name>
+    <Form>forms/stage</Form>
+    <Template>templates/search/stage</Template>
+  </Formular>
+  <!-- Entities -->
+  <Formular>
+    <Name>Person</Name>
+    <Form>forms/person</Form>
+  </Formular>
+  <Formular>
+    <Name>Person (search)</Name>
+    <Form>forms/person-search</Form>
+    <Template>templates/search/persons</Template>
+  </Formular>
+  <Formular>
+    <Name>Enterprise</Name>
+    <Form>forms/enterprise</Form>
+  </Formular>
+  <Formular>
+    <Name>Enterprise (search)</Name>
+    <Form>forms/enterprise-search</Form>
+    <Template>templates/search/enterprises</Template>
+  </Formular>
+  <!-- Management -->
+  <Formular>
+    <Name>User profile</Name>
+    <Form>forms/profile</Form>
+  </Formular>
+  <Formular>
+    <Name>User account</Name>
+    <Form>forms/account</Form>
+  </Formular>
+</Formulars>

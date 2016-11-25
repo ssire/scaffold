@@ -1,0 +1,12 @@
+<Form Tag="Stage" StartLevel="3" Layout="fluid" Width="500px" Orientation="horizontal"
+  xmlns:site="http://oppidoc.com/oppidum/site" xmlns:xt="http://ns.inria.org/xtiger">
+  <Row style="margin-bottom:2em">
+    <p class="text-info">Use this formular to create a search mask to navigate into your application data model</p>
+  </Row>
+  <Row>
+    <Field Key="countries" Tag="Countries" Gap="1">Country</Field>
+  </Row>
+  <Bindings/>
+  <Plugins/>
+  <Hints/>
+</Form>

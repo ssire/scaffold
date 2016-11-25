@@ -1,0 +1,55 @@
+<!-- ======================================================================
+                          Platinn Coaching modules
+     ======================================================================= -->
+<modules>
+  <!-- **************** -->
+  <!-- ** Submission ** -->
+  <!-- **************** -->
+  <module id="submission">
+    <item name="submission" method="POST">
+        <model src="modules/submission/submission.xql">
+          <param name="name" value="SearchRequest"/>
+        </model>
+        <action name="POST">
+            <model src="modules/submission/submission.xql">
+              <param name="name" value="SearchRequest"/>
+            </model>
+        </action>
+    </item>
+  </module>
+  <!-- ************ -->
+  <!-- ** Images ** -->
+  <!-- ************ -->
+    <module id="images">
+        <collection name="images" collection="$__collection" method="POST">
+            <model src="oppidum:models/forbidden.xql"/>
+            <action name="POST">
+                <model src="oppistore:images/upload.xql">
+                    <param name="max-size" value="1200x1200"/>
+                    <param name="photo-thumb-size" value="500x500"/>
+                    <param name="group" value="guest"/>
+                </model>
+            </action>
+            <item resource="$2" collection="$__collection/images">
+                <model src="oppistore:images/image.xql"/>
+                <variant name="GET" format="jpeg"/>
+                <variant name="GET" format="gif"/>
+                <variant name="GET" format="png"/>
+            </item>
+        </collection>
+    </module>
+  <!-- ***************** -->
+  <!-- **  Vignettes  ** -->
+  <!-- ***************** -->
+    <module id="vignettes">
+        <collection name="vignettes" collection="$__collection">
+            <model src="oppidum:models/forbidden.xql"/>
+            <item resource="$2" collection="$__collection/images">
+                <model src="oppistore:images/vignette.xql"/>
+                <variant name="GET" format="jpeg"/>
+                <variant name="GET" format="gif"/>
+                <variant name="GET" format="png"/>
+            </item>
+        </collection>
+    </module>
+</modules>

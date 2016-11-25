@@ -1,0 +1,54 @@
+<GlobalInformation>
+  <Description Lang="en" Role="normative">
+    <Selector Name="Functions" Value="Id" Label="Name">
+      <Description>User's functions with associated database roles</Description>
+      <Option Group="admin-system" Role="admin-system" Sight="omni">
+        <Id>1</Id>
+        <Name>System Administrator</Name>
+        <Brief>SysAdmin</Brief>
+      </Option>
+    </Selector>
+    <Selector Name="Services" Value="Id" Label="Name" Test="Services">
+      <Description>Services associated with some roles</Description>
+      <Option>
+        <Id>2</Id>
+        <Name>Business</Name>
+      </Option>
+      <Option>
+        <Id>1</Id>
+        <Name>Organisation</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Financing</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Cooperation</Name>
+      </Option>
+    </Selector>
+    <Selector Name="Sizes" Value="Id" Label="Name">
+      <Description>Enterprise size</Description>
+      <Option>
+        <Id>1</Id>
+        <Name>Micro (1-9 employees)</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>Small (10-49 employees)</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Medium (50-249 employees)</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Large (250 employees and more)</Name>
+      </Option>
+      <Option>
+        <Id>5</Id>
+        <Name>Other</Name>
+      </Option>
+    </Selector>    
+  </Description>
+</GlobalInformation>

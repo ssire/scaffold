@@ -1,0 +1,352 @@
+/* Global application level CSS for all pages */
+*[loc]:hover {
+  background: yellow!important;
+}
+div.navbar {
+  margin-bottom: 0;
+}
+#cct-title h1 {
+  text-align: center;
+  margin: 5px 0 10px;
+  color: #004563;
+}
+#cct-title h1 a {
+  color: #004563;
+  text-decoration: none;
+}
+#cct-logo {
+  height: 34px;
+}
+#c-lgSel {
+  color: #8E8E8E;
+  text-align: right;
+}
+#c-lgSel > a {
+  color: #8E8E8E;
+}
+#c-curLg, #c-lgSel> a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+#c-skip-header {
+  padding-top: 65px;
+}
+#c-skip-timeline {
+  padding-top: 65px;
+}
+a:focus {
+ outline: none;
+ border: none;
+}
+#error, #message {
+  margin: 5px 0 10px 20px;
+}
+#fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(142,176,201);
+  z-index: 500;
+}
+#fixed-inner {
+  margin: 0 auto;
+  width: 940px;
+}
+#c-no-more-fixed-timeline {
+  margin: 15px 0;
+}
+/*#c-fixed-timeline {
+  position: fixed;
+  top: 115px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding-top: 8px;
+  z-index: 10;
+}
+*/div.photo-id {
+  text-align: right;
+  background:#EEE;
+  border: solid 1px #AAA;
+  padding: 1px;
+}
+div.photo-id img {
+  max-height: 68px; /* resize identity photo */
+  max-width: 68px;
+}
+div.span1.photo-id {
+  margin-top: 10px;
+  width: 68px; /* instead of 60 */
+  margin-left: 8px;
+  text-align: center;
+  background: white;
+}
+div.span2.login {
+  margin-top: 10px;
+  text-align: right;
+}
+ul.nav {
+  width: 100%; /* see below c-flush-right */
+}
+#c-flush-right {
+  float:right;
+}
+div.navbar {
+  padding-top: 10px;
+}
+div.navbar-inner {
+  min-height: 30px;
+  padding-left: 0;
+  padding-right: 0;
+}
+#banner {
+  background-image: url(../images/logo-banner.png);
+  background-repeat: no-repeat;
+  height: 60px;
+}
+#c-app-title {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0 0 0 90px;
+  color: #00456B;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(0,69,99);
+}
+h1 {
+  font-size: 1.6em;
+}
+h2 {
+  font-size: 1.4em;
+  line-height: 1.6em;
+}
+h3 {
+  font-size: 1.2em;
+  line-height: 1.2em ;
+}
+h4 {
+  font-size: 1em;
+}
+h5, h6 {
+  font-weight: normal;
+}
+h3 > a {
+  text-decoration: none !important;
+  color: rgb(0,69,99);
+}
+div.row.login {
+  margin-top: 20px;
+}
+#c-busy {
+  background-image: url(../images/busy.gif);
+  background-repeat: no-repeat;
+}
+/* Overwrite Bootstrap */
+.close.ui-close {
+  float: left;
+  padding: 6px;
+}
+/* common to search forms and editing forms */
+.axel-choice-placeholder {
+  font-style: italic;
+  color: #666;
+}
+.text-hint {
+  font-family: Arial;
+  color: #3a87ad;
+  font-size: 15px;
+  font-weight: 300;
+}
+span.sg-hint {
+  display: inline-block;
+  background-color: #04C;
+  color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width: 18px;
+  height: 18px;
+  text-align:center;
+  margin: 0 2px;
+  vertical-align: middle;
+  line-height: 1.5;
+  font-size: 12px;
+}
+span.sg-mandatory {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0);
+  color: #FF4444;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width: 15px;
+  height: 34px;
+  text-align:center;
+  margin: 0 2px;
+  vertical-align: middle;
+  line-height: 1.5;
+  font-size: 25px;
+}
+.tooltip > .tooltip-inner {
+  background-color: #04C;
+}
+.tooltip > .tooltip-arrow {
+  border-right-color: #04C;
+}
+i.c-info {
+  background-image: url("../images/icon-info.png");
+  background-repeat: no-repeat;
+  display: inline;
+  color: lightblue;
+}
+i.c-info:hover {
+  cursor: pointer;
+}
+@media print {
+  #fixed-top {
+    display: none;
+  }
+  i.c-info {
+    display:none;
+  }
+}
+
+/************ Coach Match services ****************/
+
+th[data-sort] {
+  cursor: pointer;
+}
+th {
+  vertical-align: top !important;
+}
+th.ascending > span.head:after {
+  content: " \25B2";
+}
+th.descending > span.head:after {
+  content: " \25BC";
+}
+caption {
+  font-size: 20px;
+  margin: 0.5em;
+  font-family: Helvetica;
+  font-weight: bold;
+  color: rgb(68, 85, 102);
+}
+
+ul.cm-summary {
+  list-style-type: none;
+  margin: 0 0 0 10px
+}
+ul.cm-summary > li {
+  margin-bottom: 10px;
+}
+ul.cm-summary dl {
+  margin-left: 10px;
+}
+ul.cm-summary dt {
+  float: left;
+  clear: left;
+  width: 65px;
+  line-height: 24px;
+}
+ul.cm-summary dd {
+  line-height: 24px;
+  margin-left: 65px;
+}
+span.cm-name {
+  color: #005580;
+  cursor: pointer;
+}
+span.ellipsis {
+  display:inline-block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -o-text-overflow: ellipsis;
+  width:250px;
+}
+
+/********************* 'choice2' *********************/
+
+ul.choice2-drop-container {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border: 1px solid #5897FB !important;
+  border-radius: 0px 0px 4px 4px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+  border-width: medium 1px 1px;
+  border-style: none solid solid;
+  border-color: -moz-use-text-color #5897FB #5897FB;
+  color: black;
+  background: white;
+  z-index: 1000;
+}
+ul.choice2-drop-container li {
+  cursor: pointer;
+  padding: 3px 7px 4px;
+  margin: 0px;
+  min-height: 1em;
+  -moz-user-select: none;
+  font-size: 11px;
+}
+ul.choice2-popup1 {
+  position: absolute;
+  display: none;
+}
+ul.choice2-popup1.show {
+  display: block;
+}
+li.choice2-option {
+  position: relative;
+}
+li.choice2-option:hover ul.choice2-popup2 {
+  display: block;
+}
+ul.choice2-popup2 {
+  display: none;
+  position: absolute;
+  top: 0;
+}
+li.choice2-option.selected, li.choice2-label.selected {
+  font-weight: bold;
+  background: white;
+  color: #3875D7;
+}
+li.choice2-option:hover, li.choice2-label:hover, div.choice2-item.selected:hover, li.choice2-label.selected:hover {
+  background: #3875D7;
+  color: #FFF;
+}
+fieldset.bubble {
+  background: #EEEEEE;
+  padding: 20px;
+  border: 1px solid rgb(140,176,202);
+  border-radius: 6px;
+  margin: 10px 0 20px;
+  font-family: sans-serif;
+}
+fieldset.bubble legend {
+  margin-left: 220px;
+  margin-bottom: 0;
+  width: 500px;
+  text-align: center;
+  background-color: rgb(140,176,202); /*rgb(227,236,241);*/
+  border: 1px solid rgb(140,176,202); /*#DDD;*/
+  border-radius: 8px;
+  color: rgb(0,69,99);
+}
+span.over {
+  color:#900;
+}
+span.fn {
+  text-transform: uppercase;
+}
+@media print {
+  fieldset.bubble, fieldset.bubble legend {
+    border : none;
+  }
+  .noprint {
+    display: none;
+  }
+}

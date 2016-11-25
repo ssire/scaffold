@@ -1,0 +1,50 @@
+<Form xmlns:site="http://oppidoc.com/oppidum/site"
+  Tag="Enterprise" Layout="fluid" Width="540px" Orientation="horizontal">
+  <Row>
+    <site:conditional meet="create" force="true">
+      <div class="text-info well" style="display:relative" xmlns="http://www.w3.org/1999/xhtml">
+        <button class="close" onclick="javascript:$(event.target).parent().hide()" type="button" style="position:relative;top:-15px;right:-10px">×</button>
+        <span loc="enterprise.create.info">Hint message</span>
+      </div>
+    </site:conditional>
+    <Cell Gap="1.5">
+      <Title loc="term.enterprise">Company</Title>
+      <Field Key="enterprise" Tag="Name" Gap="1.25">Name</Field>
+      <Field Key="abbrev" Tag="ShortName" Gap="1.25">Short name</Field>
+      <Field Key="creation" Tag="CreationYear" Gap="2">Year of establishment</Field>
+      <Field Key="size" Tag="SizeRef" Gap="2">Company size</Field>
+      <Field Key="domain-activity" Tag="DomainActivityRef" Gap="1">NACE</Field>
+      <Field Key="website" Tag="WebSite" Gap="1">Website</Field>
+      <Field Key="activities" Tag="MainActivities" Gap="1">Main activities</Field>
+      <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="1">Markets</Field>
+    </Cell>
+  </Row>
+  <Separator/>
+  <Row>
+    <Cell Gap="1.5" Tag="Address">
+      <Title loc="form.legend.address">Adresse</Title>
+      <Field Key="street" Tag="StreetNameAndNo" W="12" Gap="1">Street &amp; no</Field>
+      <Field Key="box" Tag="PO-Box" Gap="1">Box number</Field>
+      <Field Key="careof" Tag="Co" Gap="1">c/o</Field>
+      <Field Key="npa" Tag="PostalCode" Gap="1">Postcode</Field>
+      <Field Key="town" Tag="Town" Gap="1">City</Field>
+      <Field Key="nuts" Tag="Nuts" Gap="1">Nutscode</Field>
+      <Field Key="country" Tag="Country" Gap="1">Country</Field>
+    </Cell>
+  </Row>
+  <Bindings>
+    <Require Keys="enterprise town"/>
+    <Enforce>
+      <RegExp Keys="creation" Message-loc="validation.year"
+        Message="Enter a year as a number with 4 digits"
+        >^\s*$|^\d{4}$</RegExp>
+    </Enforce>
+  </Bindings>
+  <Plugins>
+    <Input Keys="abbrev creation activities street box careof npa town nuts"/>
+    <Input Keys="website" Media="url"/>
+  </Plugins>
+  <Hints>
+    <Hint Keys="enterprise" meet="create" loc="enterprise.name.hint">Hint message</Hint>
+  </Hints>
+</Form>

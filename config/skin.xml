@@ -1,0 +1,89 @@
+<!-- ========================================================================
+                               Scaffold skin
+========================================================================= -->
+<skin xmlns="http://oppidoc.com/oppidum/skin">
+  <!-- Contribs and dependencies -->
+  <handler name="msg-or-err">
+    <predef module="oppidum">flash</predef>
+  </handler>
+  <profile name="jquery" type="predef">
+    <script src="contribs/jquery/jquery-1.7.1.min.js"/>
+  </profile>
+  <profile name="photo" type="predef">
+    <link href="contribs/axel/bundles/photo/photo.css"/>
+    <script type="text/javascript"> function finishTransmission(status, result) {
+  // var pwin = window.parent; 
+  // iff template run from inside an iframe ! 
+  var manager = window.xtiger.factory('upload').getInstance(document); 
+  if (manager) { manager.reportEoT(status, result); } 
+}
+    </script>
+  </profile>
+  <profile name="axel-1.3-no-jquery" type="predef">
+    <link href="contribs/axel-1.3/axel.css"/>
+    <script src="contribs/axel-1.3/axel.js"/>
+    <script data-bundles-path="contribs/axel/bundles" data-when="deferred" src="contribs/axel/axel-forms.js"/>
+  </profile>
+  <profile name="date" type="predef">
+    <link href="contribs/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.min.css"/>
+    <script src="contribs/jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.min.js"/>
+  </profile>
+  <profile name="select2" type="predef">
+    <link href="contribs/select2/select2.css"/>
+    <link href="contribs/select2/select2-bootstrap.css"/>
+    <script src="contribs/select2/select2.min.js"/>
+  </profile>
+  <profile name="axel">
+    <predef>axel-1.3-no-jquery</predef>
+  </profile>
+  <!-- Included on all pages (TODO: jQuery CDN version ?)-->
+  <profile name="*">
+    <link href="css/forms.css"/>
+    <predef>jquery</predef>
+    <script src="lib/app.js"/>
+  </profile>
+  <!-- Standard application mesh -->
+  <profile name="home" type="mesh">
+    <link href="contribs/bootstrap-2.3.2/css/bootstrap.css"/>
+    <link href="css/site.css"/>
+    <predef avoid="error()">axel-1.3-no-jquery</predef>
+    <predef avoid="error()">date</predef>
+    <script src="contribs/bootstrap-2.3.2/js/bootstrap.min.js"/>
+    <predef>select2</predef>
+  </profile>
+  <!-- /forms skin -->
+  <profile name="formulars">
+    <script src="lib/formulars.js"/>
+    <script src="lib/extensions.js"/>
+    <predef>photo</predef>
+  </profile>
+  <!-- /stage skin -->
+  <profile name="stage">
+    <link href="css/search.css"/>
+    <link href="css/stage.css"/>
+    <script src="lib/search.js"/>
+    <script src="lib/extensions.js"/>
+  </profile>
+  <!-- /management skin -->
+  <profile name="management">
+    <link href="css/forms.css"/>
+    <link href="css/export.css"/>
+    <script src="lib/extensions.js"/>
+    <script src="lib/management.js"/>
+    <script src="contribs/excellentexport/excellentexport.js"/>
+    <script src="contribs/tablesorter/jquery.tablesorter.min.js"/>
+    <predef>photo</predef>
+  </profile>
+  <!-- /persons, /enterprises skin -->
+  <profile name="search">
+    <link href="css/search.css"/>
+    <link href="css/forms.css"/>
+    <script src="lib/search.js"/>
+    <script src="lib/extensions.js"/>
+    <predef>photo</predef>
+  </profile>
+  <!-- /test/* skin -->
+  <profile name="test">
+    <script src="lib/test.js"/>
+  </profile>
+</skin>

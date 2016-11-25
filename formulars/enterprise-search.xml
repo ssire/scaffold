@@ -1,0 +1,12 @@
+<Form Tag="SearchEnterprisesRequest" Width="680px" Wrapper="none">
+  <!-- <Title Render="h2" style="text-align:center;margin: 10px 0 15px 140px" loc="form.title.enterprise.search">Recherche d'entreprises</Title> -->
+  <Row>
+    <Field Key="enterprises" Tag="Enterprises" Gap="2" loc="term.name" Placeholder-loc="content.any">Nom</Field>
+    <Field Key="towns" Tag="Towns" Gap="2" loc="term.town" Placeholder-loc="content.any.f">Localité</Field>
+    <Field Key="countries" Tag="Countries" Gap="2" loc="term.country" Placeholder-loc="content.any">Pays</Field>
+    <Field Key="sizes" Tag="Sizes" Gap="2" loc="term.enterpriseSize" Placeholder-loc="content.any.f">Taille d'entreprise</Field>
+    <Field Key="domains-of-activities" Tag="DomainsOfActivities" Gap="2" loc="term.domainActivity" Placeholder-loc="content.any">NACE</Field>
+    <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="2" loc="term.targetedMarkets" Placeholder-loc="content.any">Marchés ciblés</Field>
+    <Field Key="persons" Tag="Persons" Gap="2" loc="term.persons" Placeholder-loc="content.any">Personnes</Field>
+  </Row>
+</Form>

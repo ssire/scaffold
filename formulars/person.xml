@@ -1,0 +1,75 @@
+<Form Tag="Person" Layout="fluid" Width="500px" Orientation="horizontal"
+  xmlns:site="http://oppidoc.com/oppidum/site" xmlns:xt="http://ns.inria.org/xtiger"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <Row>
+    <Field Key="sex" Tag="Sex" loc="term.sex" W="5" Gap="1.4">Sexe</Field>
+    <Field Key="civility" Tag="Civility" loc="term.civility" W="7" Gap="1">Civilité</Field>
+  </Row>
+  <Row>
+    <Cell Tag="Name">
+      <Field Key="lastname" Tag="LastName" loc="term.surname" Gap="1.4">Last Name</Field>
+      <Field Key="firstname" Tag="FirstName" loc="term.firstName" Gap="1.4">Name</Field>
+    </Cell>
+  </Row>
+  <Row>
+    <Cell W="4" Class="well">
+      <site:conditional avoid="read" force="true">
+        <Photo Tag="Photo" Base="/persons" Controller="/persons/images"/>
+      </site:conditional>
+      <site:conditional meet="read" force="true">
+        <Constant Tag="Photo" Media="image" Base="/persons/"/>
+      </site:conditional>
+    </Cell>
+    <Cell W="8" Gap="0" Tag="Contacts">
+      <Title>Contacts</Title>
+      <Row>
+        <Field Key="phone" Tag="Phone" loc ="term.phoneAbbrev" Gap="1">Téléphone</Field>
+        <Field Key="mobile" Tag="Mobile" loc="term.mobile" Gap="1">Mobile</Field>
+        <Field Key="email" Tag="Email" loc="term.email" Gap="1">Courriel</Field>
+      </Row>
+    </Cell>
+  </Row>
+  <Row>
+    <Field Key="countries" Tag="Country" loc="term.country" Gap="1">Country</Field>
+    <Field Key="enterprise" Tag="EnterpriseRef" loc="term.enterprise" Gap="1">Entreprise</Field>
+    <Field Key="function" Tag="Function" loc="term.function" Gap="1">Fonction</Field>
+  </Row>
+  <site:conditional meet="read" force="true">
+    <Separator/>
+    <Row>
+      <xhtml:div class="span6">
+        <h3 loc="term.role">rôle</h3>
+      </xhtml:div>
+      <xhtml:div class="span6">
+        <h3 loc="term.details">Détails</h3>
+      </xhtml:div>
+      <xt:repeat minOccurs="0" maxOccurs="*" label="Roles">
+        <xhtml:div class="span6" style="margin-left:0;margin-bottom:10px">
+          <xt:use param="class=uneditable-input" label="Function" types="constant"/>
+        </xhtml:div>
+        <xhtml:div class="span6" style="margin-bottom:10px">
+          <xt:use param="class=uneditable-input span a-control" label="Name" types="constant"/>
+          <xhtml:span style="display:none"><xt:menu-marker/></xhtml:span>
+        </xhtml:div>
+      </xt:repeat>
+    </Row>
+  </site:conditional>
+  <Bindings>
+    <Require Keys="firstname lastname email"/>
+    <Enforce>
+      <RegExp Keys="email" Message-loc="validation.email"
+        Message="L'addrese de courrier électronique n'est pas bien formée (nom@serveur.domaine)"
+        >^\s*$|^\w([-.]?\w)*@\w([-.]?\w)+\.[a-z]{2,}$</RegExp>
+      <!-- <RegExp Keys="phone mobile" Message-loc="validation.phone"
+        Message="Vous devez saisir un numéro de téléphone composé de chiffres uniquement séparés par des espaces"
+        >^\+?\s*[\d ]{2,}$</RegExp> -->
+    </Enforce>
+  </Bindings>
+  <Plugins>
+    <Input Keys="civility firstname phone mobile sortstring function"/>
+    <Input Keys="email" Media="email"/>
+  </Plugins>
+  <Hints>
+    <Hint Keys="lastname" meet="create" loc="person.name.hint" data-placement="right">message d'aide à définir dans le dictionnaire</Hint>
+  </Hints>  
+</Form>

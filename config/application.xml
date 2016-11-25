@@ -1,0 +1,14 @@
+<Application>
+  <Security>
+    <Omnipotent>
+      <Meet>u:admin g:admin-system</Meet>
+    </Omnipotent>
+    <Resources>
+      <Resource Name="Person">
+        <Action Type="update">
+          <Meet Format="eval">access:get-current-person-id() eq $resource/Id/text()</Meet>
+        </Action>
+      </Resource>
+    </Resources>
+  </Security>
+</Application>

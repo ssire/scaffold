@@ -1,0 +1,12 @@
+<Form Tag="SearchPersonsRequest" Width="680px" Wrapper="none">
+  <Row>
+    <!-- <Field Key="countries" Tag="Countries" Gap="2" loc="term.country" Placeholder-loc="content.any">Country</Field> -->
+    <Field Key="persons" Tag="Persons" Gap="2" loc="term.name" Placeholder-loc="content.any">Name</Field>
+    <Field Key="countries" Tag="Countries" Gap="2" loc="term.country" Placeholder-loc="content.any">Country</Field>
+    <Field Key="enterprises" Tag="Enterprises" Gap="2" loc="term.enterprise" Placeholder-loc="content.any">Company</Field>
+    <Field Key="functions" Tag="Functions" Gap="2" loc="term.role" Placeholder-loc="content.any">Role</Field>
+  </Row>
+  <Hints>
+    <Hint Keys="countries" data-placement="right">Search in the person's profile, fallback to search if the person has coached an activity or if s/he is registered as a KAM or KAM coordinator in one of the selected countries</Hint>
+  </Hints>
+</Form>

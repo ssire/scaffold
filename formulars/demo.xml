@@ -1,0 +1,57 @@
+<Form Tag="Character" Style="width:800px;background:gray">
+  <Title>Demonstation formular</Title>
+  <Row>
+    <Cell W="12" Gap="1.6" Tag="RichText">
+      <Title loc="form.legend.enterpriseContext">Rich text</Title>
+      <Field Key="redaction" Tag="Redaction" Gap="0">Free text (with static menu)</Field>
+    </Cell>
+  </Row>
+  <Separator/>
+  <Row>
+    <Field Key="none" Tag="None">No Gap</Field>
+    <Field Key="none" Tag="None" Gap="0">Gap 0</Field>
+    <Field Key="none" Tag="None" Gap="1">Gap 1</Field>
+    <Field Key="none" Tag="None" Gap="2">Gap 2</Field>
+    <Field Key="none" Tag="None" Gap="3">Gap 3</Field>
+  </Row>  
+  <Separator/>
+  <Row>
+    <Field Key="name" Tag="FirstName" W="6" Gap="1">Name</Field>
+    <Field Key="surname" Tag="LastName" W="6" Gap="2">Surname</Field>
+  </Row>
+  <Separator/>
+  <Row>
+    <Cell W="5" Tag="Facts">
+      <Cell Gap="2">
+        <Title>Characteristics</Title>
+        <Field Key="age" W="12" Tag="Age" Gap="1">Age</Field>
+        <Field Key="height" Tag="Height" Gap="1">Size</Field>
+        <Field Key="weight" Tag="Weight" Gap="1">Weight</Field>
+      </Cell>
+      <Field Key="eyes" Tag="Eyes" Gap="2">Eye color</Field>
+      <Field Key="hairs" Tag="Hairs" Gap="2">Hair color</Field>
+    </Cell>
+    <Cell W="7">
+      <Cell W="12" Gap="2" Tag="Tastes">
+        <Title>Goûts</Title>
+        <Row><Field Key="animal" Tag="Animal" W="12" Gap="2">Favorite pet</Field></Row>
+        <Row><Field Key="author" Tag="Author" W="12" Gap="2">Favorite author</Field></Row>
+        <Row><Field Key="drink" Tag="Drink" W="12" Gap="2">Favorite drink</Field></Row>
+      </Cell>
+      <Row>
+          <Field Key="portray" Tag="Description" W="12" Gap="1">Portray</Field>
+       </Row>
+    </Cell>
+  </Row>
+  <Bindings>
+    <Require Keys="name surname"/>
+    <Enforce>
+      <RegExp Keys="age" Message="Age can only contain numbers" Pattern="[0-9]*">^\s*$|^\d*$</RegExp>
+    </Enforce>
+  </Bindings>  
+  <Plugins>
+    <Input Keys="name surname age height weight hairs eyes animal author drink"/>
+    <RichText Keys="portray" Menu="dynamic"/>
+    <RichText Keys="redaction" Menu="static"/>
+  </Plugins>
+</Form>

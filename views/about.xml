@@ -1,0 +1,27 @@
+<site:view xmlns:site="http://oppidoc.com/oppidum/site" xmlns="http://www.w3.org/1999/xhtml">
+  <site:window><title>Oppidum scaffold</title></site:window>
+  <site:content>
+    <fieldset class="bubble">
+      <legend>Case tracker pilote application</legend>
+      <p>This application is a scaffold to create applications with the Oppidum and Supergrid frameworks developped by Oppidoc, as described in the <a href="https://github.com/ssire/case-tracker-manual" target="_blank">Case tracker software documentation</a>.</p>
+      <p>This application has been supported by the CoachCom2020 coordination and support action (H2020-635518; 09/2014-08/2016). Coachcom 2020 has been selected by the European Commission to develop a framework for the business innovation coaching offered to the beneficiaries of the Horizon 2020 SME Instrument.</p>
+      <p>Send feedback and questions to Stéphane Sire: <a href="mailto:s.sire@oppidoc.fr?subject=Oppidum scaffold application">s.sire@oppidoc.fr</a></p>
+    </fieldset>
+    <fieldset class="bubble">
+      <legend>How to develop a new application<br/> with case tracker pilote application ?</legend>
+      <p>Fork this project on github and customize it to create your own case tracker application</p>
+      <p>Alternatively you can copy/paste library files (in <i>lib</i> or <i>app</i> folder) or module files (in <i>modules</i> folder) to create a new application.</p>
+    </fieldset>
+    <fieldset class="bubble">
+      <legend>How to use the application ?</legend>
+      <p>Configure your web browser to :</p>
+      <ul>
+        <li>accept cookies</li>
+        <li>enable Javascript</li>
+      </ul>
+      <p>After a delay without any action (60') you will be disconnected from the server. In case you had left some windows opened and try to send some commands to the server through these windows you will get an error message telling you are not authorized to do so.</p>
+      <p>The solution is to reload the page to get the identification prompt and to identify again. If this happens inside an editor window that you didn't save, do not reload that window but instead start a new session from a new window, then you will be able to save your content from the first legacy window. Anyway it is always best to save your content before leaving the computer or before switching to another activity.</p>
+      <p class="text-warning" style="font-size: 120%">This application is designed to run on <b>Firefox</b>, USE this browser before raising any issue. It has been reported to work on Chrome and Safari too, but this is untested.</p>
+    </fieldset>
+  </site:content>
+</site:view>

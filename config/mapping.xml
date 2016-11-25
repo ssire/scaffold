@@ -1,0 +1,345 @@
+<!-- ======================================================================
+                             Platinn Coaching mapping
+     ====================================================================== -->
+<site db="/db/sites/scaffold" confbase="/db/www/scaffold" startref="about" supported="login logout" key="scaffold" mode="dev" languages="en" default="en">
+  <item name="me" supported="forgotten" method="POST" epilogue="home">
+    <model src="modules/users/password.xql"/>
+    <view src="modules/users/password.xsl"/>
+    <action name="POST" epilogue="home">
+      <model src="modules/users/password.xql"/>
+      <view src="modules/users/password.xsl"/>
+    </action>
+    <action name="forgotten" epilogue="home">
+      <!-- GET or POST -->
+      <access>
+        <rule action="GET POST" role="all"/>
+        <!-- visible to anyone -->
+      </access>
+      <model src="modules/users/password.xql"/>
+      <view src="modules/users/password.xsl"/>
+    </action>
+  </item>
+  <!-- *********** -->
+  <!-- ** stage ** -->
+  <!-- *********** -->
+  <item name="stage" method="POST" epilogue="home">
+    <access>
+      <rule action="GET POST" role="u:admin g:users" message="registered user"/>
+    </access>
+    <model src="modules/stage/search.xql"/>
+    <view src="modules/stage/search.xsl"/>
+    <action name="POST" epilogue="*">
+      <model src="modules/stage/search.xql"/>
+      <view src="modules/stage/search.xsl"/>
+    </action>
+    <import module="submission" param="name=SearchStageRequest"/>
+  </item>
+  <!-- ***************** -->
+  <!-- ** enterprises ** -->
+  <!-- ***************** -->
+  <collection name="enterprises" supported="add" method="POST" epilogue="home" collection="enterprises" resource="enterprises.xml">
+    <model src="modules/enterprises/search.xql"/>
+    <view src="modules/enterprises/search.xsl"/>
+    <action name="POST" epilogue="*">
+      <model src="modules/enterprises/search.xql"/>
+      <view src="modules/enterprises/search.xsl"/>
+    </action>
+    <import module="submission" param="name=SearchEnterprisesRequest"/>
+    <action name="add">
+      <model src="modules/enterprises/enterprise.xql"/>
+    </action>
+    <item method="POST">
+      <model src="modules/enterprises/enterprise.xql"/>
+      <action name="POST">
+        <model src="modules/enterprises/enterprise.xql"/>
+      </action>
+      <variant name="GET" format="blend">
+        <view src="views/blend.xsl"/>
+      </variant>
+      <variant name="GET" format="modal">
+        <view src="modules/enterprises/modal.xsl"/>
+      </variant>
+      <item name="delete" method="POST DELETE">
+        <!-- delete controller -->
+        <action name="POST">
+          <model src="modules/enterprises/delete.xql"/>
+        </action>
+        <action name="DELETE">
+          <model src="modules/enterprises/delete.xql"/>
+        </action>
+      </item>
+    </item>
+  </collection>
+  <!-- ************* -->
+  <!-- ** persons ** -->
+  <!-- ************* -->
+  <collection name="persons" supported="add" method="POST" epilogue="home" collection="persons" resource="persons.xml">
+    <model src="modules/persons/search.xql"/>
+    <view src="modules/persons/search.xsl"/>
+    <action name="POST" epilogue="*">
+      <model src="modules/persons/search.xql"/>
+      <view src="modules/persons/search.xsl"/>
+    </action>
+    <import module="submission" param="name=SearchPersonsRequest"/>
+    <collection name="images" method="POST">
+      <model src="oppidum:models/forbidden.xql"/>
+      <item resource="$3" collection="persons/images">
+        <access>
+          <rule action="GET" role="all"/>
+        </access>
+        <model src="modules/images/image.xql"/>
+        <variant name="GET" format="jpeg"/>
+        <variant name="GET" format="jpg"/>
+        <variant name="GET" format="png"/>
+        <variant name="GET" format="gif"/>
+      </item>
+      <action name="POST">
+        <model src="modules/images/upload.xql">
+          <param name="group" value="users"/>
+          <param name="max-size" value="400x400"/>
+        </model>
+      </action>
+    </collection>
+    <action name="add">
+      <model src="modules/persons/person.xql"/>
+      <view src="modules/persons/ajax.xsl"/>
+    </action>
+    <item method="POST">
+      <model src="modules/persons/person.xql"/>
+      <action name="POST">
+        <model src="modules/persons/person.xql"/>
+        <view src="modules/persons/ajax.xsl"/>
+      </action>
+      <variant name="GET" format="blend">
+        <view src="views/blend.xsl"/>
+      </variant>
+      <variant name="GET" format="modal">
+        <view src="modules/persons/modal.xsl"/>
+      </variant>
+      <item name="delete" method="POST DELETE">
+        <!-- delete controller -->
+        <action name="POST">
+          <model src="modules/persons/delete.xql"/>
+        </action>
+        <action name="DELETE">
+          <model src="modules/persons/delete.xql"/>
+        </action>
+      </item>
+    </item>
+  </collection>
+  <!-- *************** -->
+  <!-- ** templates ** -->
+  <!-- *************** -->
+  <item name="templates" collection="templates">
+    <model src="oppidum:models/templates.xql"/>
+    <item name="search">
+      <item name="stage" epilogue="stage.xhtml">
+        <model src="modules/stage/form.xql"/>
+      </item>
+      <item name="persons" epilogue="person-search.xhtml">
+        <model src="modules/persons/form.xql"/>
+      </item>
+      <item name="enterprises" epilogue="enterprise-search.xhtml">
+        <model src="modules/enterprises/form.xql"/>
+      </item>
+    </item>
+    <item name="demo" epilogue="demo.xhtml">
+      <model src="modules/demo/form.xql"/>
+    </item>
+    <item name="person" epilogue="person.xhtml">
+      <model src="modules/persons/form.xql"/>
+    </item>
+    <item name="enterprise" epilogue="enterprise.xhtml">
+      <model src="modules/enterprises/form.xql"/>
+    </item>
+    <item name="profile" epilogue="profile.xhtml">
+      <model src="modules/management/form.xql"/>
+    </item>
+    <item name="account" epilogue="account.xhtml">
+      <model src="modules/management/form.xql"/>
+    </item>
+  </item>
+  <!-- ************ -->
+  <!-- ** admin  ** -->
+  <!-- ************ -->
+  <item name="admin" method="POST">
+    <access>
+      <rule action="GET POST" role="u:admin" message="admin"/>
+    </access>
+    <model src="oppidum:modules/admin/restore.xql"/>
+    <view src="oppidum:modules/admin/restore.xsl"/>
+    <action name="POST">
+      <model src="oppidum:modules/admin/restore.xql"/>
+      <view src="oppidum:modules/admin/restore.xsl"/>
+    </action>
+    <item name="deploy">
+      <access>
+        <rule action="GET" role="all"/>
+      </access>
+      <model src="scripts/deploy.xql"/>
+    </item>
+    <item name="validate">
+      <access>
+        <rule action="GET" role="u:admin"/>
+      </access>
+      <model src="scripts/validate.xql"/>
+    </item>
+    <item name="hold">
+      <model src="models/hold.xql"/>
+    </item>
+  </item>
+  <!-- ***************** -->
+  <!-- ** management  ** -->
+  <!-- ***************** -->
+  <item name="management" epilogue="home">
+    <access>
+      <rule action="GET" role="u:admin g:admin-system" message="system administrator"/>
+    </access>
+    <model src="modules/management/management.xql"/>
+    <view src="modules/management/management.xsl"/>
+    <collection name="users">
+      <access>
+        <rule action="GET" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/management/user.xql"/>
+      <view src="modules/management/user.xsl"/>
+    </collection>
+    <item name="thesaurus" method="POST">
+      <access>
+        <rule action="GET POST" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/thesaurus/thesaurus.xql"/>
+      <action name="POST">
+        <model src="modules/thesaurus/thesaurus.xql"/>
+      </action>
+    </item>
+    <item name="params" method="POST">
+      <access>
+        <rule action="GET POST" role="u:admin" message="system administrator"/>
+      </access>
+      <model src="modules/management/params.xql"/>
+      <view src="modules/management/params.xsl"/>
+      <action name="POST">
+        <model src="modules/management/params.xql"/>
+      </action>
+    </item>
+    <item name="groups">
+      <access>
+        <rule action="GET" role="u:admin" message="system administrator"/>
+      </access>
+      <model src="modules/management/groups.xql"/>
+    </item>
+    <item name="roles">
+      <access>
+        <rule action="GET" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/management/roles.xql"/>
+      <view src="modules/management/roles.xsl"/>
+    </item>
+    <item name="workflow">
+      <access>
+        <rule action="GET" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/management/workflow.xql"/>
+    </item>
+    <item name="login">
+      <access>
+        <rule action="GET" role="u:admin g:admin-system" message="administrateur système"/>
+      </access>
+      <model src="modules/management/login.xql"/>
+      <view src="modules/management/login.xsl"/>
+    </item>
+    <item name="access">
+      <access>
+        <rule action="GET" role="u:admin g:admin-system" message="administrateur système"/>
+      </access>
+      <model src="modules/management/login.xql"/>
+      <view src="modules/management/access.xsl"/>
+    </item>
+  </item>
+  <!-- ************** -->
+  <!-- ** profiles ** -->
+  <!-- ************** -->
+  <collection name="profiles" collection="persons" resource="persons.xml">
+    <item method="POST">
+      <access>
+        <rule action="GET POST" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/users/profile.xql"/>
+      <action name="POST">
+        <model src="modules/users/profile.xql"/>
+      </action>
+    </item>
+  </collection>
+  <!-- ************** -->
+  <!-- ** accounts ** -->
+  <!-- ************** -->
+  <collection name="accounts" collection="persons" resource="persons.xml">
+    <item method="POST" supported="delete">
+      <access>
+        <rule action="GET POST delete" role="u:admin g:admin-system" message="system administrator"/>
+      </access>
+      <model src="modules/users/account.xql"/>
+      <action name="POST">
+        <model src="modules/users/account.xql"/>
+      </action>
+      <action name="delete">
+        <!-- delete controller -->
+        <model src="modules/users/account.xql"/>
+      </action>
+    </item>
+  </collection>
+  <!-- ***************** -->
+  <!-- ** about  ** -->
+  <!-- ***************** -->
+  <item name="about" epilogue="home" resource="file:///views/about.xml" collection="docs">
+    <access>
+      <rule action="GET" role="all"/>
+    </access>
+  </item>
+  <!-- ************ -->
+  <!-- ** forms  ** -->
+  <!-- ************ -->
+  <item name="forms" resource="file:///formulars/_register.xml" supported="install" epilogue="home">
+    <access>
+      <rule action="GET" role="u:admin g:users" message="member"/>
+    </access>
+    <view src="modules/formulars/simulator.xsl"/>
+    <item resource="file:///formulars/$2.xml"/>
+    <action name="install" resource="">
+      <model src="modules/formulars/install.xql"/>
+    </action>
+  </item>
+  <!-- *************************** -->
+  <!-- ** dictionary (optional) ** -->
+  <!-- *************************** -->
+  <item name="dictionary" method="POST" supported="test export">
+    <action name="POST">
+      <model src="modules/dictionary/update.xql"/>
+    </action>
+    <action name="test">
+      <model src="modules/dictionary/test.xql"/>
+    </action>
+    <action name="export">
+      <model src="modules/dictionary/export.xql"/>
+    </action>
+  </item>
+  <!-- *************************** -->
+  <!-- **  benchmark (optional) ** -->
+  <!-- *************************** -->
+  <item name="benchmark">
+    <model src="modules/benchmark/fibonacci.xql"/>
+    <view src="modules/benchmark/fibonacci.xsl"/>
+  </item>
+  <!-- ********************** -->
+  <!-- **  test (optional) ** -->
+  <!-- ********************** -->
+  <collection name="test">
+    <item name="units" epilogue="home">
+      <model src="test/units.xql"/>
+    </item>
+    <item name="selectors" epilogue="home">
+      <model src="test/selectors.xql"/>
+    </item>
+  </collection>
+</site>

@@ -1,0 +1,35 @@
+<Form Tag="UserProfile" Width="500px"
+  xmlns:site="http://oppidoc.com/oppidum/site">
+  <Title>Compte utilisateur</Title>
+  <Row>
+    <Field Key="email" Tag="Email" Gap="2">User's email</Field>
+  </Row>
+  <site:conditional meet="create" force="true">
+    <Row>
+      <Field Key="create-login" Tag="Login" Gap="2">Login name</Field>
+    </Row>
+  </site:conditional>
+  <site:conditional meet="update" force="true">
+    <Row>
+      <Field Key="cur-login" Tag="Username" Gap="2">Login name</Field>
+      <Field Key="update-login" Tag="Login" Gap="2">New login name</Field>
+    </Row>
+    <Row>
+      <Field Key="access" Tag="Access" Gap="2" Offset="7" W="5">Access</Field>
+    </Row>
+  </site:conditional>
+  <Bindings>
+    <Require Keys="create-login update-login"/> 
+    <Enforce>
+      <RegExp Keys="create-login update-login" Message-loc="validation.login" Message="Entrez au moins 5 caractères alphanumériques y compris le signe - et sans espace">^\s*[\w-]{5,}\s*$</RegExp>
+    </Enforce>
+  </Bindings>
+  <Plugins>
+    <Input Keys="create-login update-login"/>
+  </Plugins>
+  <Hints>
+    <Hint Keys="create-login" data-placement="right">Enter a login name then click on "Create" to create the user's login and generate a password. Both will be send at the email address of the user. If no email address is visible then you need to edit the person's record in the database to add some.</Hint>
+    <Hint Keys="update-login">Enter a new login and click on "Change" to change the login name of the user. The new login and the new generated password will be send to the email address of the user</Hint>
+    <Hint Keys="access">If the Access fields displays "no" then the user has a login name but no access to the database. To fix it you should first remove the login by clicking on the "Delete" button. Then you should create the login again using the "create" link in the Access column on the right of the window.</Hint>
+  </Hints>
+</Form>

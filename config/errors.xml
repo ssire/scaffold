@@ -1,0 +1,512 @@
+<errors>
+  <error type="CUSTOM" code="500">
+    <message lang="en">%s</message>
+  </error>
+  <error type="LOGOUT-FOR-MAINTENANCE" code="503">
+    <message lang="en">You have been automatically logged out from the application to allow us to perform some maintenance operations. We apologize for any inconvenience. Please come back later.</message>
+  </error>
+  <error type="BROWSER-WARNING" code="500">
+    <message lang="en">The Case Tracker application is actually compatible with the Firefox web browser. It has been reported to work on Chrome and Safari too. We have plan to support recent versions of Internet Explorer but this is not available yet. Since your web browser seems to be Internet Explorer (user agent : "%s") please switch to another supported web brower in the meantime. We apologize for the inconvenience.</message>
+  </error>
+  <error type="HOLD" code="401">
+    <message lang="fr">Maintenance de l'application, merci de revenir dans quelques minutes...</message>
+    <message lang="en">Maintenance in progress, please come back in a few minutes...</message>
+  </error>
+  <error type="SHUTDOWN" code="401">
+    <message lang="en">This server is shutdown for maintenance from %s until %s</message>
+  </error>
+  <error type="FORBIDDEN" code="401">
+    <message lang="fr">Vous n'avez pas les autorisations nécessaires pour effectuer cette opération</message>
+    <message lang="de">Sie sind nicht befugt diese Aktion durchzuführen</message>
+    <message lang="en">You don't have the access rights to perform this action</message>
+  </error>
+  <error type="CASE-FORBIDDEN" code="401">
+    <message lang="en">Your roles does not allow you to view case %s</message>
+  </error>
+  <error type="STATUS-DONT-ALLOW" code="401">
+    <message lang="en">The current status does not allow to perform this action</message>
+  </error>
+  <error type="MALFORMED" code="401">
+    <message lang="fr">La requête est mal formulée</message>
+    <message lang="de">Die Suchkriterien sind unklar</message>
+    <message lang="en">The request cannot be fulfilled due to a wrong formulation</message>
+  </error>
+  <error type="URI-NOT-SUPPORTED" code="404">
+    <message lang="fr">La page demandée n'existe pas</message>
+    <message lang="de">Die gewünschte Seite existiert nicht</message>
+    <message lang="en">This page does not exist</message>
+  </error>
+  <error type="SOON-AVAILABLE" code="500">
+    <message lang="fr">L'édition du document "%s" sera bientôt disponible</message>
+    <message lang="de">Die Veröffentlichung des Dokumentes "%s" ist demnächst verfügbar</message>
+    <message lang="en">The editing of the document "%s" will soon be available</message>
+  </error>
+  <error type="NOT-IMPLEMENTED-YET" code="500">
+    <message lang="fr">Cette fonctionnalité sera bientôt disponible</message>
+    <message lang="de">Diese Funktion wird bald verfügbar sein</message>
+    <message lang="en">This function is not available yet</message>
+  </error>
+  <error type="CASE-WRITE-ERROR" code="500">
+    <message lang="fr">Erreur lors de l'écriture dans la base de données, le cas n'a pas pu être enregistré</message>
+    <message lang="de">Fehlermeldung bei der Schreibweise in der Datenbank, der Fall konnte nicht abgespeichert werden</message>
+    <message lang="en">Error, during writing in the database, the case has not been registered</message>
+  </error>
+  <error type="DB-INDEX-NOT-FOUND" code="500">
+    <message lang="fr">Le serveur n'as pas réussi à générer d'indexe, l'enregistrement a échoué</message>
+    <message lang="de">Der Server konnte den Indexeintrag nicht generieren, der Speichervorgang wurde unterbrochen</message>
+    <message lang="en">The server couldn't manage to generate any appendix, the registration failed</message>
+  </error>
+  <error type="CASE-NOT-FOUND" code="500">
+    <message lang="fr">Le cas n'a pu être trouvé</message>
+    <message lang="de">Der Fall konnte nicht abgerufen werden</message>
+    <message lang="en">The case has not been found</message>
+  </error>
+  <error type="DOCUMENT-NOT-FOUND" code="500">
+    <message lang="en">The target document to update could not be found</message>
+  </error>
+  <error type="DATA-NOT-FOUND" code="500">
+    <message lang="en">The target document to update could be found but it does not contain the expected data</message>
+  </error>
+  <error type="SEND-MULTI-EMAIL-FAILURE" code="500">
+    <message lang="fr">Un ou plusieurs courriers électroniques n'ont pu être envoyés (%s)</message>
+    <message lang="de">Eine oder mehrere Nachrichten konnten nicht gesendet werden. (%s) </message>
+    <message lang="en">One or more e-mail messages couldn't be sent (%s)</message>
+  </error>
+  <error type="SEND-EMAIL-FAILURE" code="500">
+    <message lang="en">The server could not send the message to "%s"</message>
+  </error>
+  <error type="ACTIVITY-NOT-FOUND" code="404">
+    <message lang="fr">Cette activité n'existe pas ou a été supprimée</message>
+    <message lang="en">This activity does not exist or has been deleted</message>
+  </error>
+  <error type="ACTIVITY-CREATE-MISS-NEED-ANALYSIS" code="409">
+    <message lang="fr">You need to complete and save the needs analysis before creating a coaching activity</message>
+  </error>
+  <error type="INTERNAL-ERROR" code="500">
+    <message lang="fr">Erreur interne côté serveur, votre demande n'a pas pu être réalisée</message>
+    <message lang="de">Interne Fehlermeldung beim Server, Ihre Anfrage konnte nicht durchgeführt werden</message>
+    <message lang="en">Internal error with server, your request couldn't be performed</message>
+  </error>
+  <error type="PERSON-NOT-FOUND" code="404">
+    <message lang="fr">La personne n'existe pas dans la base de donnée ou bien vient d'être effacée par un autre utilisateur</message>
+    <message lang="en">The person does not exist in the database or has just been deleted by someone else</message>
+  </error>
+  <error type="VALID-INTEGER-INTERVAL" code="409">
+    <message lang="en">You must specify an integer number between %s and %s</message>
+  </error>
+  <error type="FILE-NOT-FOUND" code="404">
+    <message lang="en">%s file not found in %s</message>
+  </error>
+  <error type="MODE-WARNING-TEST">
+    <message lang="en">This is a TEST SERVER only ! If your intent is to use the real Case Tracker application, then check the URL you are using. Information on this platform may not be accurate and can be lost at any time...</message>
+  </error>
+  <error type="MODE-WARNING-DEV">
+    <message lang="en">This is a DEVELOPMENT SERVER only ! If your intent is to use the real Case Tracker application, then check the URL you are using. Information on this platform may not be accurate and can be lost at any time...</message>
+  </error>
+  <!-- ************************************* -->
+  <!-- ************ CAS Errors ************* -->
+  <!-- ************************************* -->
+  <error type="CAS-INVALID-GET">
+    <message lang="en">The URL specified for contacting %s (%s) is invalid as a mandatory parameter is lacking.</message>
+  </error>
+  <error type="CAS-INVALID-INIT">
+    <message lang="en">An error has been raised by %s while initializing login: %s.</message>
+  </error>
+  <error type="CAS-INVALID-INIT-NO-RULES">
+    <message lang="en">An error has been raised by %s while initializing login. No way has been provided to process for HTTP code %s.</message>
+  </error>
+  <error type="CAS-INVALID-INIT-NO-VALID-RULES">
+    <message lang="en">An error has been raised by %s while initializing login. No way available to process for HTTP code %s can be applied to the context of the response.</message>
+  </error>
+  <error type="CAS-INVALID-INIT-MISMATCHING-RULES">
+    <message lang="en">An error has been raised by %s while initializing login. Failures and successes have to be enforced at the same time for processing the result of the HTTP code %s.</message>
+  </error>
+  <error type="CAS-INVALID-NOTHING-TO-RETURN">
+    <message lang="en">An error has been raised by %s. Succeeded init. has returned nothing (%s).</message>
+  </error>
+  <error type="CAS-INVALID-VAL">
+    <message lang="en">An error has been raised by %s while validating the ticket: %s.</message>
+  </error>
+  <error type="ECAS-NO-USER-PROFILE">
+    <message lang="en">You must register a user account using the link on the login page before browsing the site</message>
+  </error>
+  <!-- ************************************************* -->
+  <!-- ************ Generic Validation Erors *********** -->
+  <!-- ************************************************* -->
+  <error type="INVALID-INTEGER" code="409">
+    <message lang="fr">Le champ "%s" doit être un nombre entier</message>
+    <message lang="de">Das Feld "%s" muss aus einer ganzen Zahl bestehen</message>
+    <message lang="en">The field "%s" has to be an integer</message>
+  </error>
+  <error type="INVALID-EMAIL" code="409">
+    <message lang="fr">Le champ "%s" doit conteinr une adresse de courrier électronique bien formée</message>
+    <message lang="de">Das Feld "%s" muss aus einer gültigen E-Mail-Adresse bestehen</message>
+    <message lang="en">The field "%s" must contain a correctly written Email address</message>
+  </error>
+  <error type="INVALID-LENGTH" code="409">
+    <message lang="fr">Le champ "%s" est trop court</message>
+    <message lang="de">Das Feld "%s" ist zu kurz</message>
+    <message lang="en">The field "%s" is too short</message>
+  </error>
+  <error type="NOT-KAM-COORDINATOR">
+    <message lang="en">You aren't a KAM coordinator of %s</message>
+  </error>
+  <!-- ****************************************** -->
+  <!-- ************ Validation Errors *********** -->
+  <!-- ****************************************** -->
+  <error type="VALIDATION-FORMAT-ERROR" code="409">
+    <message lang="fr">Les données soumises au serveur ne sont pas dans le bon format, merci de signaler cette erreur à un administrateur</message>
+    <message lang="de">Die beim Server eingetragenen Daten haben nicht das richtige Format, bitte melden Sie diesen Fehler beim Systemmanager</message>
+    <message lang="en">The data submitted to the server does not have the correct format. Please report this error to an administrator</message>
+  </error>
+  <error type="VALIDATION-ROOT-ERROR" code="409">
+    <message lang="fr">Le document soumis au serveur n'a pas la bonne racine (reçu : %s), merci de signaler cette erreur à un administrateur</message>
+    <message lang="de">Das beim Server gemeldete Dokument ist fehlerhaften Ursprungs (empfangen : %s), bitte melden Sie diesen Fehler beim Systemmanager</message>
+    <message lang="en">The document submitted to the server does not have the correct root (received : %s). Please report this error to a database administrator</message>
+  </error>
+  <error type="VALIDATION-FAILED" code="409">
+    <message lang="fr">Données invalides, corrigez la saisie (%s)</message>
+    <message lang="de">Daten ungültig, bitte erneut eingeben. (%s)</message>
+    <message lang="en">Invalid data, please correct the entry (%s)</message>
+  </error>
+  <error type="WRONG-SUBMISSION" code="409">
+    <message lang="fr">soumission incomplète, est-ce que vous avez bien utilisé le bouton Enregistrer pour valider votre soumission ?</message>
+    <message lang="de">Eingabe unvollständig, haben Sie Ihre Daten abgespeichert, um Ihre Eingabe zu bestätigen ?</message>
+    <message lang="en">Incomplete submission. Are you sure of having saved your submission ? ]</message>
+  </error>
+  <error type="NO-TITLE">
+    <message lang="fr">choisissez un titre</message>
+    <message lang="de">Wählen Sie einen Titel</message>
+    <message lang="en">Choose a title</message>
+  </error>
+  <error type="NO-RESPONSIBLE-COACH">
+    <message lang="fr">choisissez un coach responsable</message>
+    <message lang="de">Wählen Sie einen verantwortlichen Coach</message>
+    <message lang="en">Choose a responsible coach</message>
+  </error>
+  <error type="UNKNOWN-ENTERPRISE">
+    <message lang="fr">l'entreprise "%s" est inconnue</message>
+    <message lang="de">Das Unternehmen "%s" ist unbekannt</message>
+    <message lang="en">The company "%s" is unknown</message>
+  </error>
+  <error type="ENTERPRISE-NAME-CONFLICT">
+    <message lang="fr">le nom "%s" est déjà pris par une autre entreprise, vérifiez la liste</message>
+    <message lang="de">Der Name "%s" wurde bereits einem anderen Unternehmen zugeteilt, bitte überprüfen Sie die Liste</message>
+    <message lang="en">The name "%s" already exists for another company, please check in the list</message>
+  </error>
+  <error type="UNKNOWN-REGION" code="409">
+    <message lang="fr">L'entité régionale "%s" est inconnue</message>
+    <message lang="en">The EEN entity "%s" is unknown</message>
+  </error>
+  <error type="REGION-NAME-CONFLICT" code="409">
+    <message lang="fr">le nom "%s" est déjà pris par une autre entité régionale, utilisez en un autre</message>
+    <message lang="en">The name "%s" already exists for another EEN entity, please use another name</message>
+  </error>
+  <error type="SHORTNAME-CONFLICT">
+    <message lang="fr">le nom abrégé "%s" est déjà pris par une autre entreprise</message>
+    <message lang="de">Die Abkürzung "%s" wurde bereits einem anderen Unternehmen zugeteilt</message>
+    <message lang="en">The abbreviation "%s" already exists for another company, please check in the list</message>
+  </error>
+  <error type="CASE-CONTAINS-ACTIVITIES" code="409">
+    <message lang="fr">Vous ne pouvez effacer le cas car il contient les activités suivantes : %s</message>
+    <message lang="de">Sie können diesen Fall nicht löschen, da er die folgenden Aktivitäten enthält : %s</message>
+    <message lang="en">You cannot delete the case because it contains the following activities: %s</message>
+  </error>
+  <!-- next messages to be composed with DELETE-PERSON-FORBIDDEN -->
+  <error type="PERSON-LINKED-TO-CASE">
+    <message lang="fr">Il est lié aux cas suivant(s) : %s</message>
+    <message lang="de">Die Person ist an die folgenden Fälle geknüpft : %s</message>
+    <message lang="en">The person is linked to the following case(s): %s</message>
+  </error>
+  <error type="PERSON-LINKED-TO-ACTIVITY">
+    <message lang="fr">Il est lié aux activités suivant(es) : %s</message>
+    <message lang="de">Die Person ist an die folgende(n) Aktivität(en) geknüpft : %s</message>
+    <message lang="en">The person is linked to the following activities(s): %s</message>
+  </error>
+  <error type="PERSON-ISA-PO">
+    <message lang="en">That person is Project Officer at least in the %s case</message>
+  </error>
+  <error type="PERSON-ISA-KAM">
+    <message lang="en">That person is KAM at least in the %s case</message>
+  </error>
+  <error type="PERSON-ISA-COACH">
+    <message lang="en">That person is Coach at least in the %s case</message>
+  </error>
+  <error type="PERSON-ISA-REFEREE">
+    <message lang="en">That person is referenced at least in the %s case</message>
+  </error>
+  <error type="PERSON-WITH-LOGIN">
+    <message lang="fr">Il possède un identifiant d'accès à l'application, vous devez le lui retirer d'abord avec l'interface d'administration</message>
+    <message lang="de">Die Person besitzt einen Benutzernamen im System, Sie müssen diesen zuerst in der Rubrik Administration löschen</message>
+    <message lang="en">That person has got a login for the application, you have to ask a system administrator to remove that login first.</message>
+  </error>
+  <error type="DELETE-PERSON-FORBIDDEN" code="409">
+    <message lang="fr">Vous ne pouvez pas supprimer %s. %s</message>
+    <message lang="de">Sie können diesen Benutzer nicht löschen. %s</message>
+    <message lang="en">You cannot delete %s. %s</message>
+  </error>
+  <!-- next messages to be composed with DELETE-ENTERPRISE-FORBIDDEN -->
+  <error type="ENTERPRISE-LINKED-TO-CASE">
+    <message lang="fr">Elle est cliente des cas suivant(s) : %s</message>
+    <message lang="de">Das Unternehmen ist Kunde in folgenden Fällen : %s</message>
+    <message lang="en">That company is a beneficiary at least for the %s case</message>
+  </error>
+  <error type="ENTERPRISE-LINKED-TO-PERSON">
+    <message lang="fr">Elle est représentée par les personne(s) suivant(es) : %s</message>
+    <message lang="de">Das Unternehmen ist an die folgende Personen geknüpft : %s</message>
+    <message lang="en">That company is linked at least with the profile of %s</message>
+  </error>
+  <error type="DELETE-ENTERPRISE-FORBIDDEN" code="409">
+    <message lang="fr">Vous ne pouvez pas supprimer cette entreprise : %s</message>
+    <message lang="de">Sie können dieses Unternehmen nicht löschen : %s</message>
+    <message lang="en">You cannot delete that company. %s</message>
+  </error>
+  <!-- next messages to be composed with DELETE-REGION-FORBIDDEN -->
+  <error type="REGION-LINKED-TO-CASE">
+    <message lang="en">This EEN entity is managing the following case(s): %s</message>
+  </error>
+  <error type="DELETE-REGION-FORBIDDEN" code="409">
+    <message lang="en">You cannot delete this EEN entity: %s</message>
+  </error>
+  <error type="NO-RECIPIENT" code="409">
+    <message lang="en">The e-mail does not specify a recipient</message>
+  </error>
+  <error type="CASE-NOT-ASSIGNED">
+    <message lang="en">The case %s could not be assigned to %s because %s</message>
+  </error>
+  <error type="SME-FEEDBACK-EMAIL-ERROR" code="500">
+    <message lang="en">The e-mail message to the SME contact could not be sent : %s</message>
+  </error>
+  <error type="KAM-FEEDBACK-EMAIL-ERROR" code="500">
+    <message lang="en">The e-mail message to the KAM contact could not be sent : %s</message>
+  </error>
+  <error type="SME-FEEDBACK-WRONG-EMAIL" code="500">
+    <message lang="en">The e-mail message to the SME contact could not be sent : please enter a correct e-mail address for the SME Contact in the Needs Analysis document of the Case</message>
+  </error>
+  <error type="KAM-FEEDBACK-WRONG-EMAIL" code="500">
+    <message lang="en">The e-mail message to the KAM contact could not be sent : please enter a correct e-mail address for the KAM in the Needs Analysis document of the Case</message>
+  </error>
+  <error type="SME-FEEDBACK-MISSING-LINK-CONFIG" code="500">
+    <message lang="en">SME feedback questionnaire link configuration missing please contact a database administrator</message>
+  </error>
+  <error type="KAM-FEEDBACK-MISSING-LINK-CONFIG" code="500">
+    <message lang="en">KAM feedback questionnaire link configuration missing please contact a database administrator</message>
+  </error>
+  <!-- **************************** -->
+  <!-- ****  Document Assertions ** -->
+  <!-- **************************** -->
+  <error type="MISSING-KAM" code="409">
+    <message lang="en">You must assign a KAM first before changing status to Needs Analysis</message>
+  </error>
+  <error type="INCOMPLETE-DOCUMENT" code="409">
+    <message lang="en">The document cannot be submitted yet, please complete it as explained below. %s</message>
+  </error>
+  <error type="INCOMPLETE-COACHING-PLAN" code="409">
+    <message lang="en">You must confirm first that the coaching plan is approved by the SME. For that purpose you need to edit the coaching plan and select Yes in the corresponding field at the end.</message>
+  </error>
+  <error type="MISSING-EVALUATION-NEEDS-ANALYSIS" code="409">
+    <message lang="en">You must answer to the last two evaluation questions. For that purpose, you need to edit the Needs Analysis document and fill in the corresponding fields at the end.</message>
+  </error>
+  <error type="MISSING-EVALUATION-COACH-ASSIGNMENT" code="409">
+    <message lang="en">You must answer to the last evaluation question. For that purpose, you need to edit the Coach Assignment document and fill in the corresponding field at the end.</message>
+  </error>
+  <error type="MISSING-ENTERPRISE-STATS" code="409">
+    <message lang="en">Please complete the enterprise data in the statistical information block in the Needs Analysis document first. You need to complete at least the "Markets", "Company size", "NACE" and "Year of establishment" fields before moving to the next status.</message>
+  </error>
+  <error type="MISSING-TIMESHEET-FILE" code="409">
+    <message lang="en">Please upload your mandatory timesheet PDF file before changing status</message>
+  </error>
+  <error type="MISSING-COACH-OR-SERVICE" code="409">
+    <message lang="en">Please select a coaching service and/or select a coach in the coach assignment document before changing status</message>
+  </error>
+
+  <!-- ****************************************** -->
+  <!-- ***************   Password    ************ -->
+  <!-- ****************************************** -->
+  <error type="MISSING-FIELDS" code="409">
+    <message lang="fr">Soumission incomplète, est-ce que vous avez bien saisi tous les champs demandés ?</message>
+    <message lang="de">Eingabe unvollständig, haben Sie alle obligatorischen Felder ausgefüllt ?</message>
+    <message lang="en">Incomplete submission, have you really entered all the requested fields?</message>
+  </error>
+  <error type="VALIDATION-WRONG-EMAIL" code="409">
+    <message lang="fr">L'adresse "%s" ne correspond pas à l'adresse enregistrée dans le profil, contactez un administrateur du Case Tracker si vous souhaitez la mettre à jour</message>
+    <message lang="de">Die Adresse "%s" stimmt nicht mit derjenigen im Benutzerprofil überein.</message>
+    <message lang="en">The address "%s" does not correspond to the one saved in the profile. Please contact a Case Tracker administrator if you need to update your profile</message>
+  </error>
+  <error type="VALIDATION-NO-EMAIL" code="409">
+    <message lang="fr">Le profil "%s" est connu de l'application, par contre son adresse de courrier électronique n'est pas renseignée, contactez Platinn si vous souhaitez la mettre à jour</message>
+    <message lang="de">Das Benutzerprofil "%s" wurde vom System erkannt, jedoch nicht die E-Mail-Adresse. Nehmen Sie mit EASME Kontakt auf, falls Sie diese ändern möchten</message>
+    <message lang="en">The profile "%s" is known by the application but not the Email address. Please contact EASME if you need to update your profile</message>
+  </error>
+  <error type="VALIDATION-NO-PROFILE" code="409">
+    <message lang="fr">Le profile "%s" n'est pas reconnu par l'application comme ayant un accès autorisé, contactez Platinn si vous souhaitez le mettre à jour</message>
+    <message lang="de">Das System verweigert für dieses Benutzerprofil "%s" die Zugriffsrechte. Nehmen Sie mit EASME Kontakt auf, falls Sie dieses ändern möchten</message>
+    <message lang="en">The profile "%s" has no access to the application. Please contact EASME if you need to update your profile</message>
+  </error>
+  <error type="SEND-PASSWORD-FAILURE" code="500">
+    <message lang="fr">Échec de l'envoi du courrier électronique à "%s", le mot de passe n'a pas été modifié, réessayez ou bien ou contactez Platinn</message>
+    <message lang="de">Fehlermeldung beim Versand des E-Mails an "%s", das Passwort wurde nicht geändert. Versuchen Sie es erneut oder nehmen Sie mit EASME Kontakt auf</message>
+    <message lang="en">The sending of the Email addressed to "%s" has failed, the password has not been updated, please try again or contact EASME</message>
+  </error>
+  <error type="ACCOUNT-INCONSISTENT-PWD" code="409">
+    <message lang="fr">Les deux mots de passe proposés sont différents, entrez deux fois le même !</message>
+    <message lang="de">Die beiden Passwörter sind nicht identisch, geben Sie zweimal das gleiche Passwort ein</message>
+    <message lang="en">The second password is different from the first one, please enter similar passwords!</message>
+  </error>
+  <error type="ACCOUNT-MALFORMED-PWD" code="409">
+    <message lang="fr">Le mot de passe proposé n'est pas assez complexe : il doit contenir au minimum 8 caractères</message>
+    <message lang="de">Das vorgeschlagene Passwort ist nicht komplex genug : es muss mindestens 8 Zeichen beinhalten</message>
+    <message lang="en">This password is not complicated enough, it must contain at least 8 characters</message>
+  </error>
+  <error type="ACCOUNT-PWD-NO-ACCOUNT" code="409">
+    <message lang="fr">Cet utilisateur possède un identifiant mais pas d'accès à la base de donnée, pour lui créer un nouveau mot de passe commencez par supprimer son identifiant avec le bouton "Supprimer", vous pourrez ensuite recréer son compte avec le même identifiant, ce qui aura pour effet de lui générer un nouveau mot de passe</message>
+    <message lang="de">Dieser Benutzer besitzt einen Benutzernamen, jedoch keinen Zugriff auf die Datenbank. Löschen Sie erst seinen Benutzernamen durch "Löschen" bevor Sie ein neues Passwort eingeben. Sie können anschliessend sein Konto mit dem gleichen Benutzernamen kreieren, wodurch ein ein neues Passwort generiert wird</message>
+    <message lang="en">This user has a login but no valid access to the database. In order to create a new password, please delete the login. Then, recreate the account with the same login. This will generate a new password</message>
+  </error>
+  <!-- ****************************************** -->
+  <!-- ************* Workflow Errors ************ -->
+  <!-- ****************************************** -->
+  <error type="WFSTATUS-ORIGIN-ERROR" code="409">
+    <message lang="fr">Cette demande de changement de statut ne correspond pas au statut courant de l'activité, il est vraisemblable qu'une autre demande soit parvenue en même temps, rechargez la page de votre navigateur pour en être sûr</message>
+    <message lang="de">Diese Statusanfrage entspricht nicht dem laufenden Status der Aktivität, es ist wahrscheinlich, dass ein anderer Antrag zur gleichen Zeit verwaltet wird. Aktualisieren Sie die Seite Ihres Internet-Browsers</message>
+    <message lang="en">The request for changing the status does not correspond to the current status of the activity. Maybe another request has been sent at the same time, please reload the page to be sure</message>
+  </error>
+  <error type="WFSTATUS-SYNTAX-ERROR" code="409">
+    <message lang="fr">Le statut de l'activité est indéfini ou la demande de changement de statut n'est pas reconnue, réessayez après avoir rechargé la page de votre navigateur ou bien contactez-nous pour rapporter le problème</message>
+    <message lang="de">Der Status der Aktivität ist unbestimmt oder die Statusänderung nicht anerkannt. Aktualisieren Sie die Seite Ihres Internet-Browsers und versuchen Sie es erneut oder nehmen Sie mit EASME Kontakt auf</message>
+    <message lang="en">The activity status is undefined or the request for the status modification couldn't be identified. Please try again by reloading the page or contact us</message>
+  </error>
+  <error type="WFSTATUS-NO-TRANSITION" code="409">
+    <message lang="en">The workflow engine has no rule that permits this status change</message>
+  </error>
+  <error type="WFSTATUS-NOT-ALLOWED" code="401">
+    <message lang="fr">Vous n'avez pas les autorisations nécessaire pour changer le statut de l'activité</message>
+    <message lang="de">Sie besitzen nicht die Zugriffsrechte, um den Status der Aktivität zu ändern</message>
+    <message lang="en">You don't have enough access rights to change the activity status</message>
+  </error>
+  <!-- ****************************************** -->
+  <!-- *************  Account Errors ************ -->
+  <!-- ****************************************** -->
+  <error type="ACCOUNT-MISSING-EMAIL" code="409">
+    <message lang="fr">Vous devez d'abord renseigner la fiche de la personne avec son adresse de courrier électronique</message>
+    <message lang="de">Sie müssen zuerst die Personendaten ausfüllen mit der Adresse und dem E-Mail</message>
+    <message lang="en">You have to enter the E-mail address of the person first</message>
+  </error>
+  <error type="ACCOUNT-DUPLICATED-LOGIN" code="409">
+    <message lang="fr">L'identifiant "%s" est déjà pris par un autre utilisateur</message>
+    <message lang="de">Der Benutzername "%s" wurde bereits von einem anderen Benutzer verwendet</message>
+    <message lang="en">The login "%s" already exists for another user</message>
+  </error>
+  <error type="ACCOUNT-MALFORMED-LOGIN" code="409">
+    <message lang="fr">L'identifiant du compte doit contenir au minimum 4 caractères alphanumériques y compris le signe - et sans espace</message>
+    <message lang="de">Der Benutzername muss mindestens 4 Buchstaben, einschliesslich dem Zeichen - und ohne Leerzeichen beinhalten</message>
+    <message lang="en">The login of the account must contain at least 4 caracters and a "-" without any space</message>
+  </error>
+  <error type="ACCOUNT-CREATE-LOGIN-FAILED" code="500">
+    <message lang="fr">La création du nouvel identifiant a échoué, merci de réessayer</message>
+    <message lang="de">Die Eingabe des neuen Benutzernamens wurde verweigert, bitte versuchen Sie es erneut</message>
+    <message lang="en">The login has not been entered correctly, please try again</message>
+  </error>
+  <error type="VALIDATION-PROFILE-FAILED" code="409">
+    <message lang="fr">Les données du profile sont mal renseignées, merci de corriger et de réessayer</message>
+    <message lang="de">Die Daten des Benutzerprofils sind nicht korrekt, bitte versuchen Sie es erneut</message>
+    <message lang="en">The profil details haven't been completed properly, please correct or complete the indications and try again</message>
+  </error>
+  <error type="PROTECT-ADMIN-SYSTEM-ROLE" code="409">
+    <message lang="fr">Vous ne pouvez pas vous retirer à vous même le rôle administrateur, demandez à un autre administrateur</message>
+    <message lang="de">Sie können sich nicht selbst die Rolle als Administrator entziehen, fragen Sie einen anderen Administrator</message>
+    <message lang="en">You cannot delete your role of administrator, please ask another administrator to do it</message>
+  </error>
+  <error type="PROTECT-ADMIN-SYSTEM-LOGIN" code="409">
+    <message lang="fr">Vous ne pouvez pas vous retirer votre propre identifiant, demandez à un autre administrateur</message>
+    <message lang="de">Sie können sich nicht Ihren eigenen Benutzernamen entziehen, fragen Sie einen anderen Adiministrator</message>
+    <message lang="en">You cannot delete your own login, please ask another administratort to do it</message>
+  </error>
+  <error type="PROTECT-ROLE-INTEGRITY-SR" code="409">
+    <message lang="fr">Vous ne pouvez pas directement retirer le rôle de responsable de service à une personne : vous devez l'attribuer à une nouvelle personne ce qui aura pour effet de le retirer à l'ancien responsable de service</message>
+    <message lang="de">Sie können nicht direkt einer Person die Rolle als Service-Verantwortlichen entziehen. Um dies zu bewirken, müssen Sie diese einer anderen Person zuteilen</message>
+    <message lang="en">You cannot delete the role "head of service" to someone. You can only replace him by another head of service which you must choose first</message>
+  </error>
+  <error type="ROLE-SR-WRONG-SERVICE-REF" code="409">
+    <message lang="fr">Vous devez spécifier au moins un service pour le rôle de responsable de service</message>
+    <message lang="de">Sie müssen der Rolle des Service-Verantwortlichen einen Service zuteilen</message>
+    <message lang="en">You have to specify at least one service for the role "head of service"</message>
+  </error>
+  <error type="ROLE-CAD-WRONG-CA-REF" code="409">
+    <message lang="fr">Vous devez spécifier une antenne cantonnale (et une seule) pour le rôle de directeur d'antenne cantonnale</message>
+    <message lang="de">Sie müssen der Rolle des Direktors einer Kantonalen Antenne eine (einzige) Kantonale Antenne zuteilen</message>
+    <message lang="en">You have to specify a cantonal antenna (and only one) for the role "Antenna director"</message>
+  </error>
+  <error type="ROLE-CAD-WRONG-POID-REF" code="409">
+    <message lang="en">You have to specify the project officer acronym (and only one) for the role "Project Officer"</message>
+  </error>
+  <error type="ROLE-COACH-EMPTY-SERVICE-REF" code="409">
+    <message lang="fr">Vous devez spécifier au moins un service pour le rôle de coach</message>
+    <message lang="de">Sie müssen mindestens einen Service für die Rolle des Coachs definieren</message>
+    <message lang="en">You have to specify at least one service for the role "coach"</message>
+  </error>
+  <error type="VALIDATION-DUPLICATED-ROLE" code="409">
+    <message lang="fr">Vous ne pouvez pas déclarer 2 fois un même rôle !</message>
+    <message lang="de">Sie können nicht 2 mal eine gleiche Rolle eingeben !</message>
+    <message lang="en">You cannot chose the same role twice!</message>
+  </error>
+  <!-- ****************************************** -->
+  <!-- *********** Appendix Errors ************** -->
+  <!-- ****************************************** -->
+  <error type="APPENDIX-MISSING-NAME" code="400">
+    <message lang="fr">Vous devez spécifier un nom pour enregistrer le document sur le serveur</message>
+    <message lang="de">Geben Sie bitte den Namen des Dokumentes ein, um dieses im Server zu speichern</message>
+    <message lang="en">You must give a name to record the file on the server</message>
+  </error>
+  <error type="APPENDIX-MISSING-TYPE" code="400">
+    <message lang="fr">Le serveur n'arrive pas à reconnaitre le type du fichier envoyé</message>
+    <message lang="de">Dem Server ist die Dokumentart unbekannt</message>
+    <message lang="en">The server could not identify the file type</message>
+  </error>
+  <error type="APPENDIX-WRONG-TYPE" code="400">
+    <message lang="fr">Le type de fichier "%s" n'est pas supporté, vous devez utiliser l'un des types suivants : %s</message>
+    <message lang="de">Die Dokumentart "%s" ist nicht erlaubt, bitte verwenden Sie die folgenden Dokumenttypen : %s</message>
+    <message lang="en">Unsupported file type "%s", your document must be of one of the following types : %s</message>
+  </error>
+  <error type="APPENDIX-NO-BINARY-FILE" code="400">
+    <message lang="fr">Le fichier téléchargé ne correspond pas à ce qui est attendu, fichier binaire attendu</message>
+    <message lang="de">Das geladene Dokument entspricht nicht dem verlangten Format, binaire Datei erlaubt</message>
+    <message lang="en">Unexpected file content received, binary file expected</message>
+  </error>
+  <error type="APPENDIX-WRITE-ERROR" code="500">
+    <message lang="fr">Erreur interne lors de la sauvegarde du document, vérifiez que vous êtes identifié et réessayez</message>
+    <message lang="de">Interne Fehlermeldung beim Abspeichern des Dokumentes; überprüfen Sie, ob Sie eingeloggt sind und versuchen Sie erneut</message>
+    <message lang="en">Internal error while writing the file to the server, please check you are logged in and try again</message>
+  </error>
+  <error type="APPENDIX-COLLECTION-ERROR" code="500">
+    <message lang="fr">Erreur interne lors de la sauvegarde du document, impossible de créer l'emplacement pour copier le document, vérifiez que vous êtes identifié et réessayez</message>
+    <message lang="fr">Interne Fehlermeldung beim Abspeichern des Dokumentes. Dieses kann nicht an die gewünschte Stelle kopiert werden; überprüfen Sie ob Sie eingeloggt sind und versuchen Sie es erneut</message>
+    <message lang="en">Internal error while writing the file to the server : impossible to create a location to store it; please check you are logged in and try again</message>
+  </error>
+  <error type="APPENDIX-DUPLICATED-NAME" code="409">
+    <message lang="fr">Le nom de fichier "%s" est déjà pris, proposez un autre nom</message>
+    <message lang="de">Der Dokumentname "%s" ist bereits vergeben, wählen Sie einen anderen Namen aus</message>
+    <message lang="en">The name "%s" is already used for another appendix, please propose a new one and try again</message>
+  </error>
+  <!-- ****************************************** -->
+  <!-- *********** Services Errors ************** -->
+  <!-- ****************************************** -->
+  <error type="SERVICE-INTERNAL-ERROR" code="500">
+    <message lang="en">Error while contacting %s, the service returned : %s</message>
+  </error>
+  <error type="SERVICE-NOT-RESPONDING" code="404">
+    <message lang="en">Impossible to contact %s : the service is not responding. You may try again later or please contact a database administrator.</message>
+  </error>
+  <error type="SERVICE-ERROR" code="500">
+    <message lang="en">Error while contacting %s : %s</message>
+  </error>
+  <error type="SERVICE-MALFORMED-URL" code="500">
+    <message lang="en">Error while contacting %s : malformed URL "%", ask a system administrator to check the configuration</message>
+  </error>
+  <error type="SERVICE-MISSING" code="500">
+    <message lang="en">Impossible to contact %s : the service configuration is incomplete, ask a system administrator to fix it</message>
+  </error>
+  <error type="SERVICE-FORBIDDEN" code="401">
+    <message lang="en">Impossible to call %s : authorization refused</message>
+  </error>
+</errors>

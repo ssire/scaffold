@@ -1,0 +1,28 @@
+<Form Tag="UserProfile">
+  <Title>User Profile</Title>
+  <Row>
+    <Cell W="12">
+      <Title level="2">List of Roles for the user</Title>
+      <Repeat Tag="Roles" Min="0">
+          <Cell Tag="Role" Gap="0.75">
+              <Title level="3">Role</Title>
+              <Row>
+                <Field Key="function" Tag="FunctionRef" Gap="1">Name</Field>
+                <Field Key="services" Gap="1">Services</Field>
+                <Field Key="cantonal-antenna" Tag="RegionalEntityRef" Gap="2">EEN Regional Entity</Field>
+                <Field Key="projectid" Tag="ProjectId" Gap="2">Project Officer Id.</Field>
+              </Row>
+              <div xmlns="http://www.w3.org/1999/xhtml" style="float:right">
+                <span class="text-info">Click on minus (resp. plus) to remove (resp. add) a role <Menu/></span>
+              </div>
+          </Cell>
+      </Repeat>
+    </Cell>
+  </Row>
+  <Bindings>
+    <Require Keys="function"/>
+  </Bindings>
+  <Plugins>
+    <Input Keys="administrative-entity collaborative-entity projectid"/>
+  </Plugins>
+</Form>

@@ -1,0 +1,196 @@
+<messages>
+  <info type="INFO" timeout="-1">
+    <message>%s</message>
+  </info>
+  <info type="ASK-LOGOUT" timeout="-1">
+    <message lang="en">The case tracker will be put into maintenance. You are kindly requested to finish your operations and to log out from the application as soon as possible. In any case you will be logged out in %s from now.</message>
+  </info>
+  <info type="ACTION-LOGIN-SUCCESS">
+    <message lang="fr">Vous avez été identifié en tant que "%s"</message>
+    <message lang="de">Sie wurden identifiziert als "%s"</message>
+    <message lang="en">You are registered as: "%s"</message>
+  </info>
+  <info type="ACTION-LOGIN-SUCCESS-INFO" timeout="-1">
+    <message lang="en">Welcome, you are logged in as "%s"; the case tracker currently holds a total of %s coaching hours for the SME Instrument</message>
+  </info>
+  <info type="ACTION-LOGOUT-SUCCESS">
+    <message lang="fr">Vous avez été déconnecté avec succès</message>
+    <message lang="de">Sie wurden erfolgreich ausgeloggt</message>
+    <message lang="en">You have been logged out successfully</message>
+  </info>
+  <info type="ACTION-UPDATE-SUCCESS">
+    <message lang="fr">La ressource vient d'être mise à jour avec succès</message>
+    <message lang="de">Die Daten wurden erfolgreich aktualisiert</message>
+    <message lang="en">The resource has just been updated</message>
+  </info>
+  <info type="ACTION-UPDATE-SAME-SUCCESS">
+    <message lang="fr">La ressource vient d'être sauvegardée avec succès</message>
+    <message lang="en">The resource has just been saved</message>
+  </info>
+  <info type="ACTION-CREATE-SUCCESS" code="201">
+    <message lang="fr">La nouvelle ressource vient d'être créée avec succès</message>
+    <message lang="de">Die neuen Daten wurden erfolgreich eingegeben</message>
+    <message lang="en">The new resource has been entered successfully</message>
+  </info>
+  <info type="ACTIVITY-CREATED" code="201">
+    <message lang="fr">L'activité vient d'être créée</message>
+    <message lang="de">Die Aktivität wurde eingegeben</message>
+    <message lang="en">The activity has been created</message>
+  </info>
+  <info type="WFSTATUS-UPDATED">
+    <message lang="fr">Le statut a été modifié avec succès</message>
+    <message lang="de">Der Status wurde erfolgreich abgeändert</message>
+    <message lang="en">The status has been changed with success</message>
+  </info>
+  <info type="DELETE-CASE-CONFIRM" code="202">
+    <message lang="en">You can remove the case "%s" because it does not contain any activity. Are you sure you want to delete it? This action is irreversible</message>
+  </info>
+  <info type="DELETE-ACTIVITY-CONFIRM" code="202">
+    <message lang="en">You can delete the activity "%s" of case "%s" because it is in coach assignment status. Are you sur you want to delete it now ? This action is irreversible, the only way to come back will be to create a new coaching activity</message>
+  </info>
+  <info type="DELETE-PERSON-CONFIRM" code="202">
+    <message lang="en">You can remove the person "%s" because s/he is not referenced in any case or coaching activity and has no access login. Are you sure you want to delete her? This action is irreversible</message>
+  </info>
+  <info type="DELETE-CASE-SUCCESS">
+    <message lang="en">The case has been removed successfully</message>
+  </info>
+  <info type="DELETE-ACTIVITY-SUCCESS" timeout="-1">
+    <message lang="en">The coaching activity "%s" of case "%s" has been removed successfully</message>
+  </info>
+  <info type="DELETE-PERSON-SUCCESS">
+    <message lang="fr">La personne "%s" a été effacée avec succès</message>
+    <message lang="de">Die Person "%s" wurde erfolgreich gelöscht</message>
+    <message lang="en">The person "%s" has been removed successfully</message>
+  </info>
+  <info type="DELETE-ANNEXE-SUCCESS">
+    <message lang="fr">Le document annexe "%s" a été effacée avec succès</message>
+    <message lang="de">Der Anhang "%s" wurde erfolgreich gelöscht</message>
+    <message lang="en">the appendix "%s" has been removed successfully</message>
+  </info>
+  <info type="LOGBOOK-CLOSED">
+    <message lang="fr">Le suivi de l'activité a bien été fermé, les données sont à présent disponibles dans le rapport final</message>
+    <message lang="de">Die Angaben in der Aktivität wurden geschlossen. Die Daten sind nun im Schlussbericht verfügbar</message>
+    <message lang="en">The activity data are now available in the final report, since the activity progress has been closed</message>
+  </info>
+  <info type="DELETE-ENTERPRISE-CONFIRM" code="202">
+    <message lang="en">You can remove the company "%s" because it is not linked to any case, any activity and is not represented by any person of the data base. Are you sure you want to delete it? This action is irreversible</message>
+  </info>
+  <info type="DELETE-REGION-CONFIRM" code="202">
+    <message lang="en">You can remove the EEN entity "%s" since it is not linked to any case. As a side effect any member bearing the KAM coordinator role or the KAM role for this entity will be updated to remove the corresponding role. Are you sure you want to delete it? This action is irreversible.</message>
+  </info>
+  <info type="DELETE-ENTERPRISE-SUCCESS">
+    <message lang="fr">L'entreprise "%s" a été effacée avec succès</message>
+    <message lang="de">Das Unternehmen "%s" wurde erfolgreich gelöscht</message>
+    <message lang="en">The company "%s" has been removed successfully</message>
+  </info>
+  <info type="DELETE-REGION-SUCCESS">
+    <message lang="en">The EEN entity "%s" has been removed successfully</message>
+  </info>
+  <info type="ACTION-ALERT-CREATED" code="201">
+    <message lang="fr">Le message vient d'être envoyé au(x) destinataire(s) et enregistré dans l'historique des messages</message>
+    <message lang="de">traduire [ Le message vient d'être envoyé au(x) destinataire(s) et enregistré dans l'historique des messages ]</message>
+    <message lang="en">The message has just been sent to the adressee(s) and registered in the messages review</message>
+  </info>
+  <info type="CASE-CLIENT-CONFIRM" code="202" envelope="confirm">
+    <message lang="fr">L'entreprise client "%s" fait déjà partie des cas suivants "%s", est-ce que vous confirmez la création d'un nouveau cas avec cette entreprise ?</message>
+  </info>
+  <info type="ACTIVITY-CREATE-MISS-CONFIRM" code="202" envelope="confirm">
+    <message lang="fr">The needs analysis performed by "%s" does not define any business challenge for the case, do you confirm anyway the creation of a coaching activity ?</message>
+  </info>
+  <info type="ACTIVITY-CREATE-OK-CONFIRM" code="202" envelope="confirm">
+    <message lang="fr">Do you confirm the creation of a coaching activity from the needs analysis of "%s" ?</message>
+  </info>
+  <info type="COACH-PLAN-APPROVED-EMAIL">
+    <message lang="en">The resource has just been updated. In addition since you approved the coach plan an e-mail message has been sent to %s.</message>
+  </info>
+  <info type="CASE-ASSIGNED" timeout="-1">
+    <message lang="en">The case %s has been assigned to %s and an e-mail has been sent to %s</message>
+  </info>
+  <info type="COMMAND-TERMINATED" timeout="-1">
+    <message lang="en">The command has been run on the server</message>
+  </info>
+  <info type="NOTIFY-TRANSITION-REPORT" timeout="-1">
+    <message lang="en">A notification e-mail has been sent to %s</message>
+  </info>
+  <info type="NO-NOTIFY-SME-TRANSITION-REPORT" timeout="-1">
+    <message lang="en">The SME has already received an automatic notification e-mail on %s, 5 days after EEN Assignment</message>
+  </info>
+  <info type="SME-FEEDBACK-EMAIL-SENT" timeout="-1">
+    <message lang="en">An e-mail with a link to the SME feedback questionnaire has been sent to %s</message>
+  </info>
+  <info type="KAM-FEEDBACK-EMAIL-SENT" timeout="-1">
+    <message lang="en">An e-mail with a link to the KAM feedback questionnaire has been sent to %s</message>
+  </info>
+  <info type="ACTION-DELETE-SUCCESS">
+    <message lang="en">The resource has been deleted</message>
+  </info>
+  <info type="MODE-WARNING-TEST">
+    <message lang="en">This is a TEST SERVER only ! If your intent is to use the real Case Tracker application, then check the URL you are using. Information on this platform may not be accurate and can be lost at any time...</message>
+  </info>
+  <info type="MODE-WARNING-DEV">
+    <message lang="en">This is a DEVELOPMENT SERVER only ! If your intent is to use the real Case Tracker application, then check the URL you are using. Information on this platform may not be accurate and can be lost at any time...</message>
+  </info>  
+  <info type="OTF-ADVERT">
+    <message/><span style="font-weight:bold;">Overseas <a xmlns="http://www.w3.org/1999/xhtml" href="https://ec.europa.eu/easme/en/sme-instrument-s-overseas-trade-fairs-programme">Trade Fairs</a>: Notify your client about the latest opportunity!</span>
+  </info>
+  <!-- ******************************************** -->
+  <!-- *************  Account Messages ************ -->
+  <!-- ******************************************** -->
+  <info type="ACCOUNT-LOGIN-CREATED" code="201">
+    <message lang="fr">Le compte a été créé et un message a été envoyé à "%s"</message>
+    <message lang="de">traduire [ Le compte a été créé et un message a été envoyé à "%s" ]</message>
+    <message lang="en">The account has been created and a message has been sent to "%s"</message>
+  </info>
+  <info type="ACCOUNT-LOGIN-UPDATED">
+    <message lang="fr">Le nouveau compte a été créé et un message a été envoyé à "%s"</message>
+    <message lang="de">traduire [ Le nouveau compte a été créé et un message a été envoyé à "%s" ]</message>
+    <message lang="en">The new account has been created and a message has been sent to "%s"</message>
+  </info>
+  <info type="ACCOUNT-LOGIN-DELETED">
+    <message lang="fr">L'identifiant "%s" a été supprimé et n'a donc plus accès à la base de données</message>
+    <message lang="de">traduire [ L'identifiant "%s" a été supprimé et n'a donc plus accès à la base de données ]</message>
+    <message lang="en">The user "%s" has been removed and therefore has no longer access to the data base</message>
+  </info>
+  <info type="ACCOUNT-PWD-CHANGED-MAIL">
+    <message lang="fr">Le mot de passe a été modifié et un message de notification envoyé à %s</message>
+    <message lang="de">traduire [ Le mot de passe a été modifié et un message de notification envoyé à %s ]</message>
+    <message lang="en">The password has been changed and a notification message has been sent to %s</message>
+  </info>
+  <info type="ACCOUNT-PWD-CHANGED-NOMAIL">
+    <message lang="fr">Le mot de passe a été modifié par contre le message de notification n'a pas pu ête envoyé à %s. Prévenez-le par un autre canal !</message>
+    <message lang="de">traduire [ Le mot de passe a été modifié par contre le message de notification n'a pas pu ête envoyé à %s. Prévenez-le par un autre canal ! ]</message>
+    <message lang="en">The password has been changed but the notification message couldn't be sent to %s. Try to get it through another canal</message>
+  </info>
+  <info type="PROFILE-UPDATED-WOACCESS">
+    <message lang="fr">Le profil de "%s" a été mis à jour, n'oubliez pas de lui créer un login ou de lui générer un mot de passe si vous souhaitez lui donner accès à l'application</message>
+    <message lang="de">traduire [ Le profil de "%s" a été mis à jour, n'oubliez pas de lui créer un login ou de lui générer un mot de passe si vous souhaitez lui donner accès à l'application ]</message>
+    <message lang="en">The profil of "%s" has been updated, do not forget to create him a login or to generate a password if you want him to have an access to the application</message>
+  </info>
+  <info type="PROFILE-UPDATED">
+    <message lang="fr">Le profil de l'utilisateur "%s" a été mis à jour</message>
+    <message lang="de">traduire [ Le profil de l'utilisateur "%s" a été mis à jour ]</message>
+    <message lang="en">The profile of the user "%s" has been updated</message>
+  </info>
+  <!-- ******************************************** -->
+  <!-- ************  Appendix Messages ************ -->
+  <!-- ******************************************** -->
+  <info type="APPENDIX-PREFLIGHT-OK" code="200">
+    <message>%s</message>
+  </info>
+  <info type="APPENDIX-CREATED" code="201">
+    <message>%s</message>
+  </info>
+  <!-- ***************************************** -->
+  <!-- ************  Stats Messages ************ -->
+  <!-- ***************************************** -->
+  <info type="INFO-BI" code="200" timeout="-1">
+    <message>As member of the business intelligence group you can view statistics for all cases and activities</message>
+  </info>
+  
+  <info type="INFO-KAMCO" code="200" timeout="-1">
+    <message>As an EEN KAM Coordinator you can view statistics for %s</message>
+  </info>
+  <info type="INFO-KAM" code="200" timeout="-1">
+    <message>As a KAM you can view statistics for your own cases</message>
+  </info>
+</messages>
