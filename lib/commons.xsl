@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Common widgets - Case tracker pilote library
+<!--
+     Oppidoc Business Application Development Framework
 
      Author: Stéphane Sire <s.sire@opppidoc.fr>
 
@@ -70,6 +71,12 @@
     <site:window>
       <title><xsl:copy-of select="@loc"/><xsl:value-of select="."/></title>
     </site:window>
+  </xsl:template>
+
+  <xsl:template match="Content">
+    <site:content>
+      <xsl:apply-templates select="*"/>
+    </site:content>
   </xsl:template>
 
   <xsl:template match="Overlay">

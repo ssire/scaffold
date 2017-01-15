@@ -26,6 +26,7 @@ import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../oppid
 import module namespace skin = "http://oppidoc.com/oppidum/skin" at "../oppidum/lib/skin.xqm";
 import module namespace epilogue = "http://oppidoc.com/oppidum/epilogue" at "../oppidum/lib/epilogue.xqm";
 import module namespace partial = "http://oppidoc.com/oppidum/partial" at "lib/partial.xqm";
+import module namespace access = "http://oppidoc.com/oppidum/access" at "../lib/access.xqm";
 
 declare variable $local:app := 'scaffold';
 declare variable $site:dico-uri := '/db/www/scaffold/config/dictionary.xml';
@@ -149,6 +150,10 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
       </li>
       <li>{local:gen-nav-class($name, 'about', ())}<a href="{$base}about" loc="app.nav.guidelines">About</a></li>
       {
+      if (access:check-user-can('create', 'Case')) then
+        <li>{local:gen-nav-class($name, 'cases', ())}<a href="{$base}cases/create" loc="app.nav.case">Case creation</a></li>
+      else
+        (),
       if (($user = 'admin') or ($groups = ('developer'))) then (
         <li>
           {local:gen-nav-class($name, ('forms'), 'dropdown')}
@@ -340,7 +345,7 @@ declare function site:field( $cmd as element(), $source as element(), $view as e
                 if (exists($ext) or exists($source/@Filter)) then
                   attribute { 'param' } {
                     let $filtered := local:append-param('filter', $source/@Filter, $f/xt:use/@param)
-                    let $more := if ($ext) then string-join($ext, ';') else ()
+                    let $more := if (exists($ext)) then string-join($ext, ';') else ()
                     return
                       if ($filtered) then
                         concat($filtered, ';', $more )

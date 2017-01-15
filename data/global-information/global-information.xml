@@ -1,11 +1,22 @@
 <GlobalInformation>
   <Description Lang="en" Role="normative">
+    <WorkflowStatus Name="Case" W="10">
+      <Status>
+        <Id>1</Id>
+        <Name>Needs analysis</Name>
+      </Status>
+    </WorkflowStatus>
     <Selector Name="Functions" Value="Id" Label="Name">
       <Description>User's functions with associated database roles</Description>
       <Option Group="admin-system" Role="admin-system" Sight="omni">
         <Id>1</Id>
         <Name>System Administrator</Name>
         <Brief>SysAdmin</Brief>
+      </Option>
+      <Option Group="account-manager" Role="account-manager">
+        <Id>1</Id>
+        <Name>Account Manager</Name>
+        <Brief>KAM</Brief>
       </Option>
     </Selector>
     <Selector Name="Services" Value="Id" Label="Name" Test="Services">
@@ -49,6 +60,90 @@
         <Id>5</Id>
         <Name>Other</Name>
       </Option>
-    </Selector>    
+    </Selector>
+    <Selector Name="InitialContexts" Value="Id" Label="Name" Test="Initial case contexts">
+      <Option>
+        <Id>1</Id>
+        <Name>Seed stage</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Project-to-project stage</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>Upscaling stage</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Expansion stage</Name>
+      </Option>
+      <Option>
+        <Id>6</Id>
+        <Name>Renewal stage</Name>
+      </Option>
+      <Option>
+        <Id>5</Id>
+        <Name>Consolidation stage</Name>
+      </Option>
+    </Selector>
+    <Selector Name="TargetedContexts" Value="Id" Label="Name" Test="Targeted case contexts">
+      <Option>
+        <Id>1</Id>
+        <Name>Seed stage</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Project-to-project stage</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>Upscaling stage</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Expansion stage</Name>
+      </Option>
+      <Option>
+        <Id>6</Id>
+        <Name>Renewal stage</Name>
+      </Option>
+      <Option>
+        <Id>5</Id>
+        <Name>Consolidation stage</Name>
+      </Option>
+    </Selector>
+    <Selector Name="RatingScales" Value="Id" Label="Name" Test="Rating scale">
+      <Option>
+        <Id>5</Id>
+        <Name>Strongly disagree</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Disagree</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Neutral</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>Agree</Name>
+      </Option>
+      <Option>
+        <Id>1</Id>
+        <Name>Strongly agree</Name>
+      </Option>
+    </Selector>
+    <Selector Name="YesNoScales" Value="Id" Label="Name" Test="Yes or no">
+      <Option>
+        <Id>1</Id>
+        <Name>Yes</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>No</Name>
+      </Option>
+    </Selector>
   </Description>
 </GlobalInformation>

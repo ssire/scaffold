@@ -1,0 +1,40 @@
+<Templates>
+  <Template Name="case-initiation">
+<![CDATA[
+  <Case>
+    <No>{ $id }</No>
+    <CreationDate>{ $date }</CreationDate>
+    <StatusHistory>
+        <CurrentStatusRef>1</CurrentStatusRef>
+        <Status>
+            <Date>{ $date }</Date>
+            <ValueRef>1</ValueRef>
+        </Status>
+    </StatusHistory>
+    <Information LastModification="{ $date }">
+      <Title>GENERATED</Title>
+      <ClientEnterprise>
+        { $form/ClientEnterprise/EnterpriseRef }
+      </ClientEnterprise>
+      { $form/ContactPerson }
+    </Information>
+    <Management>
+      <AccountManagerRef>GENERATED</AccountManagerRef>
+      { $form/Conformity }
+    </Management>
+    <NeedsAnalysis>
+      { $form/ContactPerson }
+      { $form/NeedsAnalysis/Context }
+      { $form/NeedsAnalysis/Impact }
+    </NeedsAnalysis>
+    <Evaluation>
+      <KAMReport>
+        { $form/Feedback/Recognition }
+        { $form/Feedback/Tools }
+      </KAMReport>
+    </Evaluation>
+  </Case>
+]]>
+  </Template>
+</Templates>
+

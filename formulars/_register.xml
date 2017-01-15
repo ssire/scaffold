@@ -10,6 +10,10 @@
   </Formular>
   <!-- Entities -->
   <Formular>
+    <Name>Case</Name>
+    <Form>forms/case</Form>
+  </Formular>
+  <Formular>
     <Name>Person</Name>
     <Form>forms/person</Form>
   </Formular>

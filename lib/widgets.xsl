@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Common widgets - Case tracker pilote library
+<!-- 
+     Oppidoc Business Application Development Framework
 
      Author: Stéphane Sire <s.sire@opppidoc.fr>
 
@@ -218,22 +219,15 @@
   <!-- ****************************************** -->
   <!--                 FORMULAR                   -->
   <!-- ****************************************** -->
-  
+
   <xsl:template match="Formular">
+    <xsl:call-template name="formular-imp"/>
+  </xsl:template>
+
+  <xsl:template match="Formular[parent::Search]">
     <form class="form-horizontal c-search" action="" onsubmit="return false;">
       <xsl:apply-templates select="@Width" mode="Formular"/>
-      <div data-template="{Template}">
-        <xsl:apply-templates select="@Id"/>
-        <xsl:apply-templates select="Submission" mode="Formular"/>
-        <noscript loc="app.message.js">Activez Javascript</noscript>
-        <p loc="app.message.loading">Chargement du formulaire en cours</p>
-      </div>
-      <div class="row">
-        <div style="float:right" >
-          <xsl:apply-templates select="Commands/*"/>
-        </div>
-        <xsl:apply-templates select="Submission" mode="Formular-commands"/>
-      </div>
+      <xsl:call-template name="formular-imp"/>
     </form>
   </xsl:template>
 
@@ -253,14 +247,65 @@
     </div>
   </xsl:template>
 
-  <!-- ************************ -->
-  <!--  Generic <Save> buttons  -->
-  <!-- ************************ -->
+  <!--Save command inside a Formular -->
+  <xsl:template match="Save[ancestor::Formular][not(@Target)]">
+    <xsl:call-template name="save-button-imp">
+      <xsl:with-param name="target"><xsl:value-of select="ancestor::Formular/@Id"/></xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
 
-  <!--Save button acting on a remote explicit Target editor ('save' command)
-      Copy cat of previous Save button -->
+  <!-- ********************** -->
+  <!--  Generic commands  -->
+  <!-- ********************** -->
+
+  <!--Save acting on a remote explicit Target editor ('save' command) -->
   <xsl:template match="Save[@Target]">
-    <button class="btn btn-primary" data-command="save" data-target="{@Target}">
+    <xsl:call-template name="save-button-imp">
+      <xsl:with-param name="target"><xsl:value-of select="@Target"/></xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="Cancel">
+    <button class="btn btn-primary btn-small">
+      <xsl:apply-templates select="Label"/>
+    </button>
+  </xsl:template>
+
+  <xsl:template match="Clear">
+    <button class="btn btn-primary btn-small">
+      <xsl:apply-templates select="Label"/>
+    </button>
+  </xsl:template>
+
+  <!-- Button to create an entity ('add' command) with @Target editor's content -->
+  <xsl:template match="Create">
+    <button data-command="add" data-src="{Controller}" data-edit-action="create" data-target="{@Target}" data-target-modal="{@Target}-modal" class="btn btn-primary btn-small">
+      <xsl:apply-templates select="Label"/>
+    </button>
+  </xsl:template>
+  
+  <!-- ***************** -->
+  <!--  Implementations  -->
+  <!-- ***************** -->
+  
+  <xsl:template name="formular-imp">
+    <div data-template="{Template}">
+      <xsl:apply-templates select="@Id"/>
+      <xsl:apply-templates select="Submission" mode="Formular"/>
+      <noscript loc="app.message.js">Activez Javascript</noscript>
+      <p loc="app.message.loading">Chargement du formulaire en cours</p>
+    </div>
+    <div class="row">
+      <div style="float:right" >
+        <xsl:apply-templates select="Commands/*"/>
+      </div>
+      <xsl:apply-templates select="Submission" mode="Formular-commands"/>
+    </div>
+  </xsl:template>
+
+  <xsl:template name="save-button-imp">
+    <xsl:param name="target"/>
+    <button class="btn btn-primary" data-command="save" data-target="{$target}">
       <xsl:if test="not(@data-save-flags)">
         <xsl:attribute name="data-save-flags">disableOnSave</xsl:attribute>
       </xsl:if>
@@ -269,13 +314,6 @@
       <xsl:copy-of select="@*[starts-with(local-name(.), 'data-' )]"/>
       <xsl:apply-templates select="Label"/>
     </button>
-  </xsl:template>
-  
-  <!-- Button to create an entity ('add' command) with @Target editor's content -->
-  <xsl:template match="Create">
-    <button data-command="add" data-src="{Controller}" data-edit-action="create" data-target="{@Target}" data-target-modal="{@Target}-modal" class="btn btn-primary btn-small">
-      <xsl:apply-templates select="Label"/>
-    </button>
-  </xsl:template>
+  </xsl:template>  
 
 </xsl:stylesheet>

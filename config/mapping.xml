@@ -34,6 +34,42 @@
     </action>
     <import module="submission" param="name=SearchStageRequest"/>
   </item>
+  <!-- *********** -->
+  <!-- ** cases ** -->
+  <!-- *********** -->
+  <collection name="cases" supported="create" method="POST" epilogue="home">
+    <access>
+      <rule action="GET" role="g:users" message="registered user"/>
+      <rule action="POST create" role="u:admin g:account-manager" message="system administrator or account manager"/>
+    </access>
+    <action name="create" epilogue="home">
+      <model src="modules/cases/create.xql"/>
+      <view src="modules/cases/case.xsl"/>
+    </action>
+    <action name="POST">
+      <model src="modules/cases/create.xql"/>
+    </action>
+    <item epilogue="workflow">
+      <!-- workflow view -->
+      <model src="modules/cases/workflow.xql"/>
+      <view src="modules/workflow/workflow.xsl"/>
+      <!-- enterprise (modal) -->
+      <item name="enterprise">
+        <model src="modules/cases/enterprise.xql"/>
+        <view src="modules/enterprises/modal.xsl"/>
+      </item>
+      <!-- information document -->
+      <item name="information" method="POST">
+        <model src="modules/cases/case.xql"/>
+        <variant name="GET" format="blend">
+          <view src="views/blend.xsl"/>
+        </variant>
+        <action name="POST">
+          <model src="modules/cases/information.xql"/>
+        </action>
+      </item>
+    </item>
+  </collection>
   <!-- ***************** -->
   <!-- ** enterprises ** -->
   <!-- ***************** -->
@@ -143,8 +179,8 @@
         <model src="modules/enterprises/form.xql"/>
       </item>
     </item>
-    <item name="demo" epilogue="demo.xhtml">
-      <model src="modules/demo/form.xql"/>
+    <item name="case" epilogue="case.xhtml">
+      <model src="modules/cases/form.xql"/>
     </item>
     <item name="person" epilogue="person.xhtml">
       <model src="modules/persons/form.xql"/>
@@ -157,6 +193,9 @@
     </item>
     <item name="account" epilogue="account.xhtml">
       <model src="modules/management/form.xql"/>
+    </item>
+    <item name="demo" epilogue="demo.xhtml">
+      <model src="modules/demo/form.xql"/>
     </item>
   </item>
   <!-- ************ -->

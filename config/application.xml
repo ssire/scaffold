@@ -1,9 +1,40 @@
 <Application>
+  <Workflows>
+    <Workflow Id="Case">
+      <Documents TemplateBaseURL="../templates/">
+        <Document Tab="case-initiation" AtStatus="1" Blender="yes" class="case">
+          <Controller>information</Controller>
+          <Template>case</Template>
+          <Action Type="status" AtStatus="1"/>
+          <Action Type="update" AtStatus="1"/>
+        </Document>
+      </Documents>
+      <Transitions>
+        <Transition From="1" To="-1" GenericError="INCOMPLETE-DOCUMENT">
+          <Assert Base="$case/Information/ClientEnterprise" Error="MISSING-ENTERPRISE-STATS">
+            <true>count($base/TargetedMarkets/*) &gt;= 1</true>
+            <true>$base/DomainActivityRef[. ne '']</true>
+            <true>$base/SizeRef[. ne '']</true>
+            <true>$base/CreationYear[. ne '']</true>
+          </Assert>
+          <Assert Base="$case/Evaluation/KAMReport" Error="MISSING-EVALUATION-NEEDS-ANALYSIS">
+            <true>count($base/Recognition/*) &gt;= 2</true>
+            <true>count($base/Tools/*) &gt;= 2</true>
+          </Assert>
+        </Transition>
+      </Transitions>
+    </Workflow>
+  </Workflows>
   <Security>
     <Omnipotent>
       <Meet>u:admin g:admin-system</Meet>
     </Omnipotent>
     <Resources>
+      <Resource Name="Case">
+        <Action Type="create">
+          <Meet>g:account-manager</Meet>
+        </Action>
+      </Resource>
       <Resource Name="Person">
         <Action Type="update">
           <Meet Format="eval">access:get-current-person-id() eq $resource/Id/text()</Meet>

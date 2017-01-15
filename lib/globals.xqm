@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   SCAFFOLD - Case tracker pilote library
+   SCAFFOLD - Case tracker pilote application
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 
@@ -24,8 +24,9 @@ declare variable $globals:global-info-uri := '/db/sites/scaffold/global-informat
 declare variable $globals:settings-uri := '/db/www/scaffold/config/settings.xml';
 declare variable $globals:log-file-uri := '/db/debug/login.xml';
 declare variable $globals:application-uri := '/db/www/scaffold/config/application.xml';
+declare variable $globals:templates-uri := '/db/sites/scaffold/global-information/templates.xml';
 
 (: Application entities paths :)
 declare variable $globals:persons-uri := '/db/sites/scaffold/persons/persons.xml';
-declare variable $globals:enterprises-uri := '/db/sites/scaffold/enterprises/enterprises.xml'; (: NOT IMPLEMENTED :)
-declare variable $globals:cases-uri := '/db/sites/cases'; (: NOT IMPLEMENTED :)
+declare variable $globals:enterprises-uri := '/db/sites/scaffold/enterprises/enterprises.xml';
+declare variable $globals:cases-uri := '/db/sites/scaffold/cases';

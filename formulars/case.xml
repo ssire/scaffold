@@ -1,0 +1,228 @@
+<Form Tag="Case" Layout="fluid" StartLevel="2"
+  xmlns:xt="http://ns.inria.org/xtiger"
+  xmlns:site="http://oppidoc.com/oppidum/site">
+
+  <Title>Case creation</Title>
+
+  <Verbatim>
+    <xt:component name="t_person_name">
+      <Field Key="firstname" Tag="FirstName" W="6" Gap="1" L="0">Name</Field>
+      <Field Key="lastname" Tag="LastName" W="6" Gap="1">Surname</Field>
+    </xt:component>
+
+    <xt:component name="t_contacts">
+      <Field Key="phone" Tag="Phone" Gap="1" W="6" L="0">Phone</Field>
+      <Field Key="mobile" Tag="Mobile" Gap="1" W="6">Mobile</Field>
+      <Field Key="email" Tag="Email" Gap="1" W="12" L="0">Email</Field>
+    </xt:component>
+
+    <xt:component name="t_feedback">
+      <Cell Tag="Recognition" Class="c-v-spacer">
+        <Field Key="likert-scale" Tag="RatingScaleRef" Gap="3" W="12">The top management understands the value of the coaching.</Field>
+        <Field Key="comments" Tag="Comment" Gap="0">Describe your experiences.</Field>
+      </Cell>
+      <Cell Tag="Tools" Class="c-v-spacer">
+        <Field Key="likert-scale" Tag="RatingScaleRef" Gap="3" W="12">I felt confident using the needs analysis tool.</Field>
+        <Field Key="comments" Tag="Comment" Gap="0">Describe your experiences.</Field>
+      </Cell>
+    </xt:component>
+
+    <xt:component name="t_enterprise_data">
+      <Cell W="5" L="0" TypeName="enterprise_data" style="clear:left">
+        <site:conditional meet="read" force="true">
+          <Field Class="x-EnterpriseRef" Key="enterprise" Tag="EnterpriseRef" Gap="1" loc="term.name" Placeholder-loc="content.choose">Nom</Field>
+        </site:conditional>
+        <Field Key="abbrev" Tag="ShortName" Gap="1" loc="term.abbrev">Abrégé</Field>
+        <Field Key="creation" Tag="CreationYear" Gap="1" loc="term.creationYear">Année de création</Field>
+        <Field Key="size" Tag="SizeRef" Gap="1" loc="term.enterpriseSize">Taille d'entreprise</Field>
+        <Field Key="noga" Tag="NOGA-Code" Gap="1" loc="term.noga">Code NOGA</Field>
+        <Field Key="website" Tag="WebSite" Gap="1" loc="term.webSite">Site web</Field>
+        <Field Key="activities" Tag="MainActivities" Gap="1" loc="term.activityDesc">Activités principales</Field>
+        <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="1" loc="term.targetedMarkets">Marchés ciblés</Field>
+      </Cell>
+    </xt:component>
+
+    <xt:component name="t_address">
+      <Cell W="7" Gap="1.1">
+        <Title loc="form.legend.address">Adresse</Title>
+        <Field Key="street" Tag="StreetNameAndNo" W="12" Gap="1" loc="term.streetNameAndNo">Rue et nº</Field>
+        <Field Key="box" Tag="PO-Box" Gap="1" loc="term.box">Case postale</Field>
+        <Field Key="careof" Tag="Co" Gap="1" loc="term.co">c/o</Field>
+        <Field Key="npa" Tag="PostalCode" Gap="1" loc="term.postalCode">NPA</Field>
+        <Field Key="town" Tag="Town" Gap="1" loc="term.town">Localité</Field>
+        <Field Key="state" Tag="State" Gap="1" loc="term.state">Canton</Field>
+        <Field Key="country" Tag="Country" Gap="1" loc="term.country">Pays</Field>
+      </Cell>
+    </xt:component>
+  </Verbatim>
+
+  <!-- *********************  -->
+  <!-- * Start of formular * -->
+  <!-- *********************  -->
+  <Row>
+    <Cell W="12" Gap="2">
+      <Title loc="case.legend.intervention">Case</Title>
+      <Field Key="title" Tag="Title" loc="term.title" Gap="1">Title</Field>
+      <Field Key="initiator" Tag="AccountManagerRef" W="12" Gap="2" L="0" loc="term.initiator">Initiated by</Field>
+      <Field Key="number" Tag="No" W="6" Gap="2" L="0"  loc="term.case.nb">No</Field>
+      <Field Key="date" Tag="CreationDate" W="6" Gap="2" loc="term.creationDate">Date de création</Field>
+    </Cell>
+  </Row>
+  <Separator/>
+
+  <!-- Enterprise transclusion -->
+  <Row Class="x-ClientEnterprise">
+    <Cell W="12" Gap="2" Tag="ClientEnterprise">
+      <Title loc="case.legend.enterprise">Entreprise</Title>
+        <Row>
+          <site:conditional avoid="create" force="true">
+            <div class="c-transcluded">
+              <site:conditional meet="update" force="true">
+                <Field Class="x-EnterpriseRef" Key="enterprise" Tag="EnterpriseRef" W="6" Gap="1" loc="term.name" Placeholder-loc="content.choose">Nom</Field>
+                <Button Key="btn.update" Class="btn-small btn-primary" W="6" loc="action.edit.enterprise">Modifier les données de l'entreprise</Button>
+              </site:conditional>
+              <Use Type="enterprise_data"/>
+              <Use Tag="Address" Type="address"/>
+            </div>
+          </site:conditional>
+          <site:conditional meet="create" force="true">
+            <Field Class="x-EnterpriseRef" Key="enterprise" Tag="EnterpriseRef" W="6" Gap="1" loc="term.name" Placeholder-loc="content.choose">Nom</Field>
+            <Button Key="btn.update" Class="btn-small btn-primary" W="3" loc="action.edit.enterprise">Modifier les données de l'entreprise</Button>
+            <Button Meet="create" Key="btn.create" W="3" Class="btn-small btn-primary" loc="action.create.enterprise">Créer une nouvelle entreprise</Button>
+            <div class="c-transcluded">
+              <Use Type="enterprise_data"/>
+              <Use Tag="Address" Type="address"/>
+            </div>
+          </site:conditional>
+        </Row>
+    </Cell>
+  </Row>
+  <Separator/>
+
+  <!-- Contact person for needs analysis -->
+  <Row>
+    <Cell Gap="2" Class="x-ContactPerson" Tag="ContactPerson">
+      <Title>Contact person for needs analysis</Title>
+      <Row>
+        <Field Key="sex" Tag="Sex" Gap="1" W="3" L="0">Sex</Field>
+        <Field Key="civility" Tag="Civility" Gap="1" W="6" Offset="3">Title</Field>
+        <Use Tag="Name" TypeName="person_name"/>
+        <Use Tag="Contacts" TypeName="contacts"/>
+        <Field Key="function" Tag="Function" Gap="1" W="12" L="0">Function</Field>
+      </Row>
+    </Cell>
+  </Row>
+  <Separator/>
+
+  <!-- Declaration of conflicts of interests -->
+  <Row>
+    <Cell L="0" Tag="Conformity">
+      <Title Level="1">Declaration of no conflict of interest <Hint data-placement="right">You are asked to indicate if the KAM has any interests in the case which could potentially influence their ability to offer an objective assessment of needs or identification of a suitable coach. A conflict may not necessarily disqualify the KAM from working with the SME.</Hint></Title>
+      <Cell Tag="Personal">
+        <Title Level="2">Does the KAM have any personal affiliation with the company?</Title>
+        <Row>
+          <Field Key="yes-no" Tag="YesNoScaleRef" W="2"/>
+          <Field Key="explain" Tag="Comment" W="10"/>
+          <label class="noshow">1st ethical conformity question</label>
+        </Row>
+      </Cell>
+      <Cell Tag="Financial">
+        <Title Level="2">Does the KAM have any financial interest into the company?</Title>
+        <Row>
+          <Field Key="yes-no" Tag="YesNoScaleRef" W="2"/>
+          <Field Key="explain" Tag="Comment" W="10"/>
+          <label class="noshow">2nd ethical conformity question</label>
+        </Row>
+      </Cell>
+    </Cell>
+  </Row>
+  <Separator/>
+
+  <!-- Results of Needs Analysis -->
+  <Row>
+    <Cell Tag="NeedsAnalysis">
+      <Title Level="1" style="margin-bottom:20px">Results of needs analysis <Hint data-placement="right">KAMs will use a variety of methods to undertake the company needs analysis. The results of this activity – regardless of the diagnostic tool used to structure the dialogue with the company – should be translated into the categories below, which are structured to correspond with the coach database. Please do not use these categories as a questionnaire for the company, rather use them to inform the conversation you are having with them on the needs they are facing on their business innovation journey.</Hint></Title>
+      
+      <p class="span12 text-hint" style="margin: 0 0 25px 0">The purpose of the needs analysis is to identify a suitable coach and to provide information to the coach for initial discussion</p>
+      
+      <!-- Life cycle context boxes -->
+      <Cell W="12" Gap="2" Tag="Context" L="0" style="margin-bottom:20px">
+        <Title>SME life cycle context <Hint data-placement="right">Here the KAM should select the current stage of development of the SME and the planned next step in its development. Please look at the SME Instrument Method Handbook for a detailed explanation and examples of each stage.</Hint></Title>
+        <SideLink Path="/docs/cc20-method-handbook">method handbook</SideLink>
+        <Box Key="ctx-initial" Tag="InitialContextRef" W="6">
+          <Title>What's the SME's current context?</Title>
+        </Box>
+        <Box Key="ctx-target" Tag="TargetedContextRef" W="6">
+          <Title>What's the SME's next target context?</Title>
+        </Box>
+        <Row>
+          <Field Key="ctx-description" Tag="Comments" Gap="0">Describe the current SME context and where they are planning to move next</Field>
+        </Row>
+      </Cell>
+      <Separator/>
+
+      <!-- Innovation tree boxes -->
+      <Cell W="12" Gap="2" Tag="Impact" L="0">
+        <Title>Business innovation challenges <Hint data-placement="bottom">Identify only those areas that are of high importance to the company and where it is currently lacking in capabilities. For more information on identifying business innovation challenges, please look at the SME Instrument Method Handbook.</Hint></Title>
+        <Box Key="vectors" Tag="Vectors" W="3">
+          <Title>Business innovation vectors <Hint>Business Innovation Vectors are used to categorize the main dimensions of business innovation.</Hint></Title>
+        </Box>
+        <Box Key="ideas" Tag="Ideas" W="3">
+          <Title loc="term.ideaSources">Sources of business innovation ideas</Title>
+        </Box>
+        <Box Key="resources" Tag="Resources" W="3">
+          <Title loc="term.resources">Internal Resources</Title>
+        </Box>
+        <Box Key="partners" Tag="Partners" W="3">
+          <Title loc="term.partners">Partnerships</Title>
+        </Box>
+      </Cell>
+
+      <!-- Main challenges -->
+      <Row>
+        <Cell Gap="2">
+          <Title>Describe main challenges <Hint data-placement="bottom">Limited to 1000 characters max.</Hint></Title>
+          <Field Key="expectations" Tag="Comments" W="12" Gap="3"/>
+        </Cell>
+      </Row>
+    </Cell>
+  </Row>
+  <Separator/>
+  
+  <!-- Feedback questionnaire -->
+  <Row>
+    <Title Level="1">Evaluation</Title>
+    <Use TypeName="feedback" Tag="Feedback"/>
+  </Row>
+
+  <Modals>
+    <Modal Id="case-enterprise" Width="620px" Template="templates/enterprise">
+      <Title Mode="create" loc="enterprise.create.title">Création d'une entreprise</Title>
+      <Title Mode="update" loc="enterprise.update.title">Modification d'une entreprise</Title>
+    </Modal>
+  </Modals>
+
+  <Commands>
+    <Augment Key="btn.create" Mode="create" TargetEditor="case-enterprise" Controller="enterprises/add" TargetField=".x-EnterpriseRef" TargetRoot=".x-ClientEnterprise"/>
+    <Augment Key="btn.update" Mode="update" TargetEditor="case-enterprise" Controller="enterprises/$_.xml?goal=update" TargetField=".x-EnterpriseRef" TargetRoot=".x-ClientEnterprise" loc="augment.noClientEnterprise"/>
+  </Commands>
+
+  <Bindings>
+    <Require Keys="enterprise"/>
+  </Bindings>
+
+  <Plugins>
+    <RichText Keys="ctx-description" Menu="static"/>
+    <Input Keys="civility lastname firstname phone mobile email function done-by"/>
+    <!-- <Date Keys="date-analysis"/> -->
+    <Text Keys="explain"/>
+    <MultiText Keys="expectations comments"/>
+  </Plugins>
+
+  <Hints>
+    <Hint Keys="done-by" data-placement="bottom">This should be the name of the person who contacted the SME (it is generally the KAM but might be different if the KAM is out of the office). This is to ensure that someone contacts the company within the necessary time span.</Hint>
+    <Hint Keys="targeted-markets">Thomson Reuters Business Classification</Hint>
+    <Hint Keys="ctx-description">Limited to 1000 characters max.</Hint>
+    <!-- <Mandatory Tags="RatingScaleRef Comment">To proceed to the next step please fill in the mandatory fields highlighted in red</Mandatory> -->
+  </Hints>
+</Form>

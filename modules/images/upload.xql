@@ -42,6 +42,7 @@ import module namespace image = "http://exist-db.org/xquery/image";
 import module namespace text = "http://exist-db.org/xquery/text";
 
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
+import module namespace compat = "http://oppidoc.com/oppidum/compatibility" at "../../../oppidum/lib/compat.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
 
 (: Accepted file extensions normalized to construct an image/"ext" Mime Type string :)
@@ -102,7 +103,7 @@ declare function local:get-index( $col-uri as xs:string, $user as xs:string, $gr
       let $index := <Gallery LastIndex="{$start}"/> (: lazy creation :)
       return
         if (xdb:store($col-uri, 'index.xml', $index)) then
-          misc:set-owner-group-permissions(concat($col-uri, '/index.xml'), $user, $group, $perms)
+          compat:set-owner-group-permissions(concat($col-uri, '/index.xml'), $user, $group, $perms)
         else
           () (: FIXME: throw-error ? :)
     else
@@ -123,7 +124,7 @@ declare function local:create-collection-lazy ( $home-uri as xs:string, $user as
   return
     if (not(xdb:collection-available($path))) then
       if (xdb:create-collection($home-uri, 'images')) then (
-        misc:set-owner-group-permissions($path, $user, $group, $perms),
+        compat:set-owner-group-permissions($path, $user, $group, $perms),
         $path
         )[last()]
       else
@@ -237,7 +238,7 @@ declare function local:do-upload(
   return
     if (($filtered[2] instance of xs:base64Binary) and (xdb:store($col-uri, $filename, $filtered[2], $mime-type))) then
       (
-      misc:set-owner-group-permissions(concat($col-uri, '/', $filename), $user, $group, $perms),
+      compat:set-owner-group-permissions(concat($col-uri, '/', $filename), $user, $group, $perms),
       update replace $cur-index with attribute LastIndex { number($id) +1 },
       (: prepare a thumb image if needed - note that we could release the exclusive lock now... :)
       let $cname := if ($isLogo) then 'logo-thumb-size' else 'photo-thumb-size'
@@ -245,7 +246,7 @@ declare function local:do-upload(
       return
         if ($thumb[1] and ($thumb[2] instance of xs:base64Binary)) then (: write thumb :)
           if (xdb:store($col-uri, concat($image-id, '-thumb.', $ext), $thumb[2], $mime-type)) then
-            misc:set-owner-group-permissions(concat($col-uri, '/', $image-id, '-thumb.', $ext), $user, $group, $perms)
+            compat:set-owner-group-permissions(concat($col-uri, '/', $image-id, '-thumb.', $ext), $user, $group, $perms)
           else 
             () (: TODO: return a warning in case of error :)
         else 

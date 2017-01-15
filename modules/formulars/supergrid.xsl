@@ -234,7 +234,7 @@
   <xsl:template match="Form[@Wrapper='none'][$xslt.goal != 'test']" mode="main">
     <xsl:apply-templates select="@Orientation | @Width | @Style"/>
     <xsl:apply-templates select="Title[@Render] | Title[@Level]"/>
-    <xsl:apply-templates select="Row|Separator|Include"/>
+    <xsl:apply-templates select="site:conditional|Row|Separator|Include"/>
     <xsl:apply-templates select="//Modals/Modal"/>
   </xsl:template>
 
@@ -456,7 +456,7 @@
 
   <!--  Supergrid simulator TEST generation
         Generates with a fake <select> input field for testing or with the final plugin if it is defined -->
-  <xsl:template match="Field">
+  <xsl:template match="Field[. != ''][$xslt.goal != 'save']">
     <xsl:variable name="key"><xsl:value-of select="@Key"/></xsl:variable>
     <xsl:variable name="tag"><xsl:value-of select="@Tag"/></xsl:variable>
     <xsl:variable name="offset"><xsl:if test="@Offset">offset<xsl:value-of select="concat(@Offset,' ')"/></xsl:if></xsl:variable>
@@ -513,7 +513,7 @@
 
   <!--  Supergrid SAVE generation
         Generates with Oppidum mesh conventional extension point for input field or with the final plugin if it is defined -->
-  <xsl:template match="Field[$xslt.goal = 'save']">
+  <xsl:template match="Field[. != ''][$xslt.goal = 'save']">
     <xsl:variable name="key"><xsl:value-of select="@Key"/></xsl:variable>
     <xsl:variable name="tag"><xsl:value-of select="@Tag"/></xsl:variable>
     <xsl:variable name="offset"><xsl:if test="@Offset">offset<xsl:value-of select="concat(@Offset,' ')"/></xsl:if></xsl:variable>
@@ -592,7 +592,7 @@
         on the field through Enforce or Require (because they generate micro-format attributes 
         that need to be attached somewhere)
        -->
-  <xsl:template match="Field[. = '']">
+  <xsl:template match="Field[. = ''][$xslt.goal != 'save']">
     <xsl:variable name="key"><xsl:value-of select="@Key"/></xsl:variable>
     <xsl:variable name="pos"><xsl:value-of select="count(preceding::Field[string(@Key) = $key])"/></xsl:variable>
     <div>

@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote library
+   Oppidoc Business Application Development Framework
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 
@@ -143,10 +143,10 @@ declare function form:gen-json-selector-for ( $name as xs:string, $lang as xs:st
     </json>
   let $res := util:serialize($json, 'method=json')
   (: trick because of JSON serialization bug, assumes at list 10 chars :)
-  let $dedouble := concat(substring-before($res, concat("}", substring($res, 1, 10))), "}")
-  let $unfilter := replace($dedouble, '"_', '"')
+  (:let $dedouble := concat(substring-before($res, concat("}", substring($res, 1, 10))), "}"):)
+  let $filter := replace($res, '"_', '"')
   return
-   <xt:use types='choice2' param="{$params}" values='{ $unfilter }'/>
+   <xt:use types='choice2' param="{$params}" values='{ $filter }'/>
 };
 
 (: ======================================================================

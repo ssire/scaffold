@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote library
+   Oppidoc Business Application Development Framework
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 
@@ -19,16 +19,7 @@ import module namespace mail = "http://exist-db.org/xquery/mail";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "access.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "display.xqm", "../app/display.xqm";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../oppidum/lib/util.xqm";
-
-(: ======================================================================
-   Changes owner, groups and permissions for a collection or resource
-   ======================================================================
-:)
-declare function misc:set-owner-group-permissions( $path as xs:string, $owner as xs:string, $group as xs:string, $mod as xs:string ) as empty() {
-  sm:chown(xs:anyURI($path), $owner),
-  sm:chgrp(xs:anyURI($path), $group),
-  sm:chmod(xs:anyURI($path), $mod)
-};
+import module namespace compat = "http://oppidoc.com/oppidum/compatibility" at "../../oppidum/lib/compat.xqm";
 
 (: ======================================================================
    High-level function to dereference one or more reference elements
@@ -253,6 +244,34 @@ declare function misc:filter( $nodes as item()*, $blacklist as xs:string* ) as i
           else
             element { node-name($node) }
               { misc:filter($node/(attribute()|node()), $blacklist) }
+      default
+        return $node
+};
+
+(: ======================================================================
+   Returns node set containing only nodes in node set with textual
+   content (note: attribute is not enough to qualify node for inclusion)
+   ====================================================================== 
+:)
+declare function misc:prune( $nodes as item()* ) as item()* {
+  for $node in $nodes
+  return
+    typeswitch($node)
+      case text()
+        return $node
+      case attribute()
+        return $node
+      case element()
+        return
+          if (empty($node/*) and normalize-space($node) ne '') then
+            $node
+          else if (some $n in $node//* satisfies normalize-space($n) ne '') then
+            let $tag := local-name($node)
+            return
+              element { $tag }
+                { misc:prune($node/(attribute() | node())) }
+          else
+            ()
       default
         return $node
 };
@@ -486,7 +505,7 @@ declare function misc:create-collection-lazy ( $base-uri as xs:string, $path as 
      else
        if (xdb:collection-available($parent)) then
          if (xdb:create-collection($parent, $t)) then
-           misc:set-owner-group-permissions($path, $user, $group, $perms)
+           compat:set-owner-group-permissions($path, $user, $group, $perms)
          else
            ()
        else
@@ -514,7 +533,7 @@ declare function misc:create-entity( $base-url as xs:string, $name as xs:string,
         let $stored-path := xdb:store($col-uri, string($spec/@Resource), $data)
         return
           if(not($stored-path eq ())) then
-            misc:set-owner-group-permissions($stored-path, $policy/@Owner, $policy/@Group, $policy/@Perms)
+            compat:set-owner-group-permissions($stored-path, $policy/@Owner, $policy/@Group, $policy/@Perms)
           else
             ()
     else

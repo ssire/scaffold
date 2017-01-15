@@ -81,7 +81,8 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
   <group name="config" mandatory="true">
     <collection name="/db/www/scaffold/config" policy="guest">
       <files pattern="config/mapping.xml"/>
-      <files pattern="config/modules.xml"/>
+      <files pattern="config/mapping.xml"/>
+      <files pattern="config/database.xml"/>
       <files pattern="config/skin.xml"/>
       <files pattern="config/errors.xml"/>
       <files pattern="config/messages.xml"/>
@@ -100,6 +101,7 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
     <collection name="/db/sites/scaffold" policy="users" inherit="true"/>
   </group>
   <group name="data">
+    <collection name="/db/sites/scaffold/cases" policy="users" inherit="true"/>
     <collection name="/db/sites/scaffold/global-information" policy="admin" inherit="true">
       <files pattern="data/**/*.xml"/>
     </collection>
@@ -198,7 +200,7 @@ declare function local:deploy ( $dir as xs:string,  $targets as xs:string*, $bas
 
 let $dir := install:webapp-home("projects/scaffold")
 let $pwd := request:get-parameter('pwd', ())
-let $mode := request:get-parameter('m', 'prod')
+let $mode := request:get-parameter('m', fn:doc('/db/www/scaffold/config/mapping.xml')/site/@mode)
 let $targets := tokenize(request:get-parameter('t', ''), ',')
 let $host := request:get-header('Host')
 let $cmd := request:get-attribute('oppidum.command')

@@ -21,12 +21,36 @@ declare namespace site = "http://oppidoc.com/oppidum/site";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
+(: flags for hierarchical  2 levels selectors:)
+declare variable $local:json-selectors := true();
+
+(: ======================================================================
+   Generate selector for two level fields like domains of activity or markets
+   TODO: move to form.xqm
+   ====================================================================== 
+:)
+declare function local:gen-hierarchical-selector ($tag as xs:string, $xvalue as xs:string?, $optional as xs:boolean, $lang as xs:string ) {
+  let $filter := if ($optional) then ' optional' else ()
+  let $params := if ($xvalue) then
+                  concat(';multiple=yes;xvalue=', $xvalue, ';typeahead=yes')
+                 else
+                  ';multiple=no'
+  return
+    if ($local:json-selectors) then
+      form:gen-json-selector-for($tag, $lang,
+        concat($filter, $params, ";choice2_width1=300px;choice2_width2=300px;choice2_closeOnSelect=true")) 
+    else
+      form:gen-selector-for($tag, $lang, concat($filter, $params))
+};
+
 let $cmd := request:get-attribute('oppidum.command')
 let $lang := string($cmd/@lang)
 let $target := oppidum:get-resource(oppidum:get-command())/@name
 let $goal := request:get-parameter('goal', 'read')
 return
+
   if ($target = 'enterprises') then (: Enterprise search formular :)
+
     <site:view>
       <site:field Key="enterprises">
         { _form:gen-enterprise-selector($lang, ";multiple=yes;xvalue=EnterpriseRef;typeahead=yes") }
@@ -41,20 +65,25 @@ return
         { form:gen-selector-for('Sizes', $lang, ";multiple=yes;xvalue=SizeRef;typeahead=yes;select2_minimumResultsForSearch=1") }
       </site:field>
       <site:field Key="domains-of-activities">
-        { form:gen-selector-for('DomainActivities', $lang, ";multiple=yes;xvalue=DomainActivityRef;typeahead=yes") }
+        { local:gen-hierarchical-selector('DomainActivities', 'DomainActivityRef', false(), $lang) }
       </site:field>
       <site:field Key="targeted-markets">
-        { form:gen-selector-for('TargetedMarkets', $lang, ";multiple=yes;xvalue=TargetedMarketRef;typeahead=yes") }
+        { local:gen-hierarchical-selector('TargetedMarkets', 'TargetedMarketRef', false(), $lang) }
       </site:field>
       <site:field Key="persons">
         { _form:gen-person-selector($lang, ";multiple=yes;xvalue=Person;typeahead=yes") }
       </site:field>
     </site:view>
+
   else (: assumes generic Enterprise formular  :)
+
     if ($goal = 'read') then
+
       <site:view>
       </site:view>
-    else
+
+    else (: assumes create or update goal :)
+
       <site:view>
         {
         if ($goal = 'create') then 
@@ -73,10 +102,10 @@ return
           { form:gen-selector-for('Sizes', $lang, " optional;multiple=no;typeahead=yes;select2_minimumResultsForSearch=1") }
         </site:field>
         <site:field Key="domain-activity">
-          { form:gen-selector-for('DomainActivities', $lang, " optional;multiple=no;typeahead=yes") }
+          { local:gen-hierarchical-selector('DomainActivities', (), true(), $lang) }
         </site:field>
         <site:field Key="targeted-markets">
-          { form:gen-selector-for('TargetedMarkets', $lang, " optional;multiple=yes;xvalue=TargetedMarketRef;typeahead=yes") }
-        </site:field>
+          { local:gen-hierarchical-selector('TargetedMarkets', 'TargetedMarketRef', true(), $lang) }
+          </site:field>
       </site:view>
     
