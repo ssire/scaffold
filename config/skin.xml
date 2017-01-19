@@ -38,6 +38,7 @@
   </profile>
   <!-- Included on all pages (TODO: jQuery CDN version ?)-->
   <profile name="*">
+    <link href="css/site.css"/>
     <link href="css/forms.css"/>
     <predef>jquery</predef>
     <script src="lib/app.js"/>
@@ -45,11 +46,21 @@
   <!-- Standard application mesh -->
   <profile name="home" type="mesh">
     <link href="contribs/bootstrap-2.3.2/css/bootstrap.css"/>
-    <link href="css/site.css"/>
     <predef avoid="error()">axel-1.3-no-jquery</predef>
     <predef avoid="error()">date</predef>
     <script src="contribs/bootstrap-2.3.2/js/bootstrap.min.js"/>
     <predef>select2</predef>
+  </profile>
+  <!-- Workflow page mesh -->
+  <profile name="workflow" type="mesh">
+    <link href="contribs/bootstrap-2.3.2/css/bootstrap.css"/>
+    <link href="css/workflow.css"/>
+    <predef avoid="error()">axel-1.3-no-jquery</predef>
+    <predef avoid="error()">date</predef>
+    <script src="contribs/bootstrap-2.3.2/js/bootstrap.min.js"/>
+    <predef>select2</predef>
+    <script src="lib/extensions.js"/>
+    <script src="lib/workflow.js"/>
   </profile>
   <!-- /forms skin -->
   <profile name="formulars">

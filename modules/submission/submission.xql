@@ -18,7 +18,7 @@ import module namespace response = "http://exist-db.org/xquery/response";
 import module namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace submission = "http://www.oppidoc.fr/oppidum/submission" at "submission.xqm";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 
 declare option exist:serialize "method=xml media-type=application/xml";
 
@@ -30,7 +30,7 @@ declare variable $persons-uri := '/db/sites/cctracker/persons/persons.xml';
    ======================================================================
 :)
 declare function local:save-default-request ( $request as element() ) {
-  let $profile := access:get-current-person-profile()
+  let $profile := user:get-current-person-profile()
   let $found := $profile/*[name(.) = name($request)]
   return
     if ($profile) then
@@ -48,7 +48,7 @@ declare function local:save-default-request ( $request as element() ) {
    ======================================================================
 :)
 declare function local:delete-default-request ( $name as xs:string ) {
-  let $profile := access:get-current-person-profile()
+  let $profile := user:get-current-person-profile()
   let $found := $profile/*[name(.) = $name]
   return
     if ($profile) then

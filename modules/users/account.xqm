@@ -14,7 +14,7 @@ module namespace account = "http://platinn.ch/coaching/account";
 import module namespace sm = "http://exist-db.org/xquery/securitymanager";
 
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
 import module namespace media = "http://oppidoc.com/ns/cctracker/media" at "../../lib/media.xqm";
 
@@ -115,7 +115,7 @@ declare function account:send-new-password( $user as element(), $pwd as xs:strin
     media:render-email($template,
       <vars>
         <var name="Password">{ $pwd }</var>
-        { local:gen-user-name('Admin', access:get-current-person-id()) }
+        { local:gen-user-name('Admin', user:get-current-person-id()) }
         { local:gen-user-name('User', $user/Id/text()) }
       </vars>,
       'en'
@@ -136,7 +136,7 @@ declare function account:send-created-login( $user as element(), $login as xs:st
       <vars>
         <var name="Login">{ $login }</var>
         <var name="Password">{ $pwd }</var>
-        { local:gen-user-name('Admin', access:get-current-person-id()) }
+        { local:gen-user-name('Admin', user:get-current-person-id()) }
         { local:gen-user-name('User', $user/Id/text()) }
       </vars>,
       'en'
@@ -157,7 +157,7 @@ declare function account:send-updated-login( $user as element(), $login as xs:st
       <vars>
         <var name="Login">{ $login }</var>
         <var name="Password">{ $pwd }</var>
-        { local:gen-user-name('Admin', access:get-current-person-id()) }
+        { local:gen-user-name('Admin', user:get-current-person-id()) }
         { local:gen-user-name('User', $user/Id/text()) }
       </vars>,
       'en'

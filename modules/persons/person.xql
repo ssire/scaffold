@@ -13,11 +13,12 @@ import module namespace request="http://exist-db.org/xquery/request";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../../lib/display.xqm";
-import module namespace _display = "http://oppidoc.com/oppidum/display/app" at "../../app/display.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace ajax = "http://oppidoc.com/oppidum/ajax" at "../../lib/ajax.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
-import module namespace _misc = "http://oppidoc.com/ns/cctracker/misc/app" at "../../app/util.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
+
 import module namespace search = "http://platinn.ch/coaching/search" at "search.xqm";
 
 declare option exist:serialize "method=xml media-type=text/xml";
@@ -75,7 +76,7 @@ declare function local:validate-person-submission( $data as element(), $curNo as
 :)
 declare function local:gen-user-profile-for-writing( $profile as element()? ) {
   let $function := request:get-parameter("f", ())
-  let $fref := access:get-function-ref-for-role($function)
+  let $fref := user:get-function-ref-for-role($function)
   return
     if ($fref and ($function = ('kam', 'coach'))) then
       if ($profile) then 
@@ -184,7 +185,7 @@ declare function local:gen-person( $person as element(), $lang as xs:string, $go
   if ($goal = 'read') then
     (: serves both EnterpriseName for the persons/xxx.modal in /stage
        and EnterpriseRef for persons/xxx.blend view in /persons   :)
-    let $entname := _display:gen-enterprise-name($person/EnterpriseRef, $lang)
+    let $entname := custom:gen-enterprise-name($person/EnterpriseRef, $lang)
     let $roles := 
       <Roles>
       {
@@ -221,7 +222,7 @@ declare function local:gen-person( $person as element(), $lang as xs:string, $go
             <PersonRef>{ $person/Id/text() }</PersonRef>,
             $person/Name,
             $person/(Sex | Civility | Country),
-            _misc:unreference-enterprise($person/EnterpriseRef, 'EnterpriseRef', $lang),
+            custom:unreference-enterprise($person/EnterpriseRef, 'EnterpriseRef', $lang),
             $person/( Function | Photo | Contacts)
             )
     let $envelope := request:get-parameter('envelope', '')

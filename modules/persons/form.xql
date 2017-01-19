@@ -15,9 +15,9 @@ xquery version "1.0";
 
 declare default element namespace "http://www.w3.org/1999/xhtml";
 
-import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
-import module namespace _form = "http://oppidoc.com/oppidum/form/app" at "../../app/form.xqm";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
+import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 
 declare namespace xt = "http://ns.inria.org/xtiger";
 declare namespace site = "http://oppidoc.com/oppidum/site";
@@ -32,13 +32,13 @@ return
   if ($target = 'persons') then (: Person search form :)
       <site:view>
         <site:field Key="persons">
-        { _form:gen-person-selector($lang, ";multiple=yes;typeahead=yes;xvalue=PersonRef") }
+        { custom:gen-person-selector($lang, ";multiple=yes;typeahead=yes;xvalue=PersonRef") }
       </site:field>
       <site:field Key="countries">
         { form:gen-selector-for('Countries', $lang, ";multiple=yes;xvalue=Country;typeahead=yes") }
       </site:field>
       <site:field Key="enterprises">
-        { _form:gen-enterprise-selector($lang, ";multiple=yes;xvalue=EnterpriseRef;typeahead=yes") }
+        { custom:gen-enterprise-selector($lang, ";multiple=yes;xvalue=EnterpriseRef;typeahead=yes") }
       </site:field>
       <site:field Key="functions">
         { form:gen-selector-for('Functions', $lang, ";multiple=yes;typeahead=no;xvalue=FunctionRef") }
@@ -52,7 +52,7 @@ return
       {
       if ($goal = 'create') then
         <site:field Key="lastname">
-          { _form:gen-person-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
+          { custom:gen-person-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
         </site:field>
       else
         <site:field Key="lastname" filter="no">
@@ -70,7 +70,7 @@ return
         { form:gen-selector-for('Countries', $lang, " optional;multiple=no;typeahead=yes") }
       </site:field>
       <site:field Key="enterprise">
-        { _form:gen-enterprise-selector($lang, ' optional;multiple=no;typeahead=yes') }
+        { custom:gen-enterprise-selector($lang, ' optional;multiple=no;typeahead=yes') }
       </site:field>
     </site:view>
   else (: 'read' - only constant fields  :)

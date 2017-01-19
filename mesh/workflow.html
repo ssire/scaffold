@@ -1,0 +1,72 @@
+<html xmlns:site="http://oppidoc.com/oppidum/site" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description" content="CoachCom2020 case tracking system for the business innovation coaching offered to the beneficiaries of the Horizon 2020 SME Instrument"/>
+        <meta name="keywords" content="coachcom2020, case tracker"/>
+        <meta name="robots" content="noindex,nofollow"/>
+        <meta name="generator" content="Oppidum by Oppidoc"/>
+        <site:window>Case Tracker beta</site:window>
+        <site:skin force="true">
+          <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+          <link href="../resources/css/home.css" rel="stylesheet" type="text/css" />
+          <link href="../resources/css/site.css" rel="stylesheet" type="text/css" />
+        </site:skin>
+    </head>
+    <body id="c-skip-timeline">
+      <div id="fixed-top">
+        <div id="fixed-inner">
+          <div id="banner" class="container">
+            <div class="row">
+              <div class="span9">
+                <div class="navbar">
+                  <div class="navbar-inner">
+                    <site:navigation force="true">NAVIGATION</site:navigation>
+                  </div>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="row">
+                  <div class="span12" id="cct-logo"/>
+                  <div class="span12">
+                    <site:login force="true">LOGIN</site:login>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="span12" id="cct-title">
+              <site:title force="true">TITLE</site:title>
+          </div>
+        </div>
+        <div id="c-no-more-fixed-timeline">
+          <div id="fixed-inner" class="container">
+            <div class="row">        
+              <site:timeline>TIMELINE</site:timeline>
+            </div>
+          </div>
+        </div>
+        <div id="err-msg" class="row" >
+            <div id="error" class="span12" condition="has-error">
+              <span class="ui-close" onclick="javascript:document.errorOff()">X</span>
+              <!-- <button class="close" onclick="javascript:document.errorOff()">&#215;</button> -->
+              <site:error force="true">
+                  <p>ERROR</p>
+              </site:error>
+            </div>
+            <div id="message" class="span12" condition="has-message">
+              <span class="ui-close" data-timeout="1500" onclick="javascript:document.messageOff()">X</span>
+              <!-- <button class="close ui-close" onclick="javascript:document.messageOff()">&#215;</button> -->
+              <site:message force="true">
+                  <p>MESSAGE</p>
+              </site:message>
+            </div>
+        </div>
+        <site:content>CONTENT</site:content>
+      </div>
+    </body>
+</html>

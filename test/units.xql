@@ -19,6 +19,7 @@ import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../li
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../lib/form.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../lib/display.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../lib/util.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../lib/access.xqm";
 
 declare variable $local:tests := 
@@ -39,10 +40,10 @@ declare variable $local:tests :=
     </Module>
     <Module>
       <Name>Access</Name>
-      <Test>access:get-current-person-id()</Test>
-      <Test Format="xml">access:get-current-person-profile()</Test>
-      <Test>access:get-current-person-id('test')</Test>
-      <Test>access:get-function-ref-for-role('admin-system')</Test>
+      <Test>user:get-current-person-id()</Test>
+      <Test Format="xml">user:get-current-person-profile()</Test>
+      <Test>user:get-current-person-id('test')</Test>
+      <Test>user:get-function-ref-for-role('admin-system')</Test>
       <Test>access:check-omnipotent-user()</Test>
       <Test>access:assert-access-rules((), ())</Test>
       <Test><![CDATA[access:assert-rule('test', 'users', <Meet>u:test</Meet>, ())]]></Test>

@@ -51,12 +51,12 @@ Note that inherently to Oppidum you need to clone all your projects inside the s
 #### Using HTTPS
 
     cd /usr/local/scaffold/lib/webapp/projects
-    git clone https://{your login}@bitbucket.org/ssire/scaffold.git
+    git clone https://github.com/ssire/scaffold.git
 
 #### Using SSH (if you registered your own SSH key inside your bitbucket profile)
 
     cd /usr/local/cctracker/lib/webapp/projects
-    git clone git@bitbucket.org:votre-login-bitbucket/cctracker.git
+    git clone git@github.com:ssire/scaffold.git
 
 On Mac OS X you need to configure your SSH-agent to use you SSH Key (see available online tutorials)
 
@@ -75,18 +75,20 @@ Then execute the deployment script script/deploy.xql.
 
 You can execute it directly from your browser by entering into the address bar :
 
-    http:127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms&pwd=[PASSWORD]&m=dev
+    http:127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev
 
 or using curl from a terminal if available :
 
-    curl -D - "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms&pwd=[PASSWORD]&m=dev"
+    curl -D - "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev"
 
 or using wget from a terminal if available :
 
-    sudo wget --no-check-certificate -O- "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms&pwd=[PASSWORD]&m=dev"
+    sudo wget --no-check-certificate -O- "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev"
 
 PASSWORD is the *admin* database password<br/>
 Read header comments in `scripts/deploy.xql` to learn more about the different deployment targets.
+
+**WARNING**: do not forget the *policies* target, which is required only the first time, to setup collection permissions, in particular for a specific permission category (owner, group or guest) the parent collection must be executable so that files can be read since eXist-DB 2.2.
 
 ##### 4.2 Option 2 : by restoring an existing database backup
 
@@ -97,6 +99,17 @@ You can restore a full database backup.
 You can start at [http://localhost:8080/exist/projects/scaffold]()
 
 You can connect with the *admin* user of the database at first, then create one or more users using the *Add a person* button in the *Community > Persons* area. You can manage user roles in the *Users* tab in the *Admin* area. By default users with the *System Administrator* role are able to create other users.
+
+### 6. Start creating cases and activities
+
+If you started from scratch then you can only login with the *admin* user. You must then create a user with the account manager role, and create a login for that user. For that purpose :
+
+* add the person from Community > Persons (click on *Add a person*)
+* assign Account Manager role to that user from Admin > Users (you can also assign her the System Administrator role to allow her to administrate the other users)
+* create a login for that user from Admin > Users 
+
+you can then login with that user to create cases and activities
+
 
 Coding conventions
 ---------------------

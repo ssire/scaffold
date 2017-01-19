@@ -39,7 +39,7 @@
   <!-- *********** -->
   <collection name="cases" supported="create" method="POST" epilogue="home">
     <access>
-      <rule action="GET" role="g:users" message="registered user"/>
+      <rule action="GET" role="u:admin g:users" message="registered user"/>
       <rule action="POST create" role="u:admin g:account-manager" message="system administrator or account manager"/>
     </access>
     <action name="create" epilogue="home">
@@ -59,13 +59,13 @@
         <view src="modules/enterprises/modal.xsl"/>
       </item>
       <!-- information document -->
-      <item name="information" method="POST">
+      <item name="case" method="POST">
         <model src="modules/cases/case.xql"/>
         <variant name="GET" format="blend">
           <view src="views/blend.xsl"/>
         </variant>
         <action name="POST">
-          <model src="modules/cases/information.xql"/>
+          <model src="modules/cases/case.xql"/>
         </action>
       </item>
     </item>

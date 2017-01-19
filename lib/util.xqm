@@ -16,8 +16,8 @@ import module namespace sm = "http://exist-db.org/xquery/securitymanager";
 
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../lib/globals.xqm";
 import module namespace mail = "http://exist-db.org/xquery/mail";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "access.xqm";
-import module namespace display = "http://oppidoc.com/oppidum/display" at "display.xqm", "../app/display.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "user.xqm";
+import module namespace display = "http://oppidoc.com/oppidum/display" at "display.xqm";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../oppidum/lib/util.xqm";
 import module namespace compat = "http://oppidoc.com/oppidum/compatibility" at "../../oppidum/lib/compat.xqm";
 
@@ -88,7 +88,13 @@ declare function misc:unreference( $nodes as item()* ) as item()* {
         return
           let $tag := local-name($node)
           return
-            if (ends-with($tag, 's') and (count($node/*) > 0) and
+            if ($node/@_Unref) then
+              element { $tag }
+                { 
+                local:unref_display_attribute($node, 'en'),
+                $node/*
+                }
+            else if (ends-with($tag, 's') and (count($node/*) > 0) and
                 (every $c in $node/* satisfies (ends-with(local-name($c), 'Ref') and not(ends-with(local-name($c), 'ScaleRef'))))) then
               element { $tag }
                 {(
@@ -108,6 +114,15 @@ declare function misc:unreference( $nodes as item()* ) as item()* {
                 { misc:unreference($node/(attribute()|node())) }
       default
         return $node
+};
+
+declare function local:unref_display_attribute( $ref as element(), $lang as xs:string ) as attribute() {
+  let $label := util:eval(concat($ref/@_Unref, '($ref, $lang)'))
+  return
+    if ($label) then
+      attribute { '_Display' } { $label }
+    else
+      ()
 };
 
 declare function misc:unreference( $ref as element()?, $tag as xs:string, $lang as xs:string ) as element() {
@@ -158,7 +173,7 @@ declare function misc:gen-current-date( $tag as xs:string ) as element() {
    ======================================================================
 :)
 declare function misc:gen-current-person-name() as xs:string {
-  let $uid := access:get-current-person-id()
+  let $uid := user:get-current-person-id()
   let $name := display:gen-person-name($uid, 'en')
   return
     if ($name) then $name else oppidum:get-current-user()
@@ -181,7 +196,7 @@ declare function misc:gen-current-person-name( $tag as xs:string ) as element() 
    ======================================================================
 :)
 declare function misc:gen-current-person-id( $tag as xs:string ) as element() {
-  let $uid := access:get-current-person-id()
+  let $uid := user:get-current-person-id()
   return
     element { $tag } {
       if ($uid) then
@@ -627,3 +642,32 @@ declare function misc:record-proxy($host as element(), $data as element()?) {
     update insert <Proxies> { $data } </Proxies> into $host
 };
 
+(: ======================================================================
+   Converts a  REST url resource name to a document root element name 
+   (e.g. needs-analysis becomes NeedsAnalysis)
+   ====================================================================== 
+:)
+declare function misc:rest-to-Root( $name as xs:string ) as xs:string {
+  string-join(
+    for $w in tokenize($name, '-')
+    return 
+      concat(upper-case(substring($w, 1, 1)), substring($w, 2))
+    )
+};
+
+(: =======================================================================
+   Implements XAL (XML Aggregation Language) update protocol
+   FIXME: currently only XALAction with 'replace' @Type
+   =======================================================================
+:)
+declare function misc:apply-updates( $parent as element(), $spec as element() ) {
+  for $fragment in $spec/XALAction[@Type eq 'replace']
+  return
+    for $cur in $fragment/*
+    let $legacy := $parent/*[local-name(.) eq local-name($cur)]
+    return
+      if (exists($legacy)) then
+        update replace $legacy with $cur
+      else
+        update insert $cur into $parent
+};

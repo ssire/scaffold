@@ -14,7 +14,7 @@ import module namespace request="http://exist-db.org/xquery/request";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
-import module namespace _form = "http://oppidoc.com/oppidum/form/app" at "../../app/form.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 
 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
 declare namespace xt = "http://ns.inria.org/xtiger";
@@ -96,7 +96,7 @@ declare function local:gen-enterprise-create( $cmd as element(), $lang as xs:str
   let $params := ';multiple=no;typeahead=yes'
   return
     <site:field Key="enterprise">
-      { _form:gen-enterprise-selector($lang, concat(' ', $autofill, $params)) }
+      { custom:gen-enterprise-selector($lang, concat(' ', $autofill, $params)) }
     </site:field>
 };
 

@@ -16,6 +16,7 @@ declare namespace httpclient = "http://exist-db.org/xquery/httpclient";
 import module namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../../lib/display.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
 
@@ -89,7 +90,7 @@ declare function search:gen-person-sample ( $person as element(), $role-ref as x
 
 (: ======================================================================
    Returns community member(s) matching request
-   FIXME: hard-coded function refs -> access:get-function-ref-for-role('xxx')
+   FIXME: hard-coded function refs -> user:get-function-ref-for-role('xxx')
    ======================================================================
 :)
 declare function search:fetch-persons ( $request as element() ) as element()* {
@@ -97,9 +98,9 @@ declare function search:fetch-persons ( $request as element() ) as element()* {
   let $country := $request//Country
   let $function := $request/Functions/FunctionRef/text()
   let $enterprise := $request/Enterprises/EnterpriseRef/text()
-  let $region-role-ref := access:get-function-ref-for-role("region-manager")
+  let $region-role-ref := user:get-function-ref-for-role("region-manager")
   let $omni := access:check-user-can('update', 'Person')
-  let $uid := if ($omni) then () else access:get-current-person-id()
+  let $uid := if ($omni) then () else user:get-current-person-id()
   return
     <Results>
       <Persons>

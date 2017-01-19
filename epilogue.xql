@@ -26,7 +26,7 @@ import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../oppid
 import module namespace skin = "http://oppidoc.com/oppidum/skin" at "../oppidum/lib/skin.xqm";
 import module namespace epilogue = "http://oppidoc.com/oppidum/epilogue" at "../oppidum/lib/epilogue.xqm";
 import module namespace partial = "http://oppidoc.com/oppidum/partial" at "lib/partial.xqm";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "../lib/access.xqm";
+import module namespace access = "http://oppidoc.com/oppidum/access" at "lib/access.xqm";
 
 declare variable $local:app := 'scaffold';
 declare variable $site:dico-uri := '/db/www/scaffold/config/dictionary.xml';

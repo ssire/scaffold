@@ -13,7 +13,7 @@ module namespace submission = "http://www.oppidoc.fr/oppidum/submission";
 
 import module namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 
 declare variable $submission:persons-uri := '/db/sites/cctracker/persons/persons.xml';
 declare variable $submission:empty-req := <Request/>;
@@ -25,7 +25,7 @@ declare variable $submission:empty-req := <Request/>;
    ======================================================================
 :)
 declare function submission:get-default-request ( $name as xs:string ) as element() {
-  let $profile := access:get-current-person-profile()
+  let $profile := user:get-current-person-profile()
   let $found := $profile/*[name(.) = $name]
   return
     if ($found) then

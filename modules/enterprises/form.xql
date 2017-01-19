@@ -14,7 +14,7 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../../lib/display.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
-import module namespace _form = "http://oppidoc.com/oppidum/form/app" at "../../app/form.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 
 declare namespace xt = "http://ns.inria.org/xtiger";
 declare namespace site = "http://oppidoc.com/oppidum/site";
@@ -53,10 +53,10 @@ return
 
     <site:view>
       <site:field Key="enterprises">
-        { _form:gen-enterprise-selector($lang, ";multiple=yes;xvalue=EnterpriseRef;typeahead=yes") }
+        { custom:gen-enterprise-selector($lang, ";multiple=yes;xvalue=EnterpriseRef;typeahead=yes") }
       </site:field>
       <site:field Key="towns">
-        { _form:gen-town-selector($lang, ";multiple=yes;xvalue=Town;typeahead=yes") }
+        { custom:gen-town-selector($lang, ";multiple=yes;xvalue=Town;typeahead=yes") }
       </site:field>
       <site:field Key="countries">
         { form:gen-selector-for('Countries', $lang, ";multiple=yes;xvalue=Country;typeahead=yes") }
@@ -71,7 +71,7 @@ return
         { local:gen-hierarchical-selector('TargetedMarkets', 'TargetedMarketRef', false(), $lang) }
       </site:field>
       <site:field Key="persons">
-        { _form:gen-person-selector($lang, ";multiple=yes;xvalue=Person;typeahead=yes") }
+        { custom:gen-person-selector($lang, ";multiple=yes;xvalue=Person;typeahead=yes") }
       </site:field>
     </site:view>
 
@@ -88,7 +88,7 @@ return
         {
         if ($goal = 'create') then 
           <site:field Key="enterprise">
-            { _form:gen-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
+            { custom:gen-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
           </site:field>
         else
           <site:field Key="enterprise" filter="no">

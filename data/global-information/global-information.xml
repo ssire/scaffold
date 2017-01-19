@@ -1,11 +1,65 @@
 <GlobalInformation>
   <Description Lang="en" Role="normative">
-    <WorkflowStatus Name="Case" W="10">
-      <Status>
+    <Selector Name="CaseWorkflowStatus" Value="Id" Label="Name" W="10">
+      <Option>
         <Id>1</Id>
-        <Name>Needs analysis</Name>
-      </Status>
-    </WorkflowStatus>
+        <Name>Active</Name>
+      </Option>
+      <Option Type="final">
+        <Id>10</Id>
+        <Name>No coaching</Name>
+      </Option>
+      <Option Type="final">
+        <Id>12</Id>
+        <Name>Closed</Name>
+      </Option>
+    </Selector>
+    <Selector Name="ActivityWorkflowStatus" Value="Id" Label="Name" W="10">
+      <Option>
+        <Id>1</Id>
+        <Name>Coach assignment</Name>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>Coaching plan</Name>
+      </Option>
+      <Option>
+        <Id>3</Id>
+        <Name>Consultation</Name>
+      </Option>
+      <Option>
+        <Id>4</Id>
+        <Name>Coach contracting</Name>
+      </Option>
+      <Option>
+        <Id>5</Id>
+        <Name>Coaching report</Name>
+      </Option>
+      <Option Deprecated="pi-4">
+        <Id>6</Id>
+        <Name>KAM report</Name>
+      </Option>
+      <Option>
+        <Id>7</Id>
+        <Name>Report approval</Name>
+      </Option>
+      <Option>
+        <Id>8</Id>
+        <Name>Feedbacks (SME,KAM)</Name>
+      </Option>
+      <Option Type="final">
+        <Id>9</Id>
+        <Name>Rejected</Name>
+      </Option>
+      <Option Type="final">
+        <Id>10</Id>
+        <Name>Closed</Name>
+      </Option>
+      <Option Type="final">
+        <Id>11</Id>
+        <Name>Evaluated</Name>
+      </Option>
+    </Selector>
     <Selector Name="Functions" Value="Id" Label="Name">
       <Description>User's functions with associated database roles</Description>
       <Option Group="admin-system" Role="admin-system" Sight="omni">

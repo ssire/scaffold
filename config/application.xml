@@ -2,8 +2,8 @@
   <Workflows>
     <Workflow Id="Case">
       <Documents TemplateBaseURL="../templates/">
-        <Document Tab="case-initiation" AtStatus="1" Blender="yes" class="case">
-          <Controller>information</Controller>
+        <Document Tab="case-info" AtStatus="1" Blender="yes" class="case">
+          <Controller>case</Controller>
           <Template>case</Template>
           <Action Type="status" AtStatus="1"/>
           <Action Type="update" AtStatus="1"/>
@@ -26,20 +26,31 @@
     </Workflow>
   </Workflows>
   <Security>
-    <Omnipotent>
-      <Meet>u:admin g:admin-system</Meet>
-    </Omnipotent>
+    <Documents>
+      <!-- Main documents shown on accordion tabs -->
+      <Document TabRef="case-info" Root="Case">
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
+    </Documents>
     <Resources>
       <Resource Name="Case">
         <Action Type="create">
           <Meet>g:account-manager</Meet>
         </Action>
+        <Action Type="open">
+          <Meet>s:omni g:account-manager r:coach</Meet>
+        </Action>
       </Resource>
       <Resource Name="Person">
         <Action Type="update">
-          <Meet Format="eval">access:get-current-person-id() eq $resource/Id/text()</Meet>
+          <Meet Format="eval">user:get-current-person-id() eq $resource/Id/text()</Meet>
         </Action>
       </Resource>
     </Resources>
+    <Omnipotent>
+      <Meet>u:admin g:admin-system</Meet>
+    </Omnipotent>
   </Security>
 </Application>

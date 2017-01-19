@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote library
+   Oppidoc Business Application Development Framework
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 
@@ -16,8 +16,8 @@ declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 declare namespace session = "http://exist-db.org/xquery/session";
 
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../oppidum/lib/util.xqm";
-import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../lib/globals.xqm";
-import module namespace access = "http://oppidoc.com/oppidum/access" at "../lib/access.xqm";
+import module namespace globals = "http://oppidoc.com/oppidum/globals" at "globals.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "user.xqm";
 
 (: Sets time in minute before kick out in maintenance mode :)
 declare variable $partial:kick-out-delay := 5;
@@ -113,7 +113,7 @@ declare function partial:gen-todos-menu ( $base as xs:string, $user as xs:string
         </ul>
       </li>
     else (: alerts for semantic roles :)
-      let $user-ref := access:get-current-person-id()
+      let $user-ref := user:get-current-person-id()
       let $todos := fn:collection('/db/sites/cctracker/checks/')//Case[ReRef eq $user-ref]
       let $count := count($todos)
       return

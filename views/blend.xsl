@@ -69,7 +69,7 @@
 
   <xsl:template match="Parag">
     <xhtml:p class="parag">
-      <xsl:apply-templates select="Fragment | Link"/>
+      <xsl:apply-templates select="Fragment | Link | text()"/>
     </xhtml:p>
   </xsl:template>
 

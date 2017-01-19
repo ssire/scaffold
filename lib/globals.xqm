@@ -30,3 +30,12 @@ declare variable $globals:templates-uri := '/db/sites/scaffold/global-informatio
 declare variable $globals:persons-uri := '/db/sites/scaffold/persons/persons.xml';
 declare variable $globals:enterprises-uri := '/db/sites/scaffold/enterprises/enterprises.xml';
 declare variable $globals:cases-uri := '/db/sites/scaffold/cases';
+
+(:~
+ : Returns the selector from global information that serves as a reference for
+ : a given selector enriched with meta-data.
+ : @return The normative Selector element or the empty sequence
+ :)
+declare function globals:get-normative-selector-for( $name ) as element()? {
+  fn:collection($globals:global-info-uri)//Description[@Role = 'normative']/Selector[@Name eq $name]
+};

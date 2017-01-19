@@ -20,6 +20,7 @@
     <Translation key="term.country">Country</Translation>
     <Translation key="term.service">Coaching service</Translation>
     <Translation key="term.phase">Call phase</Translation>
+    <Translation key="term.initiator">Initiated by</Translation>
     <Translation key="term.activityPhase">Coaching service</Translation>
     <Translation key="term.responsibleCoach">Responsible coach</Translation>
     <Translation key="term.currentStatus">Coaching status</Translation>
@@ -298,6 +299,7 @@
     <!-- /case/xx/activities/yy (activity workflow) titles, labels and messages -->
     <!--************************************************************************-->
     <Translation key="workflow.tab.whois">Who's Who</Translation>
+    <Translation key="workflow.tab.documents">Documents</Translation>
     <Translation key="workflow.tab.case.info">Case</Translation>
     <Translation key="workflow.tab.case.attachments">Case attachments</Translation>
     <Translation key="workflow.tab.case.messages">Case messages</Translation>
@@ -313,7 +315,7 @@
     <Translation key="workflow.title.activity.messages">Coaching activity messages</Translation>
     <Translation key="workflow.title.activity.attachments">Coaching activity document attachments</Translation>
     <Translation key="workflow.title.activity.whois">Coaching activity Who is who</Translation>
-    <Translation key="workflow.title.case-init">EEN assignment (EASME)</Translation>
+    <Translation key="workflow.title.case-info">Case</Translation>
     <Translation key="workflow.title.kam-init">KAM assignment (EEN)</Translation>
     <Translation key="workflow.title.coaching-init">Needs analysis (KAM)</Translation>
     <Translation key="workflow.title.coaching-assignment">Coach assignment (KAM)</Translation>

@@ -14,10 +14,11 @@ import module namespace request="http://exist-db.org/xquery/request";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace compat = "http://oppidoc.com/oppidum/compatibility" at "../../../oppidum/lib/compat.xqm";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
-import module namespace _display = "http://oppidoc.com/oppidum/display/app" at "../../app/display.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
 import module namespace ajax = "http://oppidoc.com/oppidum/ajax" at "../../lib/ajax.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 import module namespace cases = "http://oppidoc.fr/ns/ctracker/cases" at "case.xqm";
 
 declare option exist:serialize "method=xml media-type=text/xml";
@@ -36,7 +37,7 @@ declare function local:confirm-case-submission( $submitted as element(), $lang a
               return $c/Title/text()
   return
     if (count($cas) > 0) then
-      oppidum:throw-message("CASE-CLIENT-CONFIRM", (_display:gen-enterprise-name($id, $lang), string-join($cas, ', ')))
+      oppidum:throw-message("CASE-CLIENT-CONFIRM", (custom:gen-enterprise-name($id, $lang), string-join($cas, ', ')))
     else
       ()
 };
@@ -63,10 +64,14 @@ declare function local:validate-case-submission( $submitted as element(), $lang 
    ======================================================================
 :)
 declare function local:gen-case-for-writing( $form as element(), $id as xs:string ) {
+  let $uid := user:get-current-person-id()
   let $date :=  substring(string(current-dateTime()), 1, 10) 
-  let $src := fn:doc($globals:templates-uri)/Templates/Template[@Name eq 'case-initiation']
+  let $src := fn:doc($globals:templates-uri)/Templates/Template[@Mode eq 'create'][@Name eq 'case']
   return
-    misc:prune(util:eval(string-join($src/text(), '')))
+    if ($src) then
+      misc:prune(util:eval(string-join($src/text(), '')))  
+    else
+      oppidum:throw-error('CUSTOM', 'Missing "case" template for create mode')
  };
 
 (: ======================================================================

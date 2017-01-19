@@ -35,7 +35,7 @@
         <Field Key="abbrev" Tag="ShortName" Gap="1" loc="term.abbrev">Abrégé</Field>
         <Field Key="creation" Tag="CreationYear" Gap="1" loc="term.creationYear">Année de création</Field>
         <Field Key="size" Tag="SizeRef" Gap="1" loc="term.enterpriseSize">Taille d'entreprise</Field>
-        <Field Key="noga" Tag="NOGA-Code" Gap="1" loc="term.noga">Code NOGA</Field>
+        <Field Key="noga" Tag="NOGA-Code" Gap="1" loc="term.domainActivity">Code NOGA</Field>
         <Field Key="website" Tag="WebSite" Gap="1" loc="term.webSite">Site web</Field>
         <Field Key="activities" Tag="MainActivities" Gap="1" loc="term.activityDesc">Activités principales</Field>
         <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="1" loc="term.targetedMarkets">Marchés ciblés</Field>

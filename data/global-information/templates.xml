@@ -1,5 +1,5 @@
 <Templates>
-  <Template Name="case-initiation">
+  <Template Name="case" Mode="create">
 <![CDATA[
   <Case>
     <No>{ $id }</No>
@@ -19,13 +19,14 @@
       { $form/ContactPerson }
     </Information>
     <Management>
-      <AccountManagerRef>GENERATED</AccountManagerRef>
+      <AccountManagerRef>{ $uid }</AccountManagerRef>
       { $form/Conformity }
     </Management>
     <NeedsAnalysis>
       { $form/ContactPerson }
       { $form/NeedsAnalysis/Context }
       { $form/NeedsAnalysis/Impact }
+      { $form/NeedsAnalysis/Comments }
     </NeedsAnalysis>
     <Evaluation>
       <KAMReport>
@@ -33,6 +34,63 @@
         { $form/Feedback/Tools }
       </KAMReport>
     </Evaluation>
+  </Case>
+]]>
+  </Template>
+  <Template Name="case" Mode="update">
+<![CDATA[
+  <XAL>
+    <XALAction Type="replace">
+      <Information LastModification="{ $date }">
+        <Title>{ $case/Information/Title/text() }</Title>
+        <ClientEnterprise>
+          { $form/ClientEnterprise/EnterpriseRef }
+        </ClientEnterprise>
+        { $form/ContactPerson }
+      </Information>
+      <Management>
+        <AccountManagerRef>{ $case/Management/AccountManagerRef/text() }</AccountManagerRef>
+        { $form/Conformity }
+      </Management>
+      <NeedsAnalysis>
+        { $form/ContactPerson }
+        { $form/NeedsAnalysis/Context }
+        { $form/NeedsAnalysis/Impact }
+        { $form/NeedsAnalysis/Comments }
+      </NeedsAnalysis>
+    </XALAction>
+    <XALAction Type="replace">
+      <Evaluation>
+        <KAMReport>
+          { $form/Feedback/Recognition }
+          { $form/Feedback/Tools }
+        </KAMReport>
+      </Evaluation>
+    </XALAction>
+  </XAL>
+]]>
+  </Template>
+  <Template Name="case" Mode="read">
+<![CDATA[
+  <Case>
+    <Title>{ $case/Information/Title/text() }</Title>
+    <AccountManagerRef _Unref="display:gen-person-name">{ $case/Management/AccountManagerRef/text() }</AccountManagerRef>
+    <No>{ $case/No/text() }</No>
+    <CreationDate>{ $case/CreationDate/text() }</CreationDate>
+    <ClientEnterprise>
+      <EnterpriseRef>{ $case/Information/ClientEnterprise/EnterpriseRef/text() }</EnterpriseRef>
+    </ClientEnterprise>
+    { $case/NeedsAnalysis/ContactPerson }
+    { $case/Management/Conformity }
+    <NeedsAnalysis>
+      { $case/NeedsAnalysis/Context }
+      { $case/NeedsAnalysis/Impact }
+      { $case/NeedsAnalysis/Comments }
+    </NeedsAnalysis>
+    <Feedback>
+      { $case/Evaluation/KAMReport/Recognition }
+      { $case/Evaluation/KAMReport/Tools }
+    </Feedback>
   </Case>
 ]]>
   </Template>

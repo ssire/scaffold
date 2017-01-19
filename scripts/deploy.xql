@@ -66,7 +66,7 @@ declare variable $policies := <policies xmlns="http://oppidoc.com/oppidum/instal
 :)
 
 declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
-  <collection name="/db/www/scaffold" policy="admin" inherit="true"/>
+  <collection name="/db/www/scaffold" policy="guest" inherit="true"/>
   <group name="caches">
     <collection name="/db/caches/scaffold" policy="any-up" inherit="true">
       <files pattern="caches/cache.xml"/>
@@ -78,10 +78,10 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
       <files pattern="debug/login.xml"/>
     </collection>
   </group>
-  <group name="config" mandatory="true">
+  <group name="config" mandatory="true" policy="guest">
     <collection name="/db/www/scaffold/config" policy="guest">
       <files pattern="config/mapping.xml"/>
-      <files pattern="config/mapping.xml"/>
+      <files pattern="config/application.xml"/>
       <files pattern="config/database.xml"/>
       <files pattern="config/skin.xml"/>
       <files pattern="config/errors.xml"/>
