@@ -1,13 +1,13 @@
 Case tracker pilote application
 =======
 
-The case tracker pilote application is a sample database application which can be copied or forked to create new applications using the embedded Supergrid form generator. For instance this can be used to create a [Case Tracker](https://github.com/ssire/case-tracker-manual) application.
+The case tracker pilote application is a sample open source database application. It contains all the components of the *Oppidoc Business Application Development Framework* including the *Supergrid* formular generator. You can copy it or fork it to create new applications. For instance this can be used to create a Case Tracker application as documented in this [software documentation manual](https://github.com/ssire/case-tracker-manual).
 
-The application out of the box allows to maintain a database of persons and enterprises. The application will allow (soon) to create cases and activities and to track them with a workflow. Note that for demonstration purpose the cases and activities address a workflow to coordinate the allocation of coaches to companies and to follow up the coaching activities. 
+The sample application out of the box maintains a database of persons and enterprises. It also supports the creation of cases and activities and can track them with a workflow. Note that for demonstration purpose the cases and activities address a workflow to coordinate the allocation of coaches to companies and to follow up the coaching activities. The pilote application does not implement the full workfow. You can get a full workflow in a commercial distribution by contacting the main author.
 
 This is up to you to add more entities to the database or to replace exiting ones and to edit the workflow and the workflow documents. For that purpose, create the corresponding formulars into the *formulars* folder and create the corresponding CRUD controller into new modules that you can add to the *modules* folder. Use the Supergrid embedded application to generate the formulars for web rendering. Do not forget to edit the *config/mapping.xml* file to expose the new entities as REST resources and to modify the *epilogue.xql* script to add them to the application menu.
 
-This application is written in XQuery / XSLT / Javascript. This is a full stack XML application.
+This application is written in XQuery / XSLT / Javascript and the [Oppidum](https://github.com/ssire/oppidum) web application framework. This is a full stack XML application.
 
 This application has been supported by the CoachCom2020 coordination and support action (H2020-635518; 09/2014-08/2016). Coachcom 2020 has been selected by the European Commission to develop a framework for the business innovation coaching offered to the beneficiaries of the Horizon 2020 SME Instrument.
 
@@ -27,7 +27,9 @@ Front-end made with [AXEL](http://ssire.github.io/axel/), [AXEL-FORMS](http://ss
 License
 -------
 
-Case tracker pilote application is released as free software, under the terms of the LGPL version 2.1. You are welcome to join our efforts to improve the code base at any time and to become part of the contributors.
+The case tracker pilote application and the Oppidoc Business Application Development Framework are released as free software, under the terms of the LGPL version 2.1. 
+
+You are welcome to join our efforts to improve the code base at any time and to become part of the contributors by making your changes and improvements and sending *pull* requests.
 
 Installation
 ------------
