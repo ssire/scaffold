@@ -212,6 +212,6 @@ return
         { system:as-user('admin', $pwd, local:deploy($dir, $targets, $cmd/@base-url, $mode)) }
       </results>
     else
-      <results>Usage : deploy?t=users,policies,forms,caches,config,mesh,templates,stats&amp;pwd=[ADMIN PASSWORD]&amp;m=(dev | test | [prod])</results>
+      <results>Usage : deploy?t=users,policies,forms,caches,config,data,mesh,templates,stats&amp;pwd=[ADMIN PASSWORD]&amp;m=(dev | test | [prod])</results>
   else
     <results>This script can be called only from the server</results>

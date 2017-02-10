@@ -77,15 +77,15 @@ Then execute the deployment script script/deploy.xql.
 
 You can execute it directly from your browser by entering into the address bar :
 
-    http:127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev
+    http:127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,policies&pwd=[PASSWORD]&m=dev
 
 or using curl from a terminal if available :
 
-    curl -D - "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev"
+    curl -D - "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,policies&pwd=[PASSWORD]&m=dev"
 
 or using wget from a terminal if available :
 
-    sudo wget --no-check-certificate -O- "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=config,data,forms,policies&pwd=[PASSWORD]&m=dev"
+    sudo wget --no-check-certificate -O- "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,policies&pwd=[PASSWORD]&m=dev"
 
 PASSWORD is the *admin* database password<br/>
 Read header comments in `scripts/deploy.xql` to learn more about the different deployment targets.
