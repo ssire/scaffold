@@ -31,6 +31,11 @@
     <Form>forms/enterprise-search</Form>
     <Template>templates/search/enterprises</Template>
   </Formular>
+  <!-- Documents -->
+  <Formular>
+    <Name>Coach assignment</Name>
+    <Form>forms/coaching-assignment</Form>
+  </Formular>  
   <!-- Management -->
   <Formular>
     <Name>User profile</Name>

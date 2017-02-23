@@ -282,7 +282,7 @@ div.c-editor-menu.c-perm-menu {
   margin-left: 1em;
 }
 
-#c-workflow.Activity span {
+#c-workflow.ActivityWorkflowStatus span {
   max-width: 62px;
   padding: .7em 1em .7em 0.5em;
 }
@@ -373,6 +373,10 @@ span.c-decision.c-current{
 
 #c-workflow span.c-end {
   border-radius: 0 5px 5px 0;
+}
+
+#c-workflow span.c-start.c-end {
+  border-radius: 5px;
 }
 
 #collapse-case-init.in {

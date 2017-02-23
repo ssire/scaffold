@@ -43,12 +43,18 @@
        </Row>
     </Cell>
   </Row>
+  <Separator/>
+  <Row>
+    <Field Key="company" Tag="Company" W="6" Gap="1">Company</Field>
+    <Field Key="contact" Tag="Contact" W="6" Gap="1">Contact</Field>
+  </Row>
   <Bindings>
+    <Ajax Keys="company contact" Source="company" Service="^/selectors/contacts?company=$_"/>
     <Require Keys="name surname"/>
     <Enforce>
       <RegExp Keys="age" Message="Age can only contain numbers" Pattern="[0-9]*">^\s*$|^\d*$</RegExp>
     </Enforce>
-  </Bindings>  
+  </Bindings>
   <Plugins>
     <Input Keys="name surname age height weight hairs eyes animal author drink"/>
     <RichText Keys="portray" Menu="dynamic"/>

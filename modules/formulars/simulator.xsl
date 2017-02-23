@@ -74,7 +74,7 @@
         <div id="c-editor-errors" class="alert alert-error af-validation">
           <button type="button" class="close" data-dismiss="alert">x</button>
         </div>
-        <div id="x-simulator" class="c-editing-mode">
+        <div id="x-simulator" class="c-editing-mode" data-axel-base="{$xslt.base-url}" >
           <noscript>Activate Javascript</noscript>
           <p>Formular generation area</p>
         </div>

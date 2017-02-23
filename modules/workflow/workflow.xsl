@@ -464,7 +464,8 @@
   <!--*****  Change status action  *****-->
   <!--**********************************-->
 
-  <xsl:template match="ChangeStatus">
+  <!-- Generates status change menu  -->
+  <xsl:template match="ChangeStatus[@Status]">
     <xsl:variable name="ted">
       <xsl:value-of select="@TargetEditor"/>
     </xsl:variable>
@@ -484,6 +485,20 @@
         <xsl:apply-templates select="/Display/Modals/Modal[@Id = $ted]/Initialize"/>
         <xsl:apply-templates select="../Spawn" mode="change-status"/>
         <xsl:apply-templates select="Option" mode="change-status"/>
+      </ul>
+    </div>
+  </xsl:template>
+
+  <!-- Generates pseudo-status change menu with only one option to spawn an activity  -->
+  <xsl:template match="ChangeStatus[not(@Status)]">
+    <div class="btn-group pull-right" style="margin-left:10px">
+      <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#" style="outline:none">
+          <span loc="action.status.change">Status</span>
+          <span class="caret"/>
+      </a>
+      <ul class="dropdown-menu">
+        <xsl:apply-templates select="@Id"/>
+        <xsl:apply-templates select="../Spawn" mode="change-status"/>
       </ul>
     </div>
   </xsl:template>

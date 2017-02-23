@@ -337,14 +337,14 @@
 
   <xsl:template match="Row">
     <div class="row-fluid">
-      <xsl:copy-of select="@style"/>
+      <xsl:copy-of select="@style | @id"/>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
 
   <xsl:template match="Row[@Class]">
     <div class="row-fluid {@Class}">
-      <xsl:copy-of select="@style"/>
+      <xsl:copy-of select="@style | @id"/>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
@@ -489,7 +489,7 @@
           <xsl:if test="$gap = ''">
             <xsl:attribute name="style"><xsl:value-of select="concat(concat('margin-left:', @Gap * 60 + 20),'px')"/></xsl:attribute>
           </xsl:if>
-          <xsl:apply-templates select="/Form/Bindings/Condition[contains(@Keys, $key)]">
+          <xsl:apply-templates select="/Form/Bindings/*[local-name(.) != 'Require' and local-name(.) != 'Enforce' and contains(@Keys, $key)]">
             <xsl:with-param name="key"><xsl:value-of select="$key"/></xsl:with-param>
           </xsl:apply-templates>
           <xsl:choose>
@@ -548,7 +548,7 @@
           <xsl:if test="$gap = ''">
             <xsl:attribute name="style"><xsl:value-of select="concat(concat('margin-left:', @Gap * 60 + 20),'px')"/></xsl:attribute>
           </xsl:if>
-          <xsl:apply-templates select="/Form/Bindings/Condition[contains(@Keys, $key)]">
+          <xsl:apply-templates select="/Form/Bindings/*[local-name(.) != 'Require' and local-name(.) != 'Enforce' and contains(@Keys, $key)]">
             <xsl:with-param name="key"><xsl:value-of select="$key"/></xsl:with-param>
           </xsl:apply-templates>
           <xsl:choose>
@@ -1029,6 +1029,20 @@
 
   <xsl:template match="@DisableClass">
     <xsl:attribute name="data-disable-class"><xsl:value-of select="."/></xsl:attribute>
+  </xsl:template>
+  
+  <xsl:template match="Ajax">
+    <xsl:param name="key">key</xsl:param>
+    <xsl:choose>
+      <xsl:when test="$key = @Source">
+        <xsl:attribute name="data-binding">ajax</xsl:attribute>
+        <xsl:attribute name="data-variable"><xsl:value-of select="@Source"/></xsl:attribute>
+        <xsl:attribute name="data-ajax-url"><xsl:value-of select="@Service"/></xsl:attribute>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:attribute name="data-ajax-trigger"><xsl:value-of select="@Source"/></xsl:attribute>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- ************************* -->

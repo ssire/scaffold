@@ -30,7 +30,7 @@ declare variable $persons-uri := '/db/sites/cctracker/persons/persons.xml';
    ======================================================================
 :)
 declare function local:save-default-request ( $request as element() ) {
-  let $profile := user:get-current-person-profile()
+  let $profile := user:get-user-profile()
   let $found := $profile/*[name(.) = name($request)]
   return
     if ($profile) then
@@ -48,7 +48,7 @@ declare function local:save-default-request ( $request as element() ) {
    ======================================================================
 :)
 declare function local:delete-default-request ( $name as xs:string ) {
-  let $profile := user:get-current-person-profile()
+  let $profile := user:get-user-profile()
   let $found := $profile/*[name(.) = $name]
   return
     if ($profile) then

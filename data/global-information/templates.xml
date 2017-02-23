@@ -94,5 +94,75 @@
   </Case>
 ]]>
   </Template>
+  <Template Name="activity" Mode="create">
+<![CDATA[
+  <Activity>
+    <No>{ $id }</No>
+    <CreationDate>{ $date }</CreationDate>
+    <StatusHistory>
+      <CurrentStatusRef>1</CurrentStatusRef>
+      <Status>
+        <Date>{ $date }</Date>
+        <ValueRef>1</ValueRef>
+      </Status>
+    </StatusHistory>
+    { $case/NeedsAnalysis }
+    <FinalReportApproval LastModification="{ $date }">
+      { $case/Evaluation/KAMReport/Recognition }
+      { $case/Evaluation/KAMReport/Tools }
+    </FinalReportApproval>
+  </Activity>
+]]>
+  </Template>
+  <Template Name="assignment" Mode="create">
+<![CDATA[
+<XAL>
+  <XALAction Type="replace">
+    <Assignment LastModification="{ $date }">
+      { $form/*[not(local-name() = 'KAMReportCAProxy')] }
+      <AssignedByRef>{ $uid }</AssignedByRef>
+      <Date>{ $date }</Date>
+    </Activity>
+  </XALAction>
+  <XALAction Type="replace">
+    <FinalReportApproval LastModification="{ $date }">
+      { $activity/FinalReportApproval/Recognition }
+      { $activity/FinalReportApproval/Tools }
+      { $form/KAMReportCAProxy/Profiles }
+    </FinalReportApproval>
+  </XALAction>
+</XAL>
+]]>
+  </Template>
+  <Template Name="assignment" Mode="update">
+<![CDATA[
+<XAL>
+  <XALAction Type="replace">
+    <Assignment LastModification="{ $date }">
+      { $form/*[not(local-name() = 'KAMReportCAProxy')] }
+      <AssignedByRef>{ $uid }</AssignedByRef>
+      <Date>{ $date }</Date>
+    </Assignment>
+  </XALAction>
+  <XALAction Type="replace">
+    <FinalReportApproval LastModification="{ $date }">
+      { $activity/FinalReportApproval/Recognition }
+      { $activity/FinalReportApproval/Tools }
+      { $form/KAMReportCAProxy/Profiles }
+    </FinalReportApproval>
+  </XALAction>
+</XAL>
+]]>
+  </Template>
+  <Template Name="assignment" Mode="read">
+<![CDATA[
+  <Assignment>
+    { $activity/Assignment/* }
+    <KAMReportCAProxy>
+      { $activity/FinalReportApproval/Profiles }
+    </KAMReportCAProxy>
+  </Assignment>
+]]>
+  </Template>  
 </Templates>
 

@@ -42,15 +42,17 @@
       <rule action="GET" role="u:admin g:users" message="registered user"/>
       <rule action="POST create" role="u:admin g:account-manager" message="system administrator or account manager"/>
     </access>
+    <!-- user interface for case creation -->
     <action name="create" epilogue="home">
       <model src="modules/cases/create.xql"/>
       <view src="modules/cases/case.xsl"/>
     </action>
+    <!-- controller for case creation -->
     <action name="POST">
       <model src="modules/cases/create.xql"/>
     </action>
     <item epilogue="workflow">
-      <!-- workflow view -->
+      <!-- case workflow view -->
       <model src="modules/cases/workflow.xql"/>
       <view src="modules/workflow/workflow.xsl"/>
       <!-- enterprise (modal) -->
@@ -58,7 +60,7 @@
         <model src="modules/cases/enterprise.xql"/>
         <view src="modules/enterprises/modal.xsl"/>
       </item>
-      <!-- information document -->
+      <!-- case information document -->
       <item name="case" method="POST">
         <model src="modules/cases/case.xql"/>
         <variant name="GET" format="blend">
@@ -68,6 +70,34 @@
           <model src="modules/cases/case.xql"/>
         </action>
       </item>
+      <!-- **************** -->
+      <!-- ** activities ** -->
+      <!-- **************** -->
+      <collection name="activities" method="POST">
+        <!-- controller for activity creation -->
+        <action name="POST">
+          <model src="modules/activities/create.xql"/>
+        </action>
+        <item epilogue="workflow" supported="delete match">
+          <!-- activity workflow view -->
+          <model src="modules/activities/workflow.xql"/>
+          <view src="modules/workflow/workflow.xsl"/>
+          <!-- controller to delete an activity (POST) -->
+          <action name="delete">
+            <model src="modules/activities/delete.xql"/>
+          </action>
+          <!-- activity coach assignment document -->
+          <item name="assignment" method="POST">
+            <model src="modules/activities/assignment.xql"/>
+            <variant name="GET" format="blend">
+              <view src="views/blend.xsl"/>
+            </variant>
+            <action name="POST">
+              <model src="modules/activities/assignment.xql"/>
+            </action>
+          </item>
+        </item>
+      </collection>
     </item>
   </collection>
   <!-- ***************** -->
@@ -181,6 +211,9 @@
     </item>
     <item name="case" epilogue="case.xhtml">
       <model src="modules/cases/form.xql"/>
+    </item>
+    <item name="coaching-assignment" epilogue="coaching-assignment.xhtml">
+      <model src="modules/activities/form.xql"/>
     </item>
     <item name="person" epilogue="person.xhtml">
       <model src="modules/persons/form.xql"/>
@@ -348,6 +381,14 @@
     <action name="install" resource="">
       <model src="modules/formulars/install.xql"/>
     </action>
+  </item>
+  <!-- *********************** -->
+  <!-- **  selectors (demo) ** -->
+  <!-- *********************** -->
+  <item name="selectors">
+    <item name="contacts">
+      <model src="models/selectors.xql"/>
+    </item>
   </item>
   <!-- *************************** -->
   <!-- ** dictionary (optional) ** -->

@@ -25,7 +25,7 @@ declare variable $submission:empty-req := <Request/>;
    ======================================================================
 :)
 declare function submission:get-default-request ( $name as xs:string ) as element() {
-  let $profile := user:get-current-person-profile()
+  let $profile := user:get-user-profile()
   let $found := $profile/*[name(.) = $name]
   return
     if ($found) then

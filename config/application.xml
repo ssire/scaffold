@@ -7,11 +7,16 @@
           <Template>case</Template>
           <Action Type="status" AtStatus="1"/>
           <Action Type="update" AtStatus="1"/>
+          <Action Type="spawn" AtStatus="1" ProxyTab="coaching-assignment" Id="cmd-create-coaching"/>
+        </Document>
+        <Document Tab="coaching-assignment" Accordion="no">
+          <Controller>activities</Controller>
+          <Action Type="create" AtStatus="1"/>
         </Document>
       </Documents>
       <Transitions>
         <Transition From="1" To="-1" GenericError="INCOMPLETE-DOCUMENT">
-          <Assert Base="$case/Information/ClientEnterprise" Error="MISSING-ENTERPRISE-STATS">
+          <Assert Base="fn:doc($globals:enterprises-uri)//Enterprise[Id eq $case/Information/ClientEnterprise/EnterpriseRef]" Error="MISSING-ENTERPRISE-STATS">
             <true>count($base/TargetedMarkets/*) &gt;= 1</true>
             <true>$base/DomainActivityRef[. ne '']</true>
             <true>$base/SizeRef[. ne '']</true>
@@ -24,6 +29,46 @@
         </Transition>
       </Transitions>
     </Workflow>
+    <Workflow Id="Activity">
+      <Documents TemplateBaseURL="../../../templates/">
+        <!-- Case reminders -->
+        <Document Tab="case-info" AtStatus="1 2 3 4 5 6 7 8" Blender="yes" class="case">
+          <Controller>../../case</Controller>
+          <Template>case</Template>
+          <Action Type="update" AtStatus="1"/>
+        </Document>
+        <!-- Activity documents -->
+        <Document Tab="coaching-assignment" AtStatus="1 2 3 4 5 6 7 8" Blender="yes">
+          <AutoExec AtStatus="1" Id="ae-advance" i18nBase="action.status">
+            <Forward Command="status" EventTarget="go-coaching-plan">cmd-change-status</Forward>
+          </AutoExec>
+          <Controller>assignment</Controller>
+          <Template Param="breadcrumbs">coaching-assignment</Template>
+          <Action Type="status" AtStatus="1" Id="cmd-change-status"/>
+          <Action Type="update" AtStatus="1"/>
+          <Action Type="delete" AtStatus="1"/>
+        </Document>
+      </Documents>
+      <Transitions>
+        <!-- ============== Coach assignment ============== -->
+        <Transition From="1" To="2" Id="go-coaching-plan" Template="coach-assignment-coach-notification" GenericError="INCOMPLETE-DOCUMENT">
+          <Meet>r:kam</Meet>
+          <Recipients>r:coach</Recipients>
+          <Email Template="coach-assignment-easme-notification"/>
+          <Assert Base="$activity/Assignment" Error="MISSING-COACH-OR-SERVICE">
+            <true>$base/ServiceRef[. ne '']</true>
+            <true>$base/ResponsibleCoachRef[. ne '']</true>
+          </Assert>
+          <Assert Base="$activity/FinalReportApproval/Profiles" Error="MISSING-EVALUATION-COACH-ASSIGNMENT">
+            <true>$base/RatingScaleRef[. ne '']</true>
+            <true>$base/Comment[. ne '']</true>
+          </Assert>
+        </Transition>
+        <Transition From="1" To="9">
+          <Meet>r:kam</Meet>
+        </Transition>
+      </Transitions>
+    </Workflow>
   </Workflows>
   <Security>
     <Documents>
@@ -33,14 +78,25 @@
           <Meet>r:kam</Meet>
         </Action>
       </Document>
+      <Document TabRef="coaching-assignment" Root="Assignment" Form="coaching-assignment.xml">
+        <Action Type="create">
+          <Meet>u:admin</Meet>
+        </Action>
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+        <Action Type="delete">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
     </Documents>
     <Resources>
       <Resource Name="Case">
         <Action Type="create">
-          <Meet>g:account-manager</Meet>
+          <Meet>g:kam</Meet>
         </Action>
         <Action Type="open">
-          <Meet>s:omni g:account-manager r:coach</Meet>
+          <Meet>s:omni g:kam r:coach</Meet>
         </Action>
       </Resource>
       <Resource Name="Person">

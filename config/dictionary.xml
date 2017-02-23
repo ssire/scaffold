@@ -305,7 +305,7 @@
     <Translation key="workflow.tab.case.messages">Case messages</Translation>
     <Translation key="workflow.tab.activities">List coaching activities</Translation>
     <Translation key="workflow.tab.new.activity">Add another coaching activity</Translation>
-    <Translation key="workflow.tab.activity.info">Coaching activity</Translation>
+    <Translation key="workflow.tab.activity.info">Activity</Translation>
     <Translation key="workflow.tab.activity.attachments">Coaching activity attachments</Translation>
     <Translation key="workflow.tab.activity.messages">Coaching activity messages</Translation>
     <Translation key="workflow.title.case.attachments">Case document attachments</Translation>

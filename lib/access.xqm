@@ -136,7 +136,7 @@ declare function access:assert-sight(
   ) as xs:boolean 
 {
   let $groups-ref := fn:collection($globals:global-info-uri)//Description[@Role = 'normative']/Selector[@Name eq 'Functions']/Option[@Sight eq $suffix]/Id/text()
-  let $user-profile := user:get-current-person-profile()
+  let $user-profile := user:get-user-profile()
   return
     $user-profile//FunctionRef = $groups-ref
 };
@@ -297,9 +297,45 @@ declare function access:assert-workflow-state( $action as xs:string, $workflow a
 };
 
 (: ======================================================================
+   Asserts case data is compatible with transition
+   This can be used to suggest transition to user or to prevent it
+   ======================================================================
+:)
+declare function access:assert-transition( $from as xs:string, $to as xs:string, $case as element(), $activity as element()? ) as xs:boolean {
+  let $workflow := if ($activity) then 'Activity' else 'Case'
+  let $transition := fn:doc($globals:application-uri)//Workflow[@Id eq $workflow]//Transition[@From eq $from][@To eq $to]
+  return access:assert-transition($transition, $case, $activity)
+};
+
+(: ======================================================================
+   Implements Assert element on Transition element from application.xml
+   First checks current status compatibility with transition
+   ====================================================================== 
+:)
+declare function access:assert-transition( $transition as element()?, $case as element(), $activity as element()? ) as xs:boolean {
+  let $item := if ($activity) then $activity else $case
+  return
+    if ($transition and ($item/StatusHistory/CurrentStatusRef eq string($transition/@From))) then
+      every $check in 
+        for $assert in $transition/Assert
+        let $base := util:eval($assert/@Base)
+        return
+          let $rules := $assert/true
+          return 
+            if (count($rules) > 0) then
+              every $expr in $rules satisfies util:eval($expr/text())
+            else 
+              false()
+      satisfies $check 
+    else
+      false()
+};
+
+(: ======================================================================
    Implements one specific Assert element on Transition element from application.xml
    for item which may be a Case or an Activity
    Checks first current status compatibility with transition
+   TODO: merge with access:assert-transition ???
    ====================================================================== 
 :)
 declare function access:assert-transition-partly( $item as element(), $assert as element()?, $subject as element()?) as xs:boolean {
@@ -370,3 +406,38 @@ declare function access:pre-check-case(
     oppidum:throw-error("URI-NOT-FOUND", ())
 };
 
+(: ======================================================================
+   "All in one" utility function
+   Same as access:pre-check-case but at the activity level
+   ======================================================================
+:)
+declare function access:pre-check-activity(
+  $case as element()?,
+  $activity as element()?,
+  $method as xs:string,
+  $goal as xs:string?,
+  $root as xs:string? ) as element()*
+{
+  if (empty($case)) then
+    oppidum:throw-error('CASE-NOT-FOUND', ())
+  else if (empty($activity)) then 
+    oppidum:throw-error('ACTIVITY-NOT-FOUND', ())
+  else if (not(access:check-user-can('open', $case))) then
+    oppidum:throw-error("CASE-FORBIDDEN", $case/Title/text())
+  else if ($root) then (: access to specific activity document :)
+    let $action := if ($method eq 'GET') then 'read' else if ($goal eq 'delete') then $goal else 'update'
+    let $control := fn:doc($globals:application-uri)/Application/Security/Documents/Document[@Root = $root]
+    return
+      if (access:assert-user-role-for($action, $control, $case, $activity)) then
+        if (access:assert-workflow-state($action, 'Activity', $control, string($activity/StatusHistory/CurrentStatusRef))) then
+          ()
+        else
+          oppidum:throw-error('STATUS-DONT-ALLOW', ())
+      else
+        oppidum:throw-error('FORBIDDEN', ())
+
+  else if ($method eq 'GET') then (: access to activity workflow view :)
+    ()
+  else
+    oppidum:throw-error("URI-NOT-FOUND", ())
+};

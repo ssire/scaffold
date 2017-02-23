@@ -68,7 +68,7 @@
         <Brief>SysAdmin</Brief>
       </Option>
       <Option Group="account-manager" Role="account-manager">
-        <Id>1</Id>
+        <Id>2</Id>
         <Name>Account Manager</Name>
         <Brief>KAM</Brief>
       </Option>

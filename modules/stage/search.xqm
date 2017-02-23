@@ -25,7 +25,7 @@ import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../
    ======================================================================
 :)
 declare function search:get-default-request () as element() {
-  let $profile := user:get-current-person-profile()
+  let $profile := user:get-user-profile()
   return
     if ($profile/SearchStageRequest) then
       $profile/SearchStageRequest
@@ -124,7 +124,7 @@ declare function local:open-access( $all as xs:boolean, $case as xs:boolean?, $a
 
 declare function search:find-stage-results ( $lang as xs:string ) as element() {
   (: --- access control layer --- :)
-  let $profile := user:get-current-person-profile()
+  let $profile := user:get-user-profile()
   let $omni-sight := access:check-omniscient-user($profile)
   let $person := $profile/ancestor::Person  
   return

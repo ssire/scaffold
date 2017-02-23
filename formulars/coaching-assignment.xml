@@ -1,0 +1,83 @@
+<Form Tag="Assignment" Layout="fluid" StartLevel="1"
+  xmlns:site="http://oppidoc.com/oppidum/site"
+  xmlns:xt="http://ns.inria.org/xtiger">
+  
+  <Title>Coaching assignment</Title>
+  
+  <Verbatim>
+    <xt:component name="t_KAMReportCAProxy">
+      <Cell W="12" Gap="1.4" L="0" Tag="Profiles">
+        <Field Key="likert-scale" Tag="RatingScaleRef" Gap="2" W="12">I could find suitably profiled coaches in the coach database.</Field>
+        <Field Key="comments" Tag="Comment" Gap="0">Describe your experiences.</Field>
+      </Cell>
+    </xt:component>
+    
+  </Verbatim>
+  
+  <Row Tag="Weights">
+    <Cell W="12" Gap="1.4" Tag="Weights">
+      <Title>Required coach profile</Title>
+      <Cell W="12" Gap="2">
+        <h4 style="text-align:center">Priorities for this coaching activity</h4>
+      </Cell>
+      <Field Key="weights-vectors" Tag="Vectors" W="12" Gap="2" L="0">Business innovation vectors</Field>
+      <Field Key="weights-ideas" Tag="Ideas" W="12" Gap="2" L="0">Sources of business innovation ideas</Field>
+      <Field Key="weights-resources" Tag="Resources" W="12" Gap="2" L="0">Internal resources</Field>
+      <Field Key="weights-partners" Tag="Partners" W="12" Gap="2" L="0">Partnerships</Field>
+    </Cell>
+    <Cell W="12" Gap="1.4" L="0">
+      <Field Key="description" Tag="Description" W="12" Gap="2" L="0">SME's expectation from coaching</Field>
+      <Field Key="service" Tag="ServiceRef" W="6" Gap="2" L="0">Which coaching service should be addressed ?</Field>
+    </Cell>
+  </Row>
+  <Separator/>
+  <Row>
+    <Cell W="12" Gap="1.4" L="0" Class=".x-Assignment">
+      <Title>Coach assignment</Title>
+      <site:conditional meet="read" force="true">
+        <Field Key="assigned-coach" Tag="ResponsibleCoachRef" W="8" Gap="2">Assigned coach</Field>
+        <Field Key="authority" Tag="AssignedByRef" W="8" Gap="2" L="0">Assigned by</Field>
+        <Field Key="date" Tag="Date" W="4" Gap="0.75">Date</Field>
+      </site:conditional>
+      <site:conditional meet="update" force="true">
+        <Field Class="x-ResponsibleCoachRef" Key="assigned-coach" Tag="ResponsibleCoachRef" W="9" Gap="2" L="0">Assigned coach</Field>
+        <form id="ct-suggest-form" enctype="multipart/form-data" accept-charset="UTF-8" target="_blank" method="post" style="padding:0"><!--<Service-EndPoint Name="action" Source="xmldb:exist:///db/www/cctracker/config/services.xml" TargetId="ccmatch.suggest" TargetElement="URL"/>-->
+          <input type="hidden" name="data"/>
+          <Button id="ct-suggest-button" Class="btn btn-primary" W="3">Coach search</Button>
+          <input id="ct-suggest-submit" type="submit" style="display:none"/>
+        </form>
+        <!-- <Button Key="btn.createCoach" Class="btn btn-primary" W="3">Create a new coach</Button> -->
+        <div class="span12" style="margin-left:0">
+          <p class="text-hint">Select a coach from the <i>Assigned coach</i> list. If a coach is not in the list then contact <a href="mailto:EASME-SME-COACHING@ec.europa.eu?subject=Please register a coach in the case tracker">EASME-SME-COACHING@ec.europa.eu</a></p>
+          <p class="text-hint">Verify that your preferred coach is not an SME Instrument evaluator.</p>
+        </div>
+      </site:conditional>
+    </Cell>
+  </Row>
+  <Separator/>
+  <Row>
+    <Title>Evaluation</Title>
+    <Use TypeName="KAMReportCAProxy" Tag="KAMReportCAProxy"/>
+  </Row>
+  <Modals>
+    <!-- <Modal Id="c-coach-information" Width="500px" Template="^/templates/person">
+          <Title Mode="create" loc="person.create.title">Create a coach</Title>
+        </Modal> -->
+  </Modals>
+  <Commands>
+    <!-- <Augment Key="btn.createCoach" Mode="create" TargetEditor="c-coach-information" Controller="persons/add?f=coach" TargetField=".x-ResponsibleCoachRef" TargetRoot=".x-Assignment"/> -->
+  </Commands>
+  <Bindings>
+    <!-- <Require Keys="service"/> -->
+  </Bindings>
+  <Plugins>
+    <MultiText Keys="description comments"/>
+  </Plugins>
+  <Hints>
+    <Hint Keys="assigned-coach" avoid="read" data-placement="right">Use this list to select a coach amongst all the coaches registered in the CoachCom2020 community.</Hint>
+    <!-- <Hint Keys="service" meet="update" data-placement="right">Rollover explaining the different coaching services</Hint> -->
+    <Hint Keys="description">Limited to 1000 characters max.</Hint>
+    <Mandatory Tags="RatingScaleRef Comment ResponsibleCoachRef ServiceRef">To proceed to the next step please fill in the mandatory fields highlighted in red</Mandatory>
+  </Hints>
+
+</Form>

@@ -13,6 +13,7 @@ import module namespace request="http://exist-db.org/xquery/request";
 
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
+import module namespace template = "http://oppidoc.com/ns/cctracker/template" at "../../lib/template.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
 import module namespace ajax = "http://oppidoc.com/oppidum/ajax" at "../../lib/ajax.xqm";
@@ -47,19 +48,6 @@ declare function local:POST-document( $case as element(), $form as element(), $l
       oppidum:throw-error('CUSTOM', 'Missing "case" template for update mode')
 };
 
-(:~
- : Generates a case representation for a given purpose
- : @return A Case element representing the case document or an error element
- :)
-declare function local:GET-document-for( $case as element(), $goal as xs:string, $lang as xs:string ) as element() {
-  let $src := fn:doc($globals:templates-uri)/Templates/Template[@Mode eq 'read'][@Name eq 'case']
-  return
-    if ($src) then
-      misc:unreference(util:eval(string-join($src/text(), ''))) (: FIXME: $lang :)
-    else
-      oppidum:throw-error('CUSTOM', 'Missing "case" template for read mode')
-};
-
 (:----------------------------------------------------------------------------------------------------:)
 (: MAIN ENTRY POINT :)
 
@@ -82,6 +70,6 @@ return
         else
           ajax:report-validation-errors($errors)
     else (: assumes GET :)
-      local:GET-document-for($case, $goal, $lang)
+      template:get-document('case', $case, $lang)
   else
     $errors

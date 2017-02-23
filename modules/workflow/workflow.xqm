@@ -290,7 +290,7 @@ declare function workflow:gen-status-change(
           )}
         </ChangeStatus>
       else
-        ()
+        <ChangeStatus/> (: in case there is an isolated Spawn :)
 };
 
 (: ======================================================================

@@ -22,7 +22,7 @@ declare function user:get-current-person-id () as xs:string? {
 };
 
 (:~
- : Variant of <i>get-current-person-id</i> when the current user is known
+ : Variant of <i>template:get-current-person-id</i> when the current user is known
  :)
 declare function user:get-current-person-id ( $user as xs:string ) as xs:string? {
   let $realm := oppidum:get-current-user-realm()
@@ -37,7 +37,7 @@ declare function user:get-current-person-id ( $user as xs:string ) as xs:string?
  : Gets the user profile of the current user
  : @return A UserProfile element or an empty sequence
  :)
-declare function user:get-current-person-profile() as element()? {
+declare function user:get-user-profile() as element()? {
   let $realm := oppidum:get-current-user-realm()
   let $user := oppidum:get-current-user()
   return

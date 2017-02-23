@@ -41,7 +41,7 @@ declare variable $local:tests :=
     <Module>
       <Name>Access</Name>
       <Test>user:get-current-person-id()</Test>
-      <Test Format="xml">user:get-current-person-profile()</Test>
+      <Test Format="xml">user:get-user-profile()</Test>
       <Test>user:get-current-person-id('test')</Test>
       <Test>user:get-function-ref-for-role('admin-system')</Test>
       <Test>access:check-omnipotent-user()</Test>

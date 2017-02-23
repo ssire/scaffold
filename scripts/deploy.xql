@@ -106,6 +106,11 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
       <files pattern="data/**/*.xml"/>
     </collection>
   </group>
+  <group name="templates">
+    <collection name="/db/sites/scaffold/global-information" policy="admin" inherit="true">
+      <files pattern="data/global-information/templates.xml"/>
+    </collection>
+  </group>
 </code>;
 
 (: ======================================================================
