@@ -8,10 +8,9 @@
   -->
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:site="http://oppidoc.com/oppidum/site"
-  xmlns="http://www.w3.org/1999/xhtml">
+  xmlns:site="http://oppidoc.com/oppidum/site">
   
-  <xsl:output method="xml" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
+  <xsl:output method="xml" media-type="text/xml" omit-xml-declaration="yes" indent="yes"/>
   
   <xsl:param name="xslt.base-url">/</xsl:param>
 
@@ -152,10 +151,7 @@
       <td></td>
       <td></td>
       <td><xsl:apply-templates select="." mode="link"/></td>
-      <td></td>
-      <td></td>
       <td><xsl:apply-templates select="Coach"/></td>
-      <td></td>
       <td><xsl:value-of select="Status"/></td>
     </tr>
   </xsl:template>

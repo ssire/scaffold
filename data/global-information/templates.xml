@@ -122,7 +122,7 @@
       { $form/*[not(local-name() = 'KAMReportCAProxy')] }
       <AssignedByRef>{ $uid }</AssignedByRef>
       <Date>{ $date }</Date>
-    </Activity>
+    </Assignment>
   </XALAction>
   <XALAction Type="replace">
     <FinalReportApproval LastModification="{ $date }">

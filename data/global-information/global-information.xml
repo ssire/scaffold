@@ -72,6 +72,11 @@
         <Name>Account Manager</Name>
         <Brief>KAM</Brief>
       </Option>
+      <Option Group="developer" Role="developer">
+        <Id>99</Id>
+        <Name>Software Developer</Name>
+        <Brief>Dev</Brief>
+      </Option>
     </Selector>
     <Selector Name="Services" Value="Id" Label="Name" Test="Services">
       <Description>Services associated with some roles</Description>

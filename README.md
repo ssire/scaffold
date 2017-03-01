@@ -100,7 +100,9 @@ You can restore a full database backup.
 
 You can start at [http://localhost:8080/exist/projects/scaffold]()
 
-You can connect with the *admin* user of the database at first, then create one or more users using the *Add a person* button in the *Community > Persons* area. You can manage user roles in the *Users* tab in the *Admin* area. By default users with the *System Administrator* role are able to create other users.
+You can connect with the *admin* user of the database at first, then create one or more users using the *Add a person* button in the *Community > Persons* area. You can manage user roles in the *Users* tab in the *Admin* area.
+
+Although you could create a case with the *admin* user this is not recommended since it is the only user without any person's record in the persons collection. Thus you should create at least one user with the *System Administrator* role and/or *Account Manager* role for that purpose. Give a user the *Software Developer* role to grant him/her access to the developer's menu.
 
 ### 6. Start creating cases and activities
 

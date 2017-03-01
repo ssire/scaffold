@@ -1035,6 +1035,7 @@
     <xsl:param name="key">key</xsl:param>
     <xsl:choose>
       <xsl:when test="$key = @Source">
+        <xsl:copy-of select="@data-ajax-scope"/>
         <xsl:attribute name="data-binding">ajax</xsl:attribute>
         <xsl:attribute name="data-variable"><xsl:value-of select="@Source"/></xsl:attribute>
         <xsl:attribute name="data-ajax-url"><xsl:value-of select="@Service"/></xsl:attribute>

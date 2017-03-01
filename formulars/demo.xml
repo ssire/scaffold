@@ -44,12 +44,12 @@
     </Cell>
   </Row>
   <Separator/>
-  <Row>
+  <Row Class="company">
     <Field Key="company" Tag="Company" W="6" Gap="1">Company</Field>
     <Field Key="contact" Tag="Contact" W="6" Gap="1">Contact</Field>
   </Row>
   <Bindings>
-    <Ajax Keys="company contact" Source="company" Service="^/selectors/contacts?company=$_"/>
+    <Ajax data-ajax-scope=".company" Keys="company contact" Source="company" Service="^/selectors/contacts?company=$_"/>
     <Require Keys="name surname"/>
     <Enforce>
       <RegExp Keys="age" Message="Age can only contain numbers" Pattern="[0-9]*">^\s*$|^\d*$</RegExp>

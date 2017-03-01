@@ -122,6 +122,10 @@ declare function local:open-access( $all as xs:boolean, $case as xs:boolean?, $a
     ()
 };
 
+(: ======================================================================
+   Returns all results w/o any filtering
+   ====================================================================== 
+:)
 declare function search:find-stage-results ( $lang as xs:string ) as element() {
   (: --- access control layer --- :)
   let $profile := user:get-user-profile()
@@ -129,10 +133,10 @@ declare function search:find-stage-results ( $lang as xs:string ) as element() {
   let $person := $profile/ancestor::Person  
   return
     <Cases Scope="All">
-      { local:open-access($omni-sight, (), ()) }
-      {
+      { 
+      local:open-access($omni-sight, (), ()),
       for $c in fn:collection($globals:cases-uri)//Case
-      let $can-case := $omni-sight or access:check-user-can('open', $c) (: FIXME: add $person to speed up :)
+      let $can-case := $omni-sight or access:check-user-can('open', $c)
       return
         <Case>
           { local:open-access($omni-sight, $can-case, ()) }
@@ -150,17 +154,48 @@ declare function search:find-stage-results ( $lang as xs:string ) as element() {
 };
 
 (: ======================================================================
-   FIXME: remove [. ne 'any'] guard because optional filter does not works
-   after data has been loaded into the editor (to be fixed in AXEL) with load function
-   such as with saved filters
-   ======================================================================
+   Returns filtered results by criteria
+   ====================================================================== 
 :)
 declare function search:find-stage-results ( $filter as element(), $lang as xs:string ) as element()* {
-  let $country := $filter//Country/text()
+  (: --- access control layer --- :)
+  let $profile := user:get-user-profile()
+  let $omni-sight := access:check-omniscient-user($profile)
+  let $person := $profile/ancestor::Person
+
+  (: --- enterprise criteria --- :)
+  let $country := $filter//Country
+  let $filter-enterprise := not(empty(($country)))
+
   return
-    <Cases Scope="All">
-      {
-      local:gen-result-sample($lang)
+    <Cases>
+      { 
+      local:open-access($omni-sight, (), ()),
+      for $c in fn:collection($globals:cases-uri)//Case
+      let $e := if ($filter-enterprise) then
+                  fn:doc($globals:enterprises-uri)//Enterprise[Id eq $c/Information/ClientEnterprise/EnterpriseRef]
+                else
+                  ()
+      where 
+        (: --- client enterprise filter --- :)
+        (
+          not($filter-enterprise) or
+          (empty($country) or $e//Country = $country)
+        )
+      return
+        let $can-case := $omni-sight or access:check-user-can('open', $c)
+        return
+          <Case>
+            { local:open-access($omni-sight, $can-case, ()) }
+            { local:gen-case-sample($c, $lang) }
+            <Activities>
+              {
+              for $a in $c/Activities/Activity
+              order by $a/CreationDate
+              return local:gen-activity-sample($a, $lang)
+              }
+            </Activities>
+          </Case>
       }
     </Cases>
 };
