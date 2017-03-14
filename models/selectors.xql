@@ -10,12 +10,18 @@ xquery version "1.0";
    February 2017 - (c) Copyright 2017 Oppidoc SARL. All Rights Reserved.
    ----------------------------------------------- :)
 
+declare namespace json="http://www.json.org";
+
 declare option exist:serialize "method=json media-type=application/json";
 
+(: JSON protocol requires that items property contains an array
+   do not forget to add a json:array="true" on items if it is unique 
+:)
 let $samples := 
   <samples>
     <sample cache="1">
       <items>
+        { attribute { 'json:array' } { 'true' } }
         <label>Minny</label>
         <value>1</value>
       </items>
