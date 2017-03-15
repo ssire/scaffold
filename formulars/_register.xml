@@ -36,6 +36,10 @@
     <Name>Coach assignment</Name>
     <Form>forms/coaching-assignment</Form>
   </Formular>  
+  <Formular>
+    <Name>Sample</Name>
+    <Form>forms/sample</Form>
+  </Formular>  
   <!-- Management -->
   <Formular>
     <Name>User profile</Name>

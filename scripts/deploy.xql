@@ -44,7 +44,7 @@ import module namespace sg = "http://coaching.ch/ns/supergrid" at "../modules/fo
 
 declare option exist:serialize "method=xml media-type=text/html indent=yes";
 
-declare variable $formulars := "stage+person+person-search+enterprise+enterprise-search+profile+account";
+declare variable $formulars := "stage+person+person-search+enterprise+enterprise-search+profile+account+sample";
 
 declare variable $policies := <policies xmlns="http://oppidoc.com/oppidum/install">
   <!-- Policies -->
@@ -81,12 +81,14 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
   <group name="config" mandatory="true" policy="guest">
     <collection name="/db/www/scaffold/config" policy="guest">
       <files pattern="config/mapping.xml"/>
+      <files pattern="config/modules.xml"/>
       <files pattern="config/application.xml"/>
       <files pattern="config/database.xml"/>
       <files pattern="config/skin.xml"/>
       <files pattern="config/errors.xml"/>
       <files pattern="config/messages.xml"/>
       <files pattern="config/dictionary.xml"/>
+      <files pattern="config/variables.xml"/>
       <!--<files pattern="config/settings.xml"/>-->
       <!--<files pattern="config/services.xml"/>-->
       <!--<files pattern="modules/alerts/checks.xml"/>-->

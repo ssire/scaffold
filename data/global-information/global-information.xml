@@ -35,7 +35,7 @@
         <Id>5</Id>
         <Name>Coaching report</Name>
       </Option>
-      <Option Deprecated="pi-4">
+      <Option Deprecated="legacy">
         <Id>6</Id>
         <Name>KAM report</Name>
       </Option>
@@ -45,7 +45,7 @@
       </Option>
       <Option>
         <Id>8</Id>
-        <Name>Feedbacks (SME,KAM)</Name>
+        <Name>Feedbacks (KAM)</Name>
       </Option>
       <Option Type="final">
         <Id>9</Id>

@@ -20,24 +20,18 @@ import module namespace ajax = "http://oppidoc.com/oppidum/ajax" at "../../lib/a
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
 import module namespace workflow = "http://platinn.ch/coaching/workflow" at "../workflow/workflow.xqm";
 import module namespace alert = "http://oppidoc.com/ns/cctracker/alert" at "../workflow/alert.xqm";
-import module namespace evaluation = "http://oppidoc.com/ns/cctracker/evaluation" at "evaluation.xqm";
 
 declare option exist:serialize "method=xml media-type=application/xml";
 
 (: ======================================================================
-   Launch external service before entering a new status
-   Returns either an error if service could not be started, 
-   otherwise returns the empty sequence
-   This way services are configured via config/application.xml
+   Implements @Launch attribute on Transition element to launch external 
+   service before entering a new status (see in application.xml)
+   Returns an error if service could not be started or the empty sequence
    ======================================================================
 :)
 declare function local:launch-services( $transition as element(), $case as element(), $activity as element() ) as element()? {
-  if ($transition/@Launch eq 'feedback-at-eval') then
-    evaluation:launch-feedback($case, $activity, $transition/@Launch)
-  else if ($transition/@Launch eq 'close-feedback-at-eval') then
-    let $side-effect := evaluation:close-feedback($case, $activity, $transition/@Launch)
-    return ()
-  else ()
+  let $pass := ()
+  return $pass
 };
 
 (: MAIN ENTRY POINT :)

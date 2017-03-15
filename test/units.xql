@@ -15,6 +15,7 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 
 declare namespace site = "http://oppidoc.com/oppidum/site";
 
+import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../oppidum/lib/util.xqm";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../lib/globals.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../lib/form.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../lib/display.xqm";
@@ -40,6 +41,7 @@ declare variable $local:tests :=
     </Module>
     <Module>
       <Name>Access</Name>
+      <Test>oppidum:get-current-user-realm()</Test>
       <Test>user:get-current-person-id()</Test>
       <Test Format="xml">user:get-user-profile()</Test>
       <Test>user:get-current-person-id('test')</Test>

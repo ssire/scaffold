@@ -163,6 +163,27 @@
     </KAMReportCAProxy>
   </Assignment>
 ]]>
-  </Template>  
+  </Template>
+  <Template Name="vanilla" Mode="update">
+<![CDATA[
+  <XAL>
+    <XALAction Type="replace">
+      {
+      element { $document }
+      { 
+      attribute { 'LastModification' } { $date },
+      $form/*
+      }
+      }
+    </XALAction>
+  </XAL>
+]]>
+  </Template>
+  <Template Name="vanilla" Mode="read">
+<![CDATA[
+  element { $document }
+  { $activity/*[local-name(.) eq $document]/* }
+]]>
+  </Template>
 </Templates>
 

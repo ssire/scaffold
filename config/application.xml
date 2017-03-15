@@ -32,13 +32,13 @@
     <Workflow Id="Activity">
       <Documents TemplateBaseURL="../../../templates/">
         <!-- Case reminders -->
-        <Document Tab="case-info" AtStatus="1 2 3 4 5 6 7 8" Blender="yes" class="case">
+        <Document Tab="case-info" AtStatus="1 2 3 4 5 7 8" Blender="yes" class="case">
           <Controller>../../case</Controller>
           <Template>case</Template>
           <Action Type="update" AtStatus="1"/>
         </Document>
         <!-- Activity documents -->
-        <Document Tab="coaching-assignment" AtStatus="1 2 3 4 5 6 7 8" Blender="yes">
+        <Document Tab="coaching-assignment" AtStatus="1 2 3 4 5 7 8" Blender="yes">
           <AutoExec AtStatus="1" Id="ae-advance" i18nBase="action.status">
             <Forward Command="status" EventTarget="go-coaching-plan">cmd-change-status</Forward>
           </AutoExec>
@@ -47,6 +47,42 @@
           <Action Type="status" AtStatus="1" Id="cmd-change-status"/>
           <Action Type="update" AtStatus="1"/>
           <Action Type="delete" AtStatus="1"/>
+        </Document>
+        <Document Tab="funding-request" AtStatus="2 3 4 5 7 8">
+          <Controller>funding-request</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="2"/>
+          <Action Type="update" AtStatus="2"/>
+        </Document>
+        <Document Tab="opinions" AtStatus="3 4 5 7 8">
+          <Controller>opinions</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="3"/>
+          <Action Type="update" AtStatus="3"/>
+        </Document>
+        <Document Tab="funding-decision" AtStatus="4 5 7 8">
+          <Controller>funding-decision</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="4"/>
+          <Action Type="update" AtStatus="4"/>
+        </Document>
+        <Document Tab="final-report" AtStatus="5 7 8">
+          <Controller>final-report</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="5"/>
+          <Action Type="update" AtStatus="5"/>
+        </Document>
+        <Document Tab="report-approval" AtStatus="7 8">
+          <Controller>report-approval</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="7"/>
+          <Action Type="update" AtStatus="7"/>
+        </Document>
+        <Document Tab="evaluation" AtStatus="8">
+          <Controller>evaluation</Controller>
+          <Template>sample</Template>
+          <Action Type="status" AtStatus="8"/>
+          <Action Type="update" AtStatus="8"/>
         </Document>
       </Documents>
       <Transitions>
@@ -57,7 +93,7 @@
           <Email Template="coach-assignment-easme-notification"/>
           <Assert Base="$activity/Assignment" Error="MISSING-COACH-OR-SERVICE">
             <true>$base/ServiceRef[. ne '']</true>
-            <true>$base/ResponsibleCoachRef[. ne '']</true>
+            <!-- <true>$base/ResponsibleCoachRef[. ne '']</true> -->
           </Assert>
           <Assert Base="$activity/FinalReportApproval/Profiles" Error="MISSING-EVALUATION-COACH-ASSIGNMENT">
             <true>$base/RatingScaleRef[. ne '']</true>
@@ -67,12 +103,44 @@
         <Transition From="1" To="9">
           <Meet>r:kam</Meet>
         </Transition>
+        <Transition From="2" To="3">
+          <Meet>r:coach</Meet>
+          <Recipients>r:kam</Recipients>
+        </Transition>
+        <Transition From="3" To="4">
+          <Meet>r:kam</Meet>
+        </Transition>
+        <Transition From="3" To="2">
+          <Meet>r:kam</Meet>
+          <Recipients>r:coach</Recipients>
+        </Transition>
+        <Transition From="4" To="5">
+          <Meet>r:kam</Meet>
+          <Recipients>r:coach</Recipients>
+        </Transition>
+        <Transition From="5" To="7">
+          <Meet>r:coach</Meet>
+          <Recipients>r:kam</Recipients>
+        </Transition>
+        <Transition From="7" To="8">
+          <Meet>r:kam</Meet>
+        </Transition>
+        <Transition From="7" To="5">
+          <Meet>r:kam</Meet>
+          <Recipients>r:coach</Recipients>
+        </Transition>
+        <Transition From="8" To="10">
+          <Meet>r:kam</Meet>
+        </Transition>
+        <Transition From="8" To="11">
+          <Meet>r:kam</Meet>
+        </Transition>
       </Transitions>
     </Workflow>
   </Workflows>
   <Security>
     <Documents>
-      <!-- Main documents shown on accordion tabs -->
+      <!-- Documents -->
       <Document TabRef="case-info" Root="Case">
         <Action Type="update">
           <Meet>r:kam</Meet>
@@ -89,7 +157,38 @@
           <Meet>r:kam</Meet>
         </Action>
       </Document>
+      <Document TabRef="funding-request" Root="FundingRequest" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:coach</Meet>
+        </Action>
+      </Document>
+      <Document TabRef="opinions" Root="Opinions" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
+      <Document TabRef="funding-decision" Root="FundingDecision" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
+      <Document TabRef="final-report" Root="FinalReport" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:coach</Meet>
+        </Action>
+      </Document>
+      <Document TabRef="report-approval" Root="ReportApproval" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
+      <Document TabRef="evaluation" Root="Evaluation" Form="sample.xml">
+        <Action Type="update">
+          <Meet>r:kam</Meet>
+        </Action>
+      </Document>
     </Documents>
+    <!-- Application entities -->
     <Resources>
       <Resource Name="Case">
         <Action Type="create">

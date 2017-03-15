@@ -484,7 +484,7 @@
         <xsl:apply-templates select="@Id"/>
         <xsl:apply-templates select="/Display/Modals/Modal[@Id = $ted]/Initialize"/>
         <xsl:apply-templates select="../Spawn" mode="change-status"/>
-        <xsl:apply-templates select="Option" mode="change-status"/>
+        <xsl:apply-templates select="Status" mode="change-status"/>
       </ul>
     </div>
   </xsl:template>
@@ -504,7 +504,7 @@
   </xsl:template>
 
   <!-- TODO: use Dictionary > Transitions to localize @Label  -->
-  <xsl:template match="Option" mode="change-status">
+  <xsl:template match="Status" mode="change-status">
     <xsl:variable name="to" select="string(@To)"/>
     <li>
       <a tabindex="-1" href="#" data-action="{@Action}">

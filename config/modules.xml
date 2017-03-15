@@ -2,6 +2,21 @@
                           Platinn Coaching modules
      ======================================================================= -->
 <modules>
+  <!-- ********************* -->
+  <!-- ** Document sample ** -->
+  <!-- ********************* -->
+  <module id="sample">
+    <action name="GET">
+      <model src="modules/activities/sample.xql">
+        <param name="root" value="Sample"/>
+      </model>
+    </action>
+    <action name="POST">
+      <model src="modules/activities/sample.xql">
+        <param name="root" value="Sample"/>
+      </model>
+    </action>
+  </module>
   <!-- **************** -->
   <!-- ** Submission ** -->
   <!-- **************** -->

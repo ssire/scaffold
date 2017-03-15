@@ -101,6 +101,13 @@ declare function misc:unreference( $nodes as item()* ) as item()* {
                 local:gen_display_attribute($node/*),
                 $node/*
                 )}
+            else if (ends-with($tag, 'ByRef')) then
+              element { $tag }
+                {(
+                  attribute { '_Display' } { display:gen-person-name($node/text(), 'en') },
+                  $node/text()
+                )}
+                
             else if (ends-with($tag, 'Ref') or ($tag eq 'Country')) then
               element { $tag }
                 {(

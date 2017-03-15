@@ -1,0 +1,17 @@
+<Form Tag="Sample" Layout="fluid" StartLevel="1"
+  xmlns:site="http://oppidoc.com/oppidum/site"
+  xmlns:xt="http://ns.inria.org/xtiger">
+  
+  <Title>Sample Formular</Title>
+
+  <Row>
+    <Field Key="comments" Tag="Comments" W="12" Gap="2">Comments</Field>
+    <div class="span6 offset3 text-info">If you are interested by the complete Coaching workflow please contact smE-MPOWER, otherwise you can customize this application to fit your own worklow</div>
+  </Row>
+
+  <Bindings>
+  </Bindings>
+  <Plugins>
+    <Input Keys="comments"/>
+  </Plugins>
+</Form>

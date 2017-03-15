@@ -24,6 +24,15 @@ declare function template:save-document( $name as xs:string, $case as element(),
   template:save-document($name, $case, (), $form)
 };
 
+declare function template:get-vanilla( $document as xs:string, $case as element(), $activity as element()?, $lang as xs:string ) as element() {
+  let $src := fn:doc($globals:templates-uri)/Templates/Template[@Mode eq 'read'][@Name eq 'vanilla']
+  return
+    if ($src) then
+      misc:unreference(util:eval(string-join($src/text(), ''))) (: FIXME: $lang :)
+    else
+      oppidum:throw-error('CUSTOM', concat('Missing vanilla template for read mode'))
+};
+
 declare function template:save-document(
   $name as xs:string, 
   $case as element(), 
@@ -43,4 +52,25 @@ declare function template:save-document(
         )
     else
       oppidum:throw-error('CUSTOM', concat('Missing "', $name, '" template for update mode'))
+};
+
+declare function template:save-vanilla(
+  $document as xs:string, 
+  $case as element(), 
+  $activity as element(), 
+  $form as element() 
+  ) as element()
+{
+  let $date := current-dateTime()
+  let $uid := user:get-current-person-id() 
+  let $src := fn:doc($globals:templates-uri)/Templates/Template[@Mode eq 'update'][@Name eq 'vanilla']
+  return
+    if ($src) then
+      let $delta := misc:prune(util:eval(string-join($src/text(), '')))
+      return (
+        misc:apply-updates(if ($activity) then $activity else $case, $delta),
+        oppidum:throw-message('ACTION-UPDATE-SUCCESS', ())
+        )
+    else
+      oppidum:throw-error('CUSTOM', concat('Missing vanilla template for update mode'))
 };

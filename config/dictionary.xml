@@ -320,11 +320,11 @@
     <Translation key="workflow.title.coaching-init">Needs analysis (KAM)</Translation>
     <Translation key="workflow.title.coaching-assignment">Coach assignment (KAM)</Translation>
     <Translation key="workflow.title.funding-request">Coaching plan (Coach)</Translation>
-    <Translation key="workflow.title.opinions">Consultation (KAM, EASME)</Translation>
-    <Translation key="workflow.title.funding-decision">Coach contracting (EASME)</Translation>
+    <Translation key="workflow.title.opinions">Consultation (KAM)</Translation>
+    <Translation key="workflow.title.funding-decision">Coach contracting (KAM)</Translation>
     <Translation key="workflow.title.final-report">Coaching report (Coach)</Translation>
-    <Translation key="workflow.title.final-report-approval">KAM report (KAM)</Translation>
-    <Translation key="workflow.title.closing">Report approval (EASME)</Translation>
+    <Translation key="workflow.title.report-approval">Report approval (KAM)</Translation>
+    <Translation key="workflow.title.closing">Report approval (KAM)</Translation>
     <Translation key="workflow.title.evaluation">Feedbacks (SME, KAM)</Translation>
     <Translation key="workflow.title.evaluations">Evaluations (SME, KAM, Coach)</Translation>
     <Translation key="workflow.title.case">Concerned case</Translation>

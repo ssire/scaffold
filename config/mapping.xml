@@ -78,15 +78,19 @@
         <action name="POST">
           <model src="modules/activities/create.xql"/>
         </action>
-        <item epilogue="workflow" supported="delete match">
-          <!-- activity workflow view -->
+        <item epilogue="workflow" supported="delete status">
+          <!-- Workflow view -->
           <model src="modules/activities/workflow.xql"/>
           <view src="modules/workflow/workflow.xsl"/>
-          <!-- controller to delete an activity (POST) -->
+          <!-- Delete (POST) -->
           <action name="delete">
             <model src="modules/activities/delete.xql"/>
           </action>
-          <!-- activity coach assignment document -->
+          <!-- Change status action (POST) -->
+          <action name="status">
+            <model src="modules/activities/status.xql"/>
+          </action>
+          <!-- CoachAssignment document -->
           <item name="assignment" method="POST">
             <model src="modules/activities/assignment.xql"/>
             <variant name="GET" format="blend">
@@ -95,6 +99,30 @@
             <action name="POST">
               <model src="modules/activities/assignment.xql"/>
             </action>
+          </item>
+          <!-- FundingRequest document (demo) -->
+          <item name="funding-request" method="POST">
+            <import module="sample" param="root=FundingRequest"/>
+          </item>
+          <!-- Opinions document (demo) -->
+          <item name="opinions" method="POST">
+            <import module="sample" param="root=Opinions"/>
+          </item>
+          <!-- FundingDecision document (demo) -->
+          <item name="funding-decision" method="POST">
+            <import module="sample" param="root=FundingDecision"/>
+          </item>
+          <!-- FundingDecision document (demo) -->
+          <item name="final-report" method="POST">
+            <import module="sample" param="root=FinalReport"/>
+          </item>
+          <!-- FundingDecision document (demo) -->
+          <item name="report-approval" method="POST">
+            <import module="sample" param="root=ReportApproval"/>
+          </item>          
+          <!-- FundingDecision document (demo) -->
+          <item name="evaluation" method="POST">
+            <import module="sample" param="root=Evaluation"/>
           </item>
         </item>
       </collection>
@@ -213,6 +241,9 @@
       <model src="modules/cases/form.xql"/>
     </item>
     <item name="coaching-assignment" epilogue="coaching-assignment.xhtml">
+      <model src="modules/activities/form.xql"/>
+    </item>
+    <item name="sample" epilogue="sample.xhtml">
       <model src="modules/activities/form.xql"/>
     </item>
     <item name="person" epilogue="person.xhtml">

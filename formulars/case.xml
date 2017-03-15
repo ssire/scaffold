@@ -30,7 +30,7 @@
     <xt:component name="t_enterprise_data">
       <Cell W="5" L="0" TypeName="enterprise_data" style="clear:left">
         <site:conditional meet="read" force="true">
-          <Field Class="x-EnterpriseRef" Key="enterprise" Tag="EnterpriseRef" Gap="1" loc="term.name" Placeholder-loc="content.choose">Nom</Field>
+          <Field Key="enterprise" Tag="EnterpriseRef" Gap="1" loc="term.name" Placeholder-loc="content.choose">Nom</Field>
         </site:conditional>
         <Field Key="abbrev" Tag="ShortName" Gap="1" loc="term.abbrev">Abrégé</Field>
         <Field Key="creation" Tag="CreationYear" Gap="1" loc="term.creationYear">Année de création</Field>
