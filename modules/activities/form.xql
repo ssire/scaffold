@@ -14,8 +14,10 @@ xquery version "1.0";
 
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../../lib/globals.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../../lib/form.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../../lib/display.xqm";
+
 
 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
 declare namespace xt = "http://ns.inria.org/xtiger";
@@ -136,9 +138,9 @@ return
         <site:field Key="service">
           { form:gen-selector-for('Services', $lang, ";multiple=no;typeahead=yes") }
         </site:field>
-        <!--<site:field Key="assigned-coach">
-          { form:gen-person-with-role-selector('coach', $lang, " optional;multiple=no;typeahead=yes", "span") }
-        </site:field>-->
+        <site:field Key="assigned-coach">
+          { custom:gen-person-with-role-selector('coach', $lang, " optional;multiple=no;typeahead=yes", "span") }
+        </site:field>
         <site:field Key="suggested-coach">
           <xt:use types="constant" param="class=uneditable-input span">Will be available soon</xt:use>
         </site:field>        

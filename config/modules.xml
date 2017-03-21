@@ -1,7 +1,25 @@
 <!-- ======================================================================
-                          Platinn Coaching modules
+       Oppidoc Business Application Development Framework 
      ======================================================================= -->
 <modules>
+  <!-- ************ -->
+  <!-- ** Alerts ** -->
+  <!-- ************ -->
+  <module id="alerts">
+    <collection name="alerts" method="POST">
+      <model src="modules/workflow/alert.xql"/>
+      <action name="POST">
+        <model src="modules/workflow/alert.xql"/>
+        <view src="modules/workflow/workflow.xsl"/>
+      </action>
+      <item>
+        <model src="modules/workflow/alert.xql"/>
+        <variant name="GET" format="modal">
+          <view src="modules/workflow/alert-modal.xsl"/>
+        </variant>
+      </item>
+    </collection>
+  </module>
   <!-- ********************* -->
   <!-- ** Document sample ** -->
   <!-- ********************* -->

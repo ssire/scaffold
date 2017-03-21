@@ -1,18 +1,19 @@
 xquery version "1.0";
 (: --------------------------------------
-   CCTRACKER -Oppidoc Case Tracker
+   Oppidoc Business Application Development Framework
 
-   Creation: Christine Vanoirbeek & Stéphane Sire
+   Authors: Stéphane Sire <s.sire@oppidoc.fr>
+            Christine Vanoirbeek <christine.vanoirbeek@docetis.com>
 
-   CRUD controller to manage notifications messages (alert and email)
+   CRUD controller to manage mail notification messages
 
    E-mail templates are stored in global-information/email.xml :
    - Alert element : do not define an explicit To field but use an Addressees 
-     drop down list (see formulars/alert.xml) to select multiple recipients
-     (always used for messages triggered by workflow status changed)
+     drop down list (see formulars/mail.xml) to select multiple recipients
+     (always used for messages triggered by workflow transition)
    - Email element : define an explicit (free text) To field to edit a single
      pre-generated recipient and a fixed (non editable) CC field used in some cases
-     (see formulars/email.xml) and an attachment field also used in some cases
+     (see formulars/mail.xml) and an attachment field also used in some cases
 
    December 2014 - (c) Copyright 2014 Oppidoc SARL. All Rights Reserved.
    ----------------------------------------------- :)
@@ -78,7 +79,7 @@ declare function local:prefill-notification( $workflow as xs:string, $case as el
       else
         string($transition/@Template)
     else
-      concat(lower-case($workflow), '-workflow-alert')
+      concat(lower-case($workflow), '-workflow-transition')
   let $extra-vars := alert:gen-action-status-names($wf-from, $wf-to, $workflow) (: not in variables.xml :)
   let $alert := email:render-alert($template, 'en', $case, $activity, $extra-vars)
   return (: by default Date and Sender prefilled directly from form.xql :)
@@ -113,96 +114,6 @@ declare function local:save-timestamp( $parent as element(), $legacy as element(
       update replace $legacy with $stamp
     else
       update insert $stamp into $parent
-};
-
-(: ======================================================================
-   Generates E-mail message content to pre-fill a message for SME Agreement
-   TODO: simplify with email:render-alert
-   ======================================================================
-:)
-declare function local:prefill-sme-agreement-email( $case as element(), $activity as element() ) {
-  let $contact := $case/NeedsAnalysis/ContactPerson
-  let $coach-email := misc:gen-person-email($activity/Assignment/ResponsibleCoachRef)
-  let $vars :=
-    <vars>
-      <var name="Mail_From">{ $coach-email }</var>
-      <var name="Mail_To">{ $contact/Contacts/Email/text() }</var>
-      <var name="Project_Acronym">{ $case/Information/Acronym/text() }</var>
-      <var name="Project_Title">{ $case/Information/Title/text() }</var>
-      <var name="First_Name">{ $case/Information/ContactPerson/Name/FirstName/text() }</var>
-      <var name="Last_Name">{ $case/Information/ContactPerson/Name/LastName/text() }</var>
-      { alert:gen-user-name-for('KAM', $case/Management/AccountManagerRef) }
-      { alert:gen-user-name-for('Coach', $activity/Assignment/ResponsibleCoachRef) }
-      <var name="Needs_Analysis_Date">{ $case/NeedsAnalysis/Analysis/Date/text() }</var>
-    </vars>
-  let $mail := media:render-email('sme-agreement', $vars, 'en')
-  return
-    <Email>
-      { $mail/* }
-      <Attachment>
-        <pre>{ media:message-to-plain-text(local:gen-coaching-plan-for($case, $activity)) }</pre>
-      </Attachment>
-    </Email>
-};
-
-(: ======================================================================
-   Generates a neutral CoachingPlan model suitable for :
-   - archiving inside storage into activity messages document
-   - conversion to plain text for concatenating to email message
-     and on-screen display inside Email modal window editor
-   - conversion to HTML for on-screen display (see alert-modal.xsl)
-   NOTE: could be used to generate an attachement in richer formats (HTML, PDF ?)
-   TODO: List with ListHeader (if needed)
-   ======================================================================
-:)
-declare function local:gen-coaching-plan-for( $case as element(), $activity as element() ) as element() {
-  let $project-title := $case/Information/Title/text()
-  let $contact := $case/NeedsAnalysis/ContactPerson
-  let $na-contact := concat(if ($contact/Sex eq 'M') then "M." else "Ms.", " ", $contact/Name/LastName, "  ", $contact/Name/FirstName)
-  let $na-date := $case/NeedsAnalysis/DateOfNeedsAnalysis/text()
-  let $coach := display:gen-person-name($activity/Assignment/ResponsibleCoachRef/text(), 'en')
-  let $kam := display:gen-person-name($case/Management/AccountManagerRef/text(), 'en')
-  let $crlf := codepoints-to-string((13))
-  return
-    <CoachingPlan>
-      <Title>Coaching plan proposal</Title>
-      <Text>Objectives</Text>
-      <List>
-        {
-          for $obj in $activity/FundingRequest/Objectives/Text
-          return
-            <Item>{ $obj/text() }</Item>
-        }
-      </List>
-      <Text>Tasks</Text>
-      <List>
-        {
-          for $task at $i in $activity/FundingRequest/Budget/Tasks/Task
-          return
-            <Item>{ concat(replace($task/NbOfHours, '[^\d]', ''), "H: ", normalize-space($task/Description)) }</Item>
-        }
-      </List>
-      <Text>Total number of hours : { $activity/FundingRequest/Budget/Tasks/TotalNbOfHours/text() }H</Text>
-    </CoachingPlan>
-};
-
-(: ======================================================================
-   Submits coaching plan as attachment to SME for agreement
-   TODO: also archive $cc
-   ======================================================================
-:)
-declare function local:send-agreement-email( $case as element(), $activity as element(), $submitted as element() ) as element()? {
-  let $attachment := <Attachment>{ local:gen-coaching-plan-for($case, $activity)/* }</Attachment>
-  let $cc := misc:gen-person-email($activity/Assignment/ResponsibleCoachRef)
-  let $res := local:add-email('Activity', $activity, $submitted, $cc, 'en', $attachment)
-  return
-    if (local-name($res) eq 'success') then
-      (
-      local:save-timestamp($activity/FundingRequest, $activity/FundingRequest/SME-Agreement, 'SME-Agreement'),
-      $res
-      )
-    else
-      $res
 };
 
 (: ======================================================================
@@ -338,9 +249,9 @@ declare function local:add-notification( $workflow as xs:string, $host as elemen
 };
 
 (: ======================================================================
-   Sends an saves a document based Alert (tiggered on document save)
-   These alerts are declared in Messages part of config/application.xml
-   and must be triggered by responding a forward element in a CRUD controller
+   Sends and archives messages defined in Messages part of application.xml
+   This can be triggered by inserting a forward element in a CRUD controller
+   that controls one case or activity document.
    ======================================================================
 :)
 declare function local:add-message( $context as xs:string, $workflow as xs:string, $case as element(), $activity as element()?, $submitted as element(), $lang as xs:string ) as element()*
@@ -439,18 +350,15 @@ let $item := if ($activity-no) then $activity else $case
 return
   if ($item) then
     if ($m = 'POST') then
-      let $submitted := request:get-data()
+      let $submitted := oppidum:get-data()
       return
         if ($doc-id = 'alerts') then
-          (: Ignores the goal=init parameter :)
           let $from := request:get-parameter('from', ())
-          return
-            (: TODO : check access right :)
-            if ($from eq 'SME-Agreement') then
-              local:send-agreement-email($case, $activity, $submitted)
-            else if ($from = 'FundingDecision') then
+          return (: TODO : check access right :)
+            if ($from eq 'XXX') then (: message sent upon saving a document :)
+              (: feature not used in demo version :)
               local:add-message($from, $target, $case, $activity, $submitted, $lang)
-            else
+            else (: message sent upon workflow transition :)
               local:add-notification($target, $item, $submitted, $lang)
         else
           ()
@@ -461,12 +369,10 @@ return
         if ($goal = 'init') then
           if ($from = 'status') then
             local:prefill-notification($target, $case, $activity)
-          else if ($from = 'SME-Agreement') then
-            local:prefill-sme-agreement-email($case, $activity)
           else if ($from = 'FundingDecision') then
             local:prefill-message($from, $target, $case, $activity)
           else
-            email:render-alert(concat(lower-case($target), '-spontaneous-alert'), 'en', $case, $activity)
+            email:render-alert(concat(lower-case($target), '-user-message'), 'en', $case, $activity)
         else if ($doc-id = 'alerts') then (: not mapped :)
           <Alerts/>
         else (: assumes 'read' :)

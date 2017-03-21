@@ -39,29 +39,41 @@ return
         <Title>
           {
           workflow:gen-source($cmd/@mode, $case),
-          workflow:gen-title($case)
+          workflow:gen-title($case, $lang)
           }
         </Title>
       </Cartouche>
       { workflow:gen-workflow-steps('Case', $case, $lang) }
       <Tabs>
+        <!-- ************* -->
+        <!-- Documents tab -->
+        <!-- ************* -->
         <Tab Id="case" class=" active">
           <Name loc="workflow.tab.documents">Documents</Name>
           { 
           workflow:gen-information('Case', $case, (), $lang) 
           }
         </Tab>
+        <!-- ***************** -->
+        <!-- Case messages tab -->
+        <!-- ***************** -->
         <Tab Id="case-alerts" Counter="Alert" ExtraFeed="case-init">
           <Name loc="workflow.tab.case.messages">Case messages</Name>
           <Drawer Command="edit" loc="action.add.message" PrependerId="c-case-alerts-list" class="case">
             <Title loc="workflow.title.case.messages">Messages</Title>
             <Initialize>alerts?goal=init</Initialize>
             <Controller>alerts</Controller>
-            <Template>../templates/notification?goal=create</Template>
+            <Template>../templates/mail?goal=create</Template>
           </Drawer>
           { workflow:gen-alerts-list('Case', 'c-case-alerts-list', $case, '', $lang) }
         </Tab>
+        <!-- ********************** -->
+        <!-- List of activities tab -->
+        <!-- ********************** -->
         { workflow:gen-activities-tab($case, (), $lang) }
+        <!-- *********** -->
+        <!-- Who is tab -->
+        <!-- *********** -->
         <Tab Id="whois">
           <Name loc="workflow.tab.whois">Who is</Name>
           <Controller>{$case-no}/whois</Controller>
@@ -77,7 +89,7 @@ return
           <Legend class="text-info">The status has been changed with success. You now have the possibility to send a notification message by e-mail to some stakeholders in relation with the new status. You may also choose not to send it.</Legend>
           <Initialize>alerts?goal=init&amp;from=status</Initialize>
           <Controller>alerts?next=redirect</Controller>
-          <Template>../templates/notification?goal=create&amp;auto=1</Template>
+          <Template>../templates/mail?goal=create&amp;auto=1</Template>
           <Commands>
             <Save data-replace-type="event"><Label loc="action.send">Send</Label></Save>
             <Cancel><Label loc="action.dontSend">Continue w/o sending</Label></Cancel>

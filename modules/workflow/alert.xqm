@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: ------------------------------------------------------------------
-   CCTracker - Oppidoc Case Tracker
+   Oppidoc Business Application Development Framework
 
    Author: Stéphane Sire <s.sire@opppidoc.fr>
 
@@ -62,53 +62,11 @@ declare function alert:gen-current-user-name() as element()* {
    ======================================================================
 :)
 declare function alert:gen-action-status-names( $from as xs:string?, $to as xs:string, $workflow as xs:string ) as element()* {
-  let $status := "display:gen-workflow-status-name "(:TODO: display:gen-workflow-status-name($workflow, $to, 'en'):)
+  let $status := display:gen-name-for-sref(concat($workflow, 'WorkflowStatus'), $to, 'en')
   let $verb := if ($from and (number($from) > number($to))) then "returned back" else "moved forward"
   return (
     <var name="Action_Verb">{ $verb }</var>,
     <var name="Status_Name">{ $status }</var>
-    )
-};
-
-(: ======================================================================
-   Utility to generate variables for case and optional activity URLs
-   DEPRECATED (see variables.xml)
-   ======================================================================
-:)
-declare function alert:gen-link-to-case-activity( $case as element(), $activity as element()? ) as element()* {
-  (
-  if ($case) then
-    <var name="Link_To_Case">https://casetracker-smei.easme-web.eu/cases/{ $case/No/text() }</var>
-  else
-    (),
-  if ($activity) then
-    <var name="Link_To_Activity">https://casetracker-smei.easme-web.eu/cases/{ $case/No/text() }/activities/{ $activity/No/text() }</var>
-  else
-    ()
-  )
-};
-
-(: ======================================================================
-   Utility to generate variables for case and optional activity title
-   DEPRECATED (see variables.xml)
-   ======================================================================
-:)
-declare function alert:gen-case-activity-title(  $case as element(), $activity as element()? ) as element()* {
-  let $client := $case/Information/ClientEnterprise/Name
-  return (
-    <var name="Project_Acronym">{ $case/Information/Acronym/text() }</var>,
-    <var name="Beneficiary">{ $client }</var>,
-    if ($activity) then
-      <var name="Activity_Title">
-        {
-        let $service := display:gen-name-for('Services', $activity/Assignment/ServiceRef, 'en')
-        let $year := substring($activity/CreationDate/text(), 1, 4)
-        return
-          concat($client, ' - ', if ($service) then $service else '...', ' - ', $year)
-        }
-      </var>
-    else
-      ()
     )
 };
 
@@ -357,7 +315,7 @@ declare function alert:notify-transition(
           else
             $name
         else (: default one :)
-          concat(lower-case($workflow), '-workflow-alert')
+          concat(lower-case($workflow), '-workflow-transition')
       let $extra-vars := alert:gen-action-status-names($wf-from, $wf-to, $workflow) (: not in variables.xml :)
       let $alert := email:render-alert($template, 'en', $case, $activity, $extra-vars)
       return

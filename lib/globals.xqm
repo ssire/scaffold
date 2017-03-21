@@ -25,7 +25,7 @@ declare variable $globals:settings-uri := '/db/www/scaffold/config/settings.xml'
 declare variable $globals:log-file-uri := '/db/debug/login.xml';
 declare variable $globals:application-uri := '/db/www/scaffold/config/application.xml';
 declare variable $globals:templates-uri := '/db/sites/scaffold/global-information/templates.xml';
-declare variable $globals:variables-uri := '/db/www/cctracker/config/variables.xml';
+declare variable $globals:variables-uri := '/db/www/scaffold/config/variables.xml';
 
 (: Application entities paths :)
 declare variable $globals:persons-uri := '/db/sites/scaffold/persons/persons.xml';

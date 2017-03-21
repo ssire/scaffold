@@ -96,6 +96,18 @@
   <xsl:template match="Acronym[.='']"><i>no title</i>
   </xsl:template>
 
+  <xsl:template match="Title"><xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="Title[starts-with(., '...')]">
+    <i>pending</i><xsl:value-of select="substring-after(., '...')"/>
+  </xsl:template>
+
+  <xsl:template match="Title" mode="tooltip">
+    <xsl:attribute name="rel">tooltip</xsl:attribute>
+    <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
+  </xsl:template>
+
   <xsl:template match="Title" mode="tooltip">
     <xsl:attribute name="rel">tooltip</xsl:attribute>
     <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
@@ -134,15 +146,15 @@
   </xsl:template>
 
   <xsl:template match="Case" mode="link">
-    <span><xsl:apply-templates select="Title" mode="tooltip"/><xsl:if test="not(Acronym)"><i>no acronym</i></xsl:if><xsl:apply-templates select="Acronym"/></span><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
+    <span><xsl:apply-templates select="Title"/></span><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
   </xsl:template>
 
   <xsl:template match="Case[@Open or parent::Cases/@Open]" mode="link">
-    <a href="cases/{No}"><xsl:apply-templates select="Title" mode="tooltip"/><xsl:if test="not(Acronym)"><i>no acronym</i></xsl:if><xsl:apply-templates select="Acronym"/></a><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
+    <a href="cases/{No}"><xsl:apply-templates select="Title"/></a><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
   </xsl:template>
 
   <xsl:template match="Case[@Open or parent::Cases/@Open][count(Activities/Activity) = 1]" mode="link">
-    <a href="cases/{No}/activities/{Activities/Activity/No}"><xsl:apply-templates select="Title" mode="tooltip"/><xsl:if test="not(Acronym)"><i>no acronym</i></xsl:if><xsl:apply-templates select="Acronym"/></a><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
+    <a href="cases/{No}/activities/{Activities/Activity/No}"><xsl:apply-templates select="Title"/></a><i data-toggle="modal" href="cases/{No}.modal" data-target="#case-modal" class="c-info">__</i>
   </xsl:template>
 
   <!-- =======================  Activity ============================== -->

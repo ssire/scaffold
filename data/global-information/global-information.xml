@@ -72,6 +72,11 @@
         <Name>Account Manager</Name>
         <Brief>KAM</Brief>
       </Option>
+      <Option Role="coach">
+        <Id>4</Id>
+        <Name>Coach</Name>
+        <Brief>Coach</Brief>
+      </Option>
       <Option Group="developer" Role="developer">
         <Id>99</Id>
         <Name>Software Developer</Name>

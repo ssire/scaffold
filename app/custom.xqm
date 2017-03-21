@@ -86,6 +86,30 @@ declare function custom:gen-person-selector ( $lang as xs:string, $params as xs:
 };
 
 (: ======================================================================
+   Same as function form:gen-person-selector with a restriction to a given Role
+   ======================================================================
+:)
+declare function custom:gen-person-with-role-selector ( $roles as xs:string+, $lang as xs:string, $params as xs:string, $class as xs:string? ) as element() {
+  let $roles-ref := user:get-function-ref-for-role($roles)
+  let $pairs :=
+      for $p in fn:doc($globals:persons-uri)/Persons/Person[UserProfile//Role[FunctionRef = $roles-ref]]
+      let $fn := $p/Name/FirstName
+      let $ln := $p/Name/LastName
+      where ($p/Name/LastName/text() ne '')
+      order by $ln ascending
+      return
+         <Name id="{$p/Id/text()}">{concat(replace($ln,' ','\\ '), '\ ', replace($fn,' ','\\ '))}</Name>
+  return
+    let $ids := string-join(for $n in $pairs return string($n/@id), ' ') (: FLWOR to defeat document ordering :)
+    let $names := string-join(for $n in $pairs return $n/text(), ' ') (: idem :)
+    return
+      if ($ids) then
+        <xt:use types="choice" values="{$ids}" i18n="{$names}" param="{form:setup-select2($params)}"/>
+      else
+        <xt:use types="constant" param="noxml=true;class=uneditable-input {$class}">Not available</xt:use>
+};
+
+(: ======================================================================
   Same as form:gen-person-selector but with person's enterprise as a satellite
   It doubles request execution times
    ======================================================================
@@ -158,7 +182,6 @@ declare function custom:gen-town-selector ( $lang as xs:string, $params as xs:st
           )
 };
 
-
 (: ======================================================================
    Tests current user is compatible with semantic role and given resource
    Implement this function if your application defines semantic roles
@@ -190,3 +213,34 @@ declare function custom:assert-semantic-role( $suffix as xs:string, $case as ele
     else
       false()
 };
+
+declare function custom:gen-short-case-title( $case as element(), $lang as xs:string ) as xs:string {
+  let $ctx := $case/NeedsAnalysis/Context/InitialContextRef
+  return
+    if ($ctx) then
+      concat(display:gen-name-for("InitialContexts", $ctx, $lang), ' - ', substring($case/CreationDate, 1, 4))
+    else
+      concat('... - ', substring($case/CreationDate, 1, 4))
+};
+
+declare function custom:gen-case-title( $case as element(), $lang as xs:string ) as xs:string {
+  concat(
+    custom:gen-enterprise-name($case/Information/ClientEnterprise/EnterpriseRef, 'en'),
+    ' - ',
+    custom:gen-short-case-title($case, $lang)
+    )
+};
+
+declare function custom:gen-activity-title( $case as element(), $activity as element(), $lang as xs:string ) as xs:string {
+  let $service := $activity/Assignment/ServiceRef
+  return
+    concat(
+      custom:gen-enterprise-name($case/Information/ClientEnterprise/EnterpriseRef, 'en'),
+      ' - ',
+      if ($service) then
+        concat(display:gen-name-for("Services", $service, $lang), ' - ', substring($activity/CreationDate, 1, 4))
+      else
+        concat('service pending - ', substring($activity/CreationDate, 1, 4))
+      )
+};
+

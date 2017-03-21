@@ -19,6 +19,7 @@ import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../op
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../lib/globals.xqm";
 import module namespace form = "http://oppidoc.com/oppidum/form" at "../lib/form.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../lib/display.xqm";
+import module namespace media = "http://oppidoc.com/ns/cctracker/media" at "../lib/media.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../lib/util.xqm";
 import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../lib/access.xqm";
@@ -40,12 +41,15 @@ declare variable $local:tests :=
       <Test Format="xml"><![CDATA[misc:unreference(<Countries><Country>UK</Country><Country>DE</Country></Countries>)]]></Test>
     </Module>
     <Module>
-      <Name>Access</Name>
-      <Test>oppidum:get-current-user-realm()</Test>
+      <Name>User</Name>
       <Test>user:get-current-person-id()</Test>
       <Test Format="xml">user:get-user-profile()</Test>
       <Test>user:get-current-person-id('test')</Test>
       <Test>user:get-function-ref-for-role('admin-system')</Test>
+    </Module>
+    <Module>
+      <Name>Access</Name>
+      <Test>oppidum:get-current-user-realm()</Test>
       <Test>access:check-omnipotent-user()</Test>
       <Test>access:assert-access-rules((), ())</Test>
       <Test><![CDATA[access:assert-rule('test', 'users', <Meet>u:test</Meet>, ())]]></Test>
@@ -54,6 +58,10 @@ declare variable $local:tests :=
       <Test><![CDATA[access:assert-access-rules(<Rule xmlns=""><Avoid>u:admin</Avoid></Rule>, ())]]></Test>
       <Test>access:check-user-can('delete', 'Person')</Test>
       <Test>access:check-user-can('do', 'Something')</Test>
+    </Module>
+    <Module>
+      <Name>Media</Name>
+      <Test>media:gen-current-user-email(false())</Test>
     </Module>
   </Tests>;
 

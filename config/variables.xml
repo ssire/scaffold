@@ -1,1 +1,32 @@
-<Variables/>
+<Variables>
+  <Variable>
+    <Name>Company</Name>
+    <Expression>custom:gen-enterprise-name($case/Information/ClientEnterprise/EnterpriseRef,$lang)</Expression>
+  </Variable>
+  <Variable>
+    <Name>Case_Title</Name>
+    <Expression>custom:gen-case-title($case, $lang)</Expression>
+  </Variable>
+  <Variable>
+    <Name>Activity_Title</Name>
+    <Expression>custom:gen-activity-title($case, $activity, $lang)</Expression>
+  </Variable>
+  <Variable>
+    <Name>User_First_Name</Name>
+    <Name>User_Last_Name</Name>
+    <Expression>alert:gen-current-user-name()</Expression>
+  </Variable>
+  <Variable>
+    <Name>Coach_First_Name</Name>
+    <Name>Coach_Last_Name</Name>
+    <Expression>alert:gen-user-name-for('Coach', $activity/Assignment/ResponsibleCoachRef)</Expression>
+  </Variable>
+  <Variable>
+    <Name>Link_To_Case</Name>
+    <Expression>concat("https://{UPDATE in variables.xml}/cases/", $case/No/text())</Expression>
+  </Variable>
+  <Variable>
+    <Name>Link_To_Activity</Name>
+    <Expression>concat("https://{UPDATE in variables.xml}/cases/", $case/No/text(), "/activities/", $activity/No/text())</Expression>
+  </Variable>
+</Variables>

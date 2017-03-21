@@ -1,0 +1,139 @@
+<Emails>
+  <!-- ======================================================================
+         Messages to pre-fill mail composition window
+       ======================================================================
+   -->
+  <Alert Name="case-user-message" Lang="en">
+    <Subject>Message about project @@Case_Title@@</Subject>
+    <Message>
+      <Text>Edit your own message here...</Text>
+      <Text>Direct link to Company case on Case Tracker: @@Link_To_Case@@</Text>
+      <Text>@@User_First_Name@@ @@User_Last_Name@@</Text>
+    </Message>
+  </Alert>
+  <Alert Name="activity-user-message" Lang="en">
+    <Subject>Message about @@Activity_Title@@ coaching activity</Subject>
+    <Message>
+      <Text>Enter your own message here...</Text>
+      <Text>Direct link to Company coaching activity on Case Tracker: @@Link_To_Activity@@</Text>
+      <Text>@@User_First_Name@@ @@User_Last_Name@@</Text>
+    </Message>
+  </Alert>
+  <!-- ======================================================================
+         Messages sent on status change (application.xml)
+  
+         - fully automatic (no end user control)
+         - editing by end-user before sending or cancelling
+       ======================================================================
+   -->
+  <!-- Default for case workflow transition -->
+  <Alert Name="case-workflow-transition" Lang="en">
+    <Subject>The case @@Case_Title@@ has moved to a new status</Subject>
+    <Message>
+      <Text>I inform you that the case @@Case_Title@@ has @@Action_Verb@@ to @@Status_Name@@</Text>
+      <Text>Direct link to Company case on Case Tracker: @@Link_To_Case@@</Text>
+      <Text>@@User_First_Name@@ @@User_Last_Name@@</Text>
+    </Message>
+  </Alert>
+  <!-- Default for activity workflow transition -->
+  <Alert Name="activity-workflow-transition" Lang="en">
+    <Subject>The coaching activity @@Activity_Title@@ has moved to a new status</Subject>
+    <Message>
+      <Text>I inform you that the coaching activity has @@Action_Verb@@ to @@Status_Name@@</Text>
+      <Text>Direct link to Company coaching activity on Case Tracker: @@Link_To_Activity@@</Text>
+      <Text>@@User_First_Name@@ @@User_Last_Name@@</Text>
+    </Message>
+  </Alert>
+  <!-- Example of a specific message: coach notification  -->
+  <Alert Name="coach-assignment-notification" Lang="en">
+    <Subject>Case @@Activity_Title@@ ready for your input</Subject>
+    <Message>
+      <Line>Dear Coach,</Line>
+      <Text>You have been selected to coach @@Company@@</Text>
+      <Text>Please update the case on this link: @@Link_To_Activity@@</Text>
+      <Block>
+        <Line>Best regards,</Line>
+        <Line>@@User_First_Name@@ @@User_Last_Name@@</Line>
+      </Block>
+    </Message>
+  </Alert>
+  <!-- Exemple of automatic message: management notification -->
+  <Alert Name="coach-assignment-supervision" Lang="en">
+    <Subject>Coach assigned for project @@Activity_Title@@</Subject>
+    <To>management@case-tracker-demo.org</To>
+    <Message>
+      <Text>I have just assigned @@Coach_First_Name@@ @@Coach_Last_Name@@ to coach @@Company@@</Text>
+      <Block>
+        <Line>Best regards,</Line>
+        <Line>@@User_First_Name@@ @@User_Last_Name@@</Line>
+      </Block>
+    </Message>
+  </Alert>  
+  <!-- ======================================================================
+         Reminders (checks.xml)
+       ======================================================================
+   -->
+  <!-- ======================================================================
+         User account messages
+       ======================================================================
+   -->
+  <Email Name="login-created" Lang="en">
+    <Subject>Creation of your Case Tracker user account</Subject>
+    <Message>
+      <Text>Dear @@User_First_Name@@ @@User_Last_Name@@,</Text>
+      <Text>Welcome to the Case Tracker service.</Text>
+      <Block>
+        <Line>Your login has this ID : @@Login@@</Line>
+        <Line>and this password : @@Password@@</Line>
+      </Block>
+      <Text>When you are selected for a case you will be notified</Text>
+      <Block>
+        <Line>Best regards,</Line>
+        <Line>Case Tracker Team</Line>
+      </Block>
+    </Message>
+  </Email>
+  <!-- *************************************** -->
+  <Email Name="login-updated" Lang="en">
+    <Subject>Modification of your Case Tracker user account</Subject>
+    <Message>
+      <Text>Dear @@User_First_Name@@ @@User_Last_Name@@,</Text>
+      <Text>Your Case Tracker user account has been modified</Text>
+      <Block>
+        <Line>Your new login has this ID : @@Login@@</Line>
+        <Line>and this password : @@Password@@</Line>
+      </Block>
+      <Text>To change your password connect to the application then click on your login name on the top right corner of the screen</Text>
+      <Text>The Case Tracker is designed to run with Firefox, select About in the top menu for more information</Text>
+      <Block>
+        <Line>Warmest regards,</Line>
+        <Line>@@Admin_First_Name@@ @@Admin_Last_Name@@</Line>
+        <Line>Case Tracker Administrator</Line>
+      </Block>
+    </Message>
+  </Email>
+  <!-- *************************************** -->
+  <Email Name="new-password-by-admin" Lang="en">
+    <Subject>Modification of your Case Tracker user account</Subject>
+    <Message>
+      <Text>Your new password to access the Case Tracker is : @@Password@@</Text>
+      <Text>Use it from now to connect</Text>
+      <Text>To change your password connect to the application then click on your login name on the top right corner of the screen</Text>
+      <Block>
+        <Line>Warmest regards,</Line>
+        <Line>@@Admin_First_Name@@ @@Admin_Last_Name@@</Line>
+        <Line>Case Tracker Administrator</Line>
+      </Block>
+    </Message>
+  </Email>
+  <!-- *************************************** -->
+  <Email Name="new-password-by-user" Lang="en">
+    <Subject>Modification of your Case Tracker user account</Subject>
+    <Message>
+      <Text>Your new password to access the Case Tracker is : @@Password@@</Text>
+      <Text>Use it from now to connect</Text>
+      <Text>To change your password connect to the application then click on your login name on the top right corner of the screen</Text>
+      <Text>This message has been automatically generated, please do not answer</Text>
+    </Message>
+  </Email>
+</Emails>

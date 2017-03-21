@@ -34,25 +34,29 @@
     </action>
     <import module="submission" param="name=SearchStageRequest"/>
   </item>
-  <!-- *********** -->
-  <!-- ** cases ** -->
-  <!-- *********** -->
+  <!-- ********************** -->
+  <!-- ** cases collection ** -->
+  <!-- ********************** -->
   <collection name="cases" supported="create" method="POST" epilogue="home">
     <access>
       <rule action="GET" role="u:admin g:users" message="registered user"/>
       <rule action="POST create" role="u:admin g:account-manager" message="system administrator or account manager"/>
     </access>
-    <!-- user interface for case creation -->
+     <!-- creation formular page -->
     <action name="create" epilogue="home">
       <model src="modules/cases/create.xql"/>
       <view src="modules/cases/case.xsl"/>
     </action>
-    <!-- controller for case creation -->
+    <!-- create controller -->
     <action name="POST">
       <model src="modules/cases/create.xql"/>
     </action>
+    <!-- ********** -->
+    <!-- ** case ** -->
+    <!-- ********** -->
     <item epilogue="workflow">
-      <!-- case workflow view -->
+      <import module="alerts"/>
+      <!-- workflow view -->
       <model src="modules/cases/workflow.xql"/>
       <view src="modules/workflow/workflow.xsl"/>
       <!-- enterprise (modal) -->
@@ -60,7 +64,7 @@
         <model src="modules/cases/enterprise.xql"/>
         <view src="modules/enterprises/modal.xsl"/>
       </item>
-      <!-- case information document -->
+      <!-- Information document and satellites -->
       <item name="case" method="POST">
         <model src="modules/cases/case.xql"/>
         <variant name="GET" format="blend">
@@ -70,23 +74,27 @@
           <model src="modules/cases/case.xql"/>
         </action>
       </item>
-      <!-- **************** -->
-      <!-- ** activities ** -->
-      <!-- **************** -->
+      <!-- *************************** -->
+      <!-- ** activities collection ** -->
+      <!-- *************************** -->
       <collection name="activities" method="POST">
-        <!-- controller for activity creation -->
+        <import module="alerts"/>
         <action name="POST">
           <model src="modules/activities/create.xql"/>
         </action>
+        <!-- ************** -->
+        <!-- ** activity ** -->
+        <!-- ************** -->
         <item epilogue="workflow" supported="delete status">
-          <!-- Workflow view -->
+          <import module="alerts"/>
+          <!-- workflow view -->
           <model src="modules/activities/workflow.xql"/>
           <view src="modules/workflow/workflow.xsl"/>
-          <!-- Delete (POST) -->
+          <!-- delete activity (POST) -->
           <action name="delete">
             <model src="modules/activities/delete.xql"/>
           </action>
-          <!-- Change status action (POST) -->
+          <!-- change status action (POST) -->
           <action name="status">
             <model src="modules/activities/status.xql"/>
           </action>
@@ -112,15 +120,15 @@
           <item name="funding-decision" method="POST">
             <import module="sample" param="root=FundingDecision"/>
           </item>
-          <!-- FundingDecision document (demo) -->
+          <!-- FinalReport document (demo) -->
           <item name="final-report" method="POST">
             <import module="sample" param="root=FinalReport"/>
           </item>
-          <!-- FundingDecision document (demo) -->
+          <!-- ReportApproval document (demo) -->
           <item name="report-approval" method="POST">
             <import module="sample" param="root=ReportApproval"/>
           </item>          
-          <!-- FundingDecision document (demo) -->
+          <!-- Evaluation (feedbacks) document (demo) -->
           <item name="evaluation" method="POST">
             <import module="sample" param="root=Evaluation"/>
           </item>
@@ -236,6 +244,9 @@
       <item name="enterprises" epilogue="enterprise-search.xhtml">
         <model src="modules/enterprises/form.xql"/>
       </item>
+    </item>
+    <item name="mail" epilogue="mail.xhtml">
+      <model src="modules/workflow/form.xql"/>
     </item>
     <item name="case" epilogue="case.xhtml">
       <model src="modules/cases/form.xql"/>

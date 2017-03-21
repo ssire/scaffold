@@ -19,7 +19,7 @@ module namespace media = "http://oppidoc.com/ns/cctracker/media";
 
 import module namespace mail = "http://exist-db.org/xquery/mail";
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../lib/globals.xqm";
-import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.xqm";
+import module namespace user = "http://oppidoc.com/ns/user" at "user.xqm";
 
 (: ======================================================================
    Utility to return current user E-mail address or the empty sequence

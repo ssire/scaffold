@@ -49,11 +49,10 @@ declare function display:gen-display-date( $date as xs:string?, $lang as xs:stri
 
 (: ======================================================================
    Converts a reference to an option in a list into the option label
-   NOTE: local namespace because it seems that if exported in display namespace
-         the function is shadowed by its synonym below with element()* signature
+   Version with encoded value passed as string reference
    ======================================================================
 :)
-declare function local:gen-name-for ( $name as xs:string, $ref as xs:string?, $lang as xs:string ) as xs:string+ {
+declare function display:gen-name-for-sref ( $name as xs:string, $ref as xs:string?, $lang as xs:string ) as xs:string+ {
   if ($ref) then
     let $defs := fn:collection($globals:global-info-uri)//Description[@Lang = $lang]//Selector[@Name eq $name]
     let $label := if (starts-with($defs/@Label, 'V+')) then substring-after($defs/@Label, 'V+') else string($defs/@Label)
@@ -75,7 +74,7 @@ declare function local:gen-name-for ( $name as xs:string, $ref as xs:string?, $l
 declare function local:gen-list-for ( $name as xs:string, $items as element()*, $lang as xs:string ) as xs:string {
   string-join(
     for $r in $items
-    return local:gen-name-for($name, $r/text(), $lang),
+    return display:gen-name-for-sref($name, $r/text(), $lang),
     ', '
     )
 };
@@ -89,7 +88,7 @@ declare function display:gen-name-for ( $name as xs:string, $refs as element()*,
   if (count($refs) > 1) then
     local:gen-list-for($name, $refs, $lang)
   else
-    local:gen-name-for($name, $refs/text(), $lang)
+    display:gen-name-for-sref($name, $refs/text(), $lang)
 };
 
 (: ======================================================================

@@ -22,15 +22,13 @@ import module namespace globals = "http://oppidoc.com/oppidum/globals" at "../..
 :)
 declare function activity:gen-activity-for-viewing( $case as element(), $activity as element(), $lang as xs:string ) {
   <Activity>
-    {(
-    $activity/No,
-    <ResponsibleCoach>{display:gen-person-name($activity/Assignment/ResponsibleCoachRef/text(), $lang)}</ResponsibleCoach>,
-    <CreationDate>{display:gen-display-date($activity/CreationDate/text(), $lang)}</CreationDate>,
-    <Phase>{display:gen-name-for('Phases', $case/Information/Call/PhaseRef, $lang)}</Phase>,
-    <Hours>{ $activity/FundingRequest/Budget/Tasks/TotalNbOfHours/text() }</Hours>,
-    <ServiceName>{ display:gen-name-for('Services', $activity/Assignment/ServiceRef, $lang) }</ServiceName>,
-    <Status>display:gen-workflow-status-name</Status>
-    )} (: TODO: display:gen-workflow-status-name('Activity', $activity/StatusHistory/CurrentStatusRef/text(), $lang):)
+    { $activity/No }
+    <ResponsibleCoach>{ display:gen-person-name($activity/Assignment/ResponsibleCoachRef/text(), $lang) }</ResponsibleCoach>
+    <CreationDate>{ display:gen-display-date($activity/CreationDate/text(), $lang) }</CreationDate>
+    <Phase>{ display:gen-name-for('Phases', $case/Information/Call/PhaseRef, $lang) }</Phase>
+    <Hours>{ $activity/FundingRequest/Budget/Tasks/TotalNbOfHours/text() }</Hours>
+    <ServiceName>{ display:gen-name-for('Services', $activity/Assignment/ServiceRef, $lang) }</ServiceName>
+    <Status>{ display:gen-name-for('ActivityWorkflowStatus', $activity/StatusHistory/CurrentStatusRef, 'en') }</Status>
   </Activity>
 };
 

@@ -36,6 +36,7 @@ import module namespace media = "http://oppidoc.com/ns/cctracker/media" at "medi
 import module namespace services = "http://oppidoc.com/ns/services" at "services.xqm";
 import module namespace alert = "http://oppidoc.com/ns/cctracker/alert" at "../modules/workflow/alert.xqm";
 import module namespace workflow = "http://platinn.ch/coaching/workflow" at "../modules/workflow/workflow.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../app/custom.xqm";
 
 (: ======================================================================
    Generic function to generate e-mail template variables for a given 

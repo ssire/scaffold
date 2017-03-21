@@ -42,7 +42,6 @@
   <XAL>
     <XALAction Type="replace">
       <Information LastModification="{ $date }">
-        <Title>{ $case/Information/Title/text() }</Title>
         <ClientEnterprise>
           { $form/ClientEnterprise/EnterpriseRef }
         </ClientEnterprise>
@@ -73,7 +72,7 @@
   <Template Name="case" Mode="read">
 <![CDATA[
   <Case>
-    <Title>{ $case/Information/Title/text() }</Title>
+    <Title>{ custom:gen-case-title($case, $lang) }</Title>
     <AccountManagerRef _Unref="display:gen-person-name">{ $case/Management/AccountManagerRef/text() }</AccountManagerRef>
     <No>{ $case/No/text() }</No>
     <CreationDate>{ $case/CreationDate/text() }</CreationDate>

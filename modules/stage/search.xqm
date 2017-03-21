@@ -18,6 +18,7 @@ import module namespace user = "http://oppidoc.com/ns/user" at "../../lib/user.x
 import module namespace access = "http://oppidoc.com/oppidum/access" at "../../lib/access.xqm";
 import module namespace display = "http://oppidoc.com/oppidum/display" at "../../lib/display.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "../../lib/util.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 
 (: ======================================================================
    Returns the saved search request in the user's profile if it exists
@@ -57,7 +58,7 @@ declare function local:gen-case-sample ( $c as element(), $lang as xs:string ) a
     </Enterprise>,
     $e/Address/Country,
     $c/No,
-    $c/Information/Title,
+    <Title>{ custom:gen-short-case-title($c, $lang) }</Title>,
     misc:gen_display_name($c/Information/Call/PhaseRef , 'Phase'),
     <Date>{ display:gen-display-date($c/Information/Call/Date, $lang) }</Date>,
     <Grant>{ display:gen-display-date($c/Information/Contract/Date, $lang) }</Grant>,

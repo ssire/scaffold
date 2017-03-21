@@ -35,11 +35,11 @@
   <Formular>
     <Name>Coach assignment</Name>
     <Form>forms/coaching-assignment</Form>
-  </Formular>  
+  </Formular>
   <Formular>
     <Name>Sample</Name>
     <Form>forms/sample</Form>
-  </Formular>  
+  </Formular>
   <!-- Management -->
   <Formular>
     <Name>User profile</Name>
@@ -48,5 +48,10 @@
   <Formular>
     <Name>User account</Name>
     <Form>forms/account</Form>
+  </Formular>
+  <!-- Documents -->
+  <Formular>
+    <Name>Mail composition</Name>
+    <Form>forms/mail</Form>
   </Formular>
 </Formulars>

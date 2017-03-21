@@ -6,6 +6,7 @@ import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../op
 import module namespace globals = "http://oppidoc.com/oppidum/globals" at "globals.xqm";
 import module namespace misc = "http://oppidoc.com/ns/cctracker/misc" at "util.xqm";
 import module namespace user = "http://oppidoc.com/ns/user" at "user.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../app/custom.xqm";
 
 declare function template:get-document( $name as xs:string, $case as element(), $lang as xs:string ) as element() {
   template:get-document($name, $case, (), $lang)

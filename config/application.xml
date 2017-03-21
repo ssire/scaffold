@@ -87,10 +87,10 @@
       </Documents>
       <Transitions>
         <!-- ============== Coach assignment ============== -->
-        <Transition From="1" To="2" Id="go-coaching-plan" Template="coach-assignment-coach-notification" GenericError="INCOMPLETE-DOCUMENT">
+        <Transition From="1" To="2" Id="go-coaching-plan" Template="coach-assignment-notification" GenericError="INCOMPLETE-DOCUMENT">
           <Meet>r:kam</Meet>
           <Recipients>r:coach</Recipients>
-          <Email Template="coach-assignment-easme-notification"/>
+          <Email Template="coach-assignment-supervision"/>
           <Assert Base="$activity/Assignment" Error="MISSING-COACH-OR-SERVICE">
             <true>$base/ServiceRef[. ne '']</true>
             <!-- <true>$base/ResponsibleCoachRef[. ne '']</true> -->

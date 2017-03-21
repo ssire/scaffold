@@ -89,7 +89,7 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
       <files pattern="config/messages.xml"/>
       <files pattern="config/dictionary.xml"/>
       <files pattern="config/variables.xml"/>
-      <!--<files pattern="config/settings.xml"/>-->
+      <files pattern="config/settings.xml"/>
       <!--<files pattern="config/services.xml"/>-->
       <!--<files pattern="modules/alerts/checks.xml"/>-->
     </collection>

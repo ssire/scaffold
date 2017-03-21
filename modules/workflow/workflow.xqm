@@ -27,6 +27,7 @@ import module namespace ajax = "http://oppidoc.com/oppidum/ajax" at "../../lib/a
 import module namespace media = "http://oppidoc.com/ns/cctracker/media" at "../../lib/media.xqm";
 import module namespace activity = "http://platinn.ch/coaching/activity" at "../activities/activity.xqm";
 import module namespace alert = "http://oppidoc.com/ns/cctracker/alert" at "alert.xqm";
+import module namespace custom = "http://oppidoc.com/ns/application/custom" at "../../app/custom.xqm";
 
 (: ======================================================================
    Returns a list of person identifiers or the empty sequence
@@ -150,7 +151,7 @@ declare function workflow:gen-alert-for-viewing ( $workflow as xs:string, $lang 
       }
     </Date>,
     <ActivityStatus>
-      { "display:gen-workflow-status-name" (:TODO: display:gen-workflow-status-name($workflow, $item/ActivityStatusRef,$lang):) }
+      { display:gen-name-for('ActivityWorkflowStatus', $item/ActivityStatusRef, $lang) }
     </ActivityStatus>,
     $item/Subject,
     if ($item/SenderRef) then
@@ -789,14 +790,11 @@ declare function workflow:gen-source ( $mode as xs:string, $case as element() ) 
 };
 
 (: ======================================================================
-   Utiliy to generate the Case and Workflow activity main title
+   Utiliy to generate the Case and Activity Workflow main title
    ======================================================================
 :)
-declare function workflow:gen-title ( $case as element() ) as xs:string {
-  if (string-length($case/Information/Title/text()) > 80) then
-    replace(substring($case/Information/Title/text(), 1, 80), "\w+...$", '...')
-  else
-    $case/Information/Title/text()
+declare function workflow:gen-title ( $case as element(), $lang as xs:string ) as xs:string {
+  custom:gen-case-title($case, $lang)
 };
 
 declare function workflow:gen-new-activity-tab ( $case as element(), $activity as element()?, $prefixUrl as xs:string ) as element() {
@@ -852,7 +850,7 @@ declare function workflow:gen-activities-tab ( $case as element(), $activity as 
           $activities
         (:if (access:check-user-can('create', 'Assignment', $case)) then
                           <Add TargetModal="activity">
-                            <Template>../templates/coaching-assignment?goal=create&amp;n={$case-no}</Template>
+ <Template>../templates/coaching-assignment?goal=create&amp;n={$case-no}</Template>
                             <Controller>{$case-no}/assignment</Controller>
                             <Legend>Click on the button above to add a new Coaching activity and to assign a responsible Coach. Once you validate it the responsible Coach will receive an email asking him/her to prepare a coaching plan. <b>Before creating a Coaching activity you SHOULD complete the needs analysis document in the Case tab</b>, in particular to select the Business innovation challenges that will be used to configure the coaching activity.</Legend>                    
                           </Add>

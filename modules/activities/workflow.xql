@@ -1,12 +1,14 @@
 xquery version "1.0";
 (: --------------------------------------
-   CCTracker Oppidoc Application
+   Oppidoc Business Application Development Framework
 
-   Creation: Stéphane Sire <s.sire@oppidoc.fr>
+   Authors: Stéphane Sire <s.sire@oppidoc.fr>
 
-   Activity workflow controller that manages the display of an activity state and documents.
-   Generates a display model to be transformed into the HTML UI by workflow.xsl implementing
-   the Workflow, Tab, Drawer and Documents (i.e. accordion) widgets.
+   Activity workflow controller
+
+   Manages the display of an activity state and documents.
+   Generates a page model to be transformed into the HTML UI by workflow.xsl
+   using Workflow, Tab, Drawer and Documents (i.e. accordion) vocabulary.
 
    NOTE:
    - localized workflow state name are part of the model (Dictionary) element and injected in workflow.xsl
@@ -42,38 +44,50 @@ return
         <Title LinkToCase="{ $case/No }">
           {
           workflow:gen-source($cmd/@mode, $case),
-          workflow:gen-title($case)
+          workflow:gen-title($case, $lang)
           }
         </Title>
       </Cartouche>
       { workflow:gen-workflow-steps('Activity', $activity, $lang) }
       <Tabs>
+        <!-- ************* -->
+        <!-- Documents tab -->
+        <!-- ************* -->
         <Tab Id="case" Link="../../{$case/No}">
           <Name loc="workflow.tab.case.info">Case</Name>
           <Legend>Click on Case title at the top to return Case workflow view</Legend>
         </Tab>
+        <!-- ***************** -->
+        <!-- Case messages tab -->
+        <!-- ***************** -->
         <Tab Id="case-alerts" Counter="Alert" ExtraFeed="case-init">
           <Name loc="workflow.tab.case.messages">Case messages</Name>
           <Heading class="case">
             <Title loc="workflow.title.case.messages">Messages</Title>
-          </Heading>            
+          </Heading>
           { workflow:gen-alerts-list('Case', 'c-case-alerts-list', $case, '../../', $lang) }
         </Tab>
         { workflow:gen-activities-tab($case, $activity, $lang) }
         { workflow:gen-new-activity-tab($case, $activity, '../../') }
+        <!-- ************* -->
+        <!-- Documents tab -->
+        <!-- ************* -->
         <Tab Id="activity" class=" active">
           <Name loc="workflow.tab.activity.info">Activity information</Name>
           { 
           workflow:gen-information('Activity', $case, $activity, $lang) 
           }
         </Tab>
+        <!-- ********************* -->
+        <!-- Activity messages tab -->
+        <!-- ********************* -->
         <Tab Id="activity-alerts" Counter="Alert" ExtraFeed="funding-request">
           <Name loc="workflow.tab.activity.messages">Coaching activity messages</Name>
           <Drawer Command="edit" loc="action.add.message" PrependerId="c-activity-alerts-list">
             <Title loc="workflow.title.activity.messages">Messages</Title>
             <Initialize>alerts?goal=init</Initialize>
             <Controller>alerts</Controller>
-            <Template>../../../templates/notification?goal=create</Template>
+            <Template>../../../templates/mail?goal=create</Template>
           </Drawer>
           { workflow:gen-alerts-list('Activity', 'c-activity-alerts-list', $activity, '', $lang) }
         </Tab>
@@ -92,7 +106,7 @@ return
           <Legend class="text-info">The status has been changed with success. You now have the possibility to send a notification message by e-mail to some stakeholders in relation with the new status. You may also choose not to send it.</Legend>
           <Initialize>alerts?goal=init&amp;from=status</Initialize>
           <Controller>alerts?next=redirect</Controller>
-          <Template>../../../templates/notification?goal=create&amp;auto=1</Template>
+          <Template>../../../templates/mail?goal=create&amp;auto=1</Template>
           <Commands>
             <Save data-replace-type="event"><Label loc="action.send">Send</Label></Save>
             <Cancel><Label loc="action.dontSend">Continue w/o sending</Label></Cancel>
