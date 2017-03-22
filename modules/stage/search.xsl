@@ -135,7 +135,7 @@
   <xsl:template match="Case">
     <tr bgcolor="lightblue">
       <td>
-        <a data-toggle="modal" href="cases/{No}/enterprise" data-target="#enterprise-modal"><xsl:value-of select="Enterprise/Name"/></a>
+        <a data-toggle="modal" href="enterprises/{Enterprise/Id}.modal" data-target="#enterprise-modal"><xsl:value-of select="Enterprise/Name"/></a>
       </td>
       <td><xsl:value-of select="Country"/></td>
       <td><xsl:apply-templates select="." mode="link"/></td>
