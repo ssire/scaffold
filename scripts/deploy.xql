@@ -113,6 +113,15 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
       <files pattern="data/global-information/templates.xml"/>
     </collection>
   </group>
+  <group name="stats">
+    <collection name="/db/www/scaffold/config">
+      <files pattern="modules/stats/stats.xml"/>
+    </collection>
+    <collection name="/db/www/scaffold/formulars">
+      <files pattern="formulars/stats.xml"/>
+      <files pattern="formulars/stats-cases.xml"/>
+    </collection>
+  </group>
 </code>;
 
 (: ======================================================================

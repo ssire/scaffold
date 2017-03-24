@@ -55,7 +55,7 @@ declare function access:check-omniscient-user( $profile as element()? ) as xs:bo
 (: ======================================================================
    Implements Allow access control rules
    Currently limited to comma separated list of g:token
-   TODO: implement s:omni for omniscient users
+   TODO: implement u:* and s:omni
    ======================================================================
 :)
 declare function access:check-rule( $rule as xs:string? ) as xs:boolean {

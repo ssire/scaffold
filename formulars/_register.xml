@@ -54,4 +54,9 @@
     <Name>Mail composition</Name>
     <Form>forms/mail</Form>
   </Formular>
+  <!-- Statistics -->
+  <Formular>
+    <Name>Cases statistics</Name>
+    <Form>forms/stats-cases</Form>
+  </Formular>
 </Formulars>

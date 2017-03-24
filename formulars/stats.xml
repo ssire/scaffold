@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Oppidoc Business Application Development Framework
+
+     Author: Stéphane Sire <s.sire@opppidoc.fr>
+
+     Library of component for Statistics Search Masks
+
+     February 2015 - (c) Copyright 2015 Oppidoc SARL. All Rights Reserved.
+  -->
+
+<Form Tag="CasesFilter" StartLevel="2" Wrapper="none"
+      xmlns:xt="http://ns.inria.org/xtiger" xmlns:site="http://oppidoc.com/oppidum/site">
+
+  <Component Name="case">
+      <Group Background="#99C2EB">
+        <Title>Case</Title>
+        <Criteria Key="case-status" Tag="CaseStatus" ValueTag="CaseStatusRef" status="Case">Case status</Criteria>
+        <Criteria Key="case-initiation-period" Mask="Period-Date" loc="stats.criteria.period" render="local:serialize-period($filter/CaseStartDate, $filter/CaseEndDate)">initiated...</Criteria>
+      </Group>
+  </Component>
+  
+  <Component Name="sme">
+    <Group Background="#C2FFFF">
+      <Title>SME</Title>
+      <Criteria Key="countries" Tag="Countries" ValueTag="Country" selector="Countries">Country</Criteria>
+      <Criteria Key="domains-of-activities" Tag="DomainsOfActivities" ValueTag="DomainActivityRef"
+        selector="DomainActivities">Nace</Criteria>
+      <Criteria Key="targeted-markets" Tag="TargetedMarkets" ValueTag="TargetedMarketRef" selector="TargetedMarkets" loc="stats.criteria.targetedMarkets">Markets</Criteria>
+      <Criteria Key="sizes" Tag="Sizes" ValueTag="SizeRef" selector="Sizes" loc="stats.criteria.size">Size</Criteria>
+      <Criteria Key="sme-creation-year" Mask="Period-Year" render="local:serialize-period($filter/CreationStartYear, $filter/CreationEndYear)">Year of creation</Criteria>
+    </Group>
+  </Component>
+  
+  <Component Name="needs">
+    <Group Background="#C2FFFF">
+      <Title>Life cycle context</Title>
+      <Criteria Key="ctx-initial" Tag="InitialContexts" ValueTag="InitialContextRef"
+        selector="TargetedContexts" loc="stats.criteria.initialContext">Current</Criteria>
+      <Criteria Key="ctx-target" Tag="TargetedContexts" ValueTag="TargetedContextRef"
+        selector="TargetedContexts" loc="stats.criteria.targetedContext">Planned</Criteria>
+    </Group>
+    <Group Background="#83D6C3">
+      <Title>Business innovation needs</Title>
+      <Criteria Key="vectors" Tag="Vectors" ValueTag="VectorRef"
+        render="display:gen-case-impact-name('Vectors', $filter/Vectors/VectorRef, 'en', $local:separator)"
+        loc="stats.criteria.innovationVectors">Vectors</Criteria>
+      <Criteria Key="ideas" Tag="Ideas" ValueTag="IdeaRef" 
+        render="display:gen-case-impact-name('Ideas', $filter/Ideas/IdeaRef, 'en', $local:separator)"
+        loc="stats.criteria.ideaSources">Ideas</Criteria>
+      <Criteria Key="resources" Tag="Resources" ValueTag="ResourceRef" 
+        render="display:gen-case-impact-name('Resources', $filter/Resources/ResourceRef, 'en', $local:separator)"
+        loc="stats.criteria.resources">Resources</Criteria>
+      <Criteria Key="partners" Tag="Partners" ValueTag="PartnerRef"
+        render="display:gen-case-impact-name('Partners', $filter/Partners/PartnerRef, 'en', $local:separator)" loc="stats.criteria.partners">Partenships</Criteria>
+    </Group>
+  </Component>
+
+  <Plugins>
+    <Period Prefix="Case" Keys="case-initiation-period" From="between" To="and"/>
+    <Period Prefix="Creation" Keys="sme-creation-year" Span="Year"/>
+  </Plugins>
+</Form>

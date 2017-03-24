@@ -1,0 +1,11 @@
+<Form Tag="CasesFilter" StartLevel="2" Wrapper="none"
+      xmlns:xt="http://ns.inria.org/xtiger" xmlns:site="http://oppidoc.com/oppidum/site">
+  <Title Render="h2" style="text-align:center">Case related selection criteria</Title>
+  <Row>
+    <SearchMask ThirdColumnWidth="50%">
+      <Include src="stats.xml" Name="case"/>
+      <Include src="stats.xml" Name="sme"/>
+      <Include src="stats.xml" Name="needs"/>
+    </SearchMask>
+  </Row>
+</Form>

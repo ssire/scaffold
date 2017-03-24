@@ -1,0 +1,132 @@
+<Statistics>
+  <Filters>
+    <Filter Page="cases">
+      <Formular>
+        <Template>../templates/stats-cases</Template>
+        <Command Allow="g:admin-system g:developer g:account-manager" Name="submit" Action="export?t=all" Form="e2" W="2" Offset="8">Exportation</Command>
+        <Command Allow="g:admin-system g:developer g:account-manager" Name="stats" Action="filter" W="2">Statistics</Command>
+      </Formular>
+      <Charts>
+        <Chart>
+          <Set>Cases</Set>
+          <Title>Current case status</Title>
+          <Variable WorkflowStatus="Case">CS</Variable>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>75</Angle>
+            <Bottom>120</Bottom>
+            <Left>20</Left>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Country</Title>
+          <Variable Selector="Countries">Co</Variable>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>75</Angle>
+            <Bottom>80</Bottom>
+            <Left>20</Left>
+            <Size>4</Size>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Nace</Title>
+          <Variable Selector="DomainActivities">Nc</Variable>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>75</Angle>
+            <Bottom>240</Bottom>
+            <Left>20</Left>
+          </Layout>
+          <Title>Markets</Title>
+          <Set>Cases</Set>
+          <Vector Selector="TargetedMarkets">TM</Vector>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>25</Angle>
+            <Bottom>80</Bottom>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Size</Title>
+          <Variable Selector="Sizes">Sz</Variable>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>75</Angle>
+            <Bottom>50</Bottom>
+            <Left>20</Left>
+            <Update>destructive</Update>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Year of creation</Title>
+          <Variable Domain="year">Yr</Variable>
+        </Chart>
+        <Chart>
+          <Set>Cases</Set>
+          <Title>Current life cycle stage</Title>
+          <Variable Selector="InitialContexts">IC</Variable>
+        </Chart>
+        <Chart>
+          <Set>Cases</Set>
+          <Title>Planned life cycle stage</Title>
+          <Variable Selector="TargetedContexts">TC</Variable>
+        </Chart>
+        <Chart>
+          <Set>Cases</Set>
+          <Title>Needs vectors</Title>
+          <Vector Domain="CaseImpact" Section="1">Vct</Vector>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>45</Angle>
+            <Bottom>120</Bottom>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Needs sources of ideas</Title>
+          <Vector Domain="CaseImpact" Section="2">Ids</Vector>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>45</Angle>
+            <Bottom>120</Bottom>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Resources</Title>
+          <Vector Domain="CaseImpact" Section="3">Rsc</Vector>
+        </Chart>
+        <Chart>
+          <Layout>
+            <Angle>45</Angle>
+            <Bottom>130</Bottom>
+          </Layout>
+          <Set>Cases</Set>
+          <Title>Partnerships</Title>
+          <Vector Domain="CaseImpact" Section="4">Ptn</Vector>
+        </Chart>
+      </Charts>
+    </Filter>
+  </Filters>
+  <Tables>
+    <Table Type="all" Page="cases">
+      <Headers Lang="en">
+        <Header BG="none">Case ID</Header>
+        <Header BG="case">Case status</Header>
+        <Header BG="none">KAM</Header>
+        <Header BG="enterprise">Company</Header>
+        <Header BG="enterprise">Country</Header>
+        <Header BG="enterprise">Nace</Header>
+        <Header BG="enterprise">Markets</Header>
+        <Header BG="enterprise">Size</Header>
+        <Header BG="enterprise">Year of creation</Header>
+        <Header BG="enterprise">Current life cycle stage</Header>
+        <Header BG="enterprise">Planned life cycle stage</Header>
+        <Header BG="needs">Needs vectors</Header>
+        <Header BG="needs">Needs sources of ideas</Header>
+        <Header BG="needs">Resources</Header>
+        <Header BG="needs">Partnerships</Header>
+      </Headers>
+    </Table>
+  </Tables>
+</Statistics>

@@ -97,4 +97,18 @@
   <profile name="test">
     <script src="lib/test.js"/>
   </profile>
+  <!-- statistics  -->
+  <profile name="stats">
+    <link href="css/forms.css"/>
+    <link href="css/stats.css"/>
+    <script src="lib/extensions.js"/>
+    <script src="contribs/d3/d3.min.js"/>
+    <script src="contribs/excellentexport/excellentexport.min.js"/>
+    <script src="lib/stats.js"/>
+  </profile>
+  <!-- C3 stats -->
+  <profile name="c3">
+    <link href="distrib/c3/c3.min.css"/>
+    <script src="distrib/c3/c3.min.js"/>
+  </profile>
 </skin>

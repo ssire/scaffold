@@ -1,5 +1,5 @@
 <Form xmlns:site="http://oppidoc.com/oppidum/site"
-  Tag="Enterprise" Layout="fluid" Width="540px" Orientation="horizontal">
+  Tag="Enterprise" Layout="fluid" Width="750px" Orientation="horizontal">
   <Row>
     <site:conditional meet="create" force="true">
       <div class="text-info well" style="display:relative" xmlns="http://www.w3.org/1999/xhtml">
@@ -9,14 +9,13 @@
     </site:conditional>
     <Cell Gap="1.5">
       <Title loc="term.enterprise">Company</Title>
-      <Field Key="enterprise" Tag="Name" Gap="1.25">Name</Field>
-      <Field Key="abbrev" Tag="ShortName" Gap="1.25">Short name</Field>
+      <Field Key="enterprise" Tag="Name" Gap="2">Name</Field>
+      <Field Key="abbrev" Tag="ShortName" Gap="2">Short name</Field>
       <Field Key="creation" Tag="CreationYear" Gap="2">Year of establishment</Field>
       <Field Key="size" Tag="SizeRef" Gap="2">Company size</Field>
-      <Field Key="domain-activity" Tag="DomainActivityRef" Gap="1">NACE</Field>
-      <Field Key="website" Tag="WebSite" Gap="1">Website</Field>
-      <Field Key="activities" Tag="MainActivities" Gap="1">Main activities</Field>
-      <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="1">Markets</Field>
+      <Field Key="domain-activity" Tag="DomainActivityRef" Gap="2">NACE</Field>
+      <Field Key="activities" Tag="MainActivities" Gap="2">Main activities</Field>
+      <Field Key="targeted-markets" Tag="TargetedMarkets" Gap="2">Markets</Field>
     </Cell>
   </Row>
   <Separator/>

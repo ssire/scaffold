@@ -47,6 +47,8 @@
   <xsl:param name="xslt.app-name">scaffold</xsl:param>
   <xsl:param name="xslt.base-formulars">webapp/projects/scaffold/formulars/</xsl:param> <!-- for Include -->
 
+  <xsl:include href="search-mask.xsl"/>
+
   <xsl:template match="/Form">
     <!-- <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html>
     </xsl:text> -->

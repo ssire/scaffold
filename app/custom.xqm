@@ -183,6 +183,40 @@ declare function custom:gen-town-selector ( $lang as xs:string, $params as xs:st
 };
 
 (: ======================================================================
+   Generates selector for creation years 
+   ======================================================================
+:)
+declare function custom:gen-creation-year-selector ( ) as element() {
+  let $years := 
+    for $y in distinct-values(fn:doc($globals:enterprises-uri)//CreationYear)
+    where matches($y, "^\d{4}$")
+    order by $y descending
+    return $y
+  return
+    <xt:use types="choice" values="{ string-join($years, ' ') }" param="select2_dropdownAutoWidth=on;select2_width=off;class=year a-control;filter=optional select2;multiple=no"/>
+};
+
+(: ======================================================================
+   Generates XTiger XML 'choice' element for selecting a  Case Impact (Vecteur d'innovation)
+   TODO: 
+   - caching
+   - use Selector / Group generic structure with a gen-selector-for( $name, $group, $lang, $params) generic function
+   ======================================================================
+:)
+declare function custom:gen-challenges-selector-for  ( $root as xs:string, $lang as xs:string, $params as xs:string ) as element() {
+  let $pairs :=
+        for $p in fn:collection($globals:global-info-uri)//Description[@Lang = $lang]/CaseImpact/Sections/Section[SectionRoot eq $root]/SubSections/SubSection
+        let $n := $p/SubSectionName
+        return
+           <Name id="{$p/Id/text()}">{(replace($n,' ','\\ '))}</Name>
+  return
+   let $ids := string-join(for $n in $pairs return string($n/@id), ' ') (: FLWOR to defeat document ordering :)
+   let $names := string-join(for $n in $pairs return $n/text(), ' ') (: idem :)
+   return
+     <xt:use types="choice" values="{$ids}" i18n="{$names}" param="{form:setup-select2($params)}"/>
+};
+
+(: ======================================================================
    Tests current user is compatible with semantic role and given resource
    Implement this function if your application defines semantic roles
    ======================================================================

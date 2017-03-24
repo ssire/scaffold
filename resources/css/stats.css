@@ -1,0 +1,98 @@
+#export {
+  margin: 10px;
+}
+
+table#filters, table#results {
+  border-collapse : collapse;
+}
+
+table.stats {
+  border-collapse : collapse;
+  margin-top: 20px;
+}
+
+table#results th, table.stats th {
+  border: solid 1px #999;
+  background: steelblue;
+  color: white;
+  padding: 10px;
+}
+
+table#results td:first-child, table.stats td:first-child {
+  text-align: left;
+  padding-left: 8px;
+}
+
+table#filters td, table#results td, table.stats td {
+  border: solid 1px grey;
+  padding: 4px 6px;
+  text-align: right;
+  padding: 4px 15px 4px 20px;
+}
+
+th.date {
+  min-width: 6em;
+}
+
+tr.total {
+  border-bottom-style: double;
+  font-weight: bold;
+}
+
+td.total {
+  text-align: right !important;
+  font-weight: bold;
+}
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.axis text {
+  font: 10px sans-serif;
+  fill: black;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+div.export {
+  margin-bottom: 30px;
+}
+
+#results {
+  min-width: 727px;
+}
+
+#results a, a.export {
+  text-decoration: none;
+}
+
+#results tr {
+  text-align:right; 
+  vertical-align:top;
+}
+
+#with-sample {
+  display: none;
+}
+
+@media print {
+  table#results th {
+    background: white;
+    color: black;
+  }
+  #results-export {
+    display: none;
+  }
+}

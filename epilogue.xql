@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote application
+   Oppidoc Business Application Development Framework
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 
@@ -132,7 +132,7 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
   let $rsc := string(oppidum:get-resource($cmd)/@name)
   let $name := if (starts-with($cmd/@trail, 'cases')) then
                  (: filters out everything not cases/create as 'stage' :)
-                 if ($cmd/@action = 'create') then $rsc else 'stage'
+                 if ($cmd/@action = 'create') then 'create' else 'stage'
                else
                  $rsc
    let $user := oppidum:get-current-user()
@@ -148,10 +148,22 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
           <li><a href="{$base}enterprises" loc="app.nav.enterprises">Entreprises</a></li>
         </ul>
       </li>
+      {
+      if ($groups = ('admin-system', 'developer', 'account-manager')) then
+        <li>
+          {local:gen-nav-class($name, ('cases'), 'dropdown')}
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" loc="app.nav.stats">Stats</a>
+          <ul class="dropdown-menu">
+            <li><a href="{$base}stats/cases" loc="app.nav.cases">Cases</a></li>
+          </ul>
+        </li>
+      else
+        ()
+      }
       <li>{local:gen-nav-class($name, 'about', ())}<a href="{$base}about" loc="app.nav.guidelines">About</a></li>
       {
       if (access:check-user-can('create', 'Case')) then
-        <li>{local:gen-nav-class($name, 'cases', ())}<a href="{$base}cases/create" loc="app.nav.case">Case creation</a></li>
+        <li>{local:gen-nav-class($name, 'create', ())}<a href="{$base}cases/create" loc="app.nav.case">Case creation</a></li>
       else
         (),
       if (($user = 'admin') or ($groups = ('developer'))) then (
@@ -178,7 +190,7 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
         ()
       }
       {
-      if (($user = 'admin') or ($groups = ('admin-system'))) then (
+      if (($user = 'admin') or $groups = ('admin-system', 'developer', 'account-manager')) then (
         <li id="c-flush-right">{local:gen-nav-class($name, 'management', ())}<a href="{$base}management" loc="app.nav.admin">Admin</a></li>
         )
       else

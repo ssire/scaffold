@@ -269,6 +269,9 @@
     <item name="account" epilogue="account.xhtml">
       <model src="modules/management/form.xql"/>
     </item>
+    <item name="stats-cases" epilogue="stats-cases.xhtml">
+      <model src="modules/stats/form.xql"/>
+    </item>
     <item name="demo" epilogue="demo.xhtml">
       <model src="modules/demo/form.xql"/>
     </item>
@@ -422,6 +425,24 @@
     <item resource="file:///formulars/$2.xml"/>
     <action name="install" resource="">
       <model src="modules/formulars/install.xql"/>
+    </action>
+  </item>
+  <!-- *********** -->
+  <!-- ** stats ** -->
+  <!-- *********** -->  
+  <item name="stats" supported="filter export">
+    <access>
+      <rule action="GET POST filter export" role="g:users" message="registered user"/>
+    </access>
+    <item name="cases" epilogue="home">
+      <model src="modules/stats/stats.xql"/>
+      <view src="modules/stats/stats.xsl"/>
+    </item>
+    <action name="filter">
+      <model src="modules/stats/filter.xql"/>
+    </action>
+    <action name="export">
+      <model src="modules/stats/export.xql"/>
     </action>
   </item>
   <!-- *********************** -->
