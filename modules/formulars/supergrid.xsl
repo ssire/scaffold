@@ -1241,7 +1241,15 @@
     <xsl:attribute name="data-target"><xsl:value-of select="@TargetEditor"/></xsl:attribute>
     <xsl:attribute name="data-target-modal"><xsl:value-of select="@TargetEditor"/>-modal</xsl:attribute>
     <xsl:apply-templates select="@Resource | @Controller | @Template | @TitleKey | @TargetTitle" mode="add"/>
-    <xsl:attribute name="data-command">add</xsl:attribute>
+  </xsl:template>
+
+  <xsl:template match="Show">
+    <xsl:param name="key"></xsl:param>
+    <xsl:apply-templates select="@Id"/>
+    <xsl:attribute name="data-command">show</xsl:attribute>
+    <xsl:attribute name="data-target-modal"><xsl:value-of select="@TargetModal"/>-modal</xsl:attribute>
+    <xsl:apply-templates select="@Controller | @TitleKey | @TargetTitle" mode="add"/>
+    <xsl:attribute name="data-value-source"><xsl:value-of select="@DataSource"/></xsl:attribute>
   </xsl:template>
 
   <xsl:template match="@Resource" mode="add">
@@ -1332,6 +1340,23 @@
             </xsl:choose>
             Enregistrer</button>
           <button class="btn" data-command="trigger" data-target="{@Id}" data-trigger-event="axel-cancel-edit" loc="action.cancel">Annuler</button>
+        </div>
+      </div>
+    </xt:component>
+  </xsl:template>
+
+  <!-- Calculer margin-left ! -->
+  <xsl:template match="Modal[@Appearance = 'plain']" mode="component">
+    <xsl:variable name="margin"><xsl:value-of select="number(substring-before(@Width,'px')) div 2"/></xsl:variable>
+    <xsl:comment>Modal dialog window</xsl:comment>
+    <xt:component name="t_{@Id}">
+      <div id="{@Id}-modal" aria-hidden="true" role="dialog" tabindex="-1" class="modal hide fade" style="width:{@Width};margin-left:-{$margin}px"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h3><xsl:apply-templates select="Title" mode="modal"/></h3>
+        </div>
+        <div class="modal-body">
         </div>
       </div>
     </xt:component>

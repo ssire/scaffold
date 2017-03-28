@@ -278,3 +278,15 @@ declare function custom:gen-activity-title( $case as element(), $activity as ele
       )
 };
 
+(: ======================================================================
+   Temporary solution to filter out 'choice' plugin with 'select2' filter
+   with select2_tags option when there are no value
+   TODO: fix 'select2' filter in AXEL
+   ====================================================================== 
+:)
+declare function custom:filter-select2-tags( $use as element() ) as element() {
+  if ($use/@values eq '') then
+    <xt:use types="input" param="class=span12"></xt:use>
+  else
+    $use
+};

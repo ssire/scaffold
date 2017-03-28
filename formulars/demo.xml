@@ -45,8 +45,9 @@
   </Row>
   <Separator/>
   <Row Class="company">
-    <Field Key="company" Tag="Company" W="6" Gap="1">Company</Field>
-    <Field Key="contact" Tag="Contact" W="6" Gap="1">Contact</Field>
+    <div id="contact"><Field Key="company" Tag="Company" W="4" Gap="1">Company</Field></div>
+    <Field Key="contact" Tag="Contact" W="4" Gap="1">Contact</Field>
+    <Button Key="information" Class="btn-small btn-primary" W="4">Information</Button>
   </Row>
   <Bindings>
     <Ajax data-ajax-scope=".company" Keys="company contact" Source="company" Service="^/selectors/contacts?company=$_"/>
@@ -55,9 +56,17 @@
       <RegExp Keys="age" Message="Age can only contain numbers" Pattern="[0-9]*">^\s*$|^\d*$</RegExp>
     </Enforce>
   </Bindings>
+  <Commands>
+    <Show Key="information" DataSource="#contact" TargetModal="information" Controller="persons/$_.modal"/>
+  </Commands>
   <Plugins>
     <Input Keys="name surname age height weight hairs eyes animal author drink"/>
     <RichText Keys="portray" Menu="dynamic"/>
     <RichText Keys="redaction" Menu="static"/>
   </Plugins>
+  <Modals>
+    <Modal Id="information" Width="620px" Appearance="plain">
+      <Title>Information</Title>
+    </Modal>
+  </Modals>
 </Form>

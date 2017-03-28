@@ -673,6 +673,39 @@
     }
     $axel.command.register('open', OpenCommand, { check : false });
   }());
+  
+  /************************************************************************************\
+  |                                                                                    |
+  |  'show' command object to open a modal with content depending on an editing field  |
+  |                                                                                    |
+  \************************************************************************************/
+  (function () {
+    function ShowCommand ( identifier, node ) {
+      this.spec = $(node);
+      this.key = identifier;
+      this.spec.bind('click', $.proxy(this, 'execute'));
+    }
+    ShowCommand.prototype = {
+      execute : function (event) {
+        var dial = this.spec.attr('data-target-modal'),
+            ptr  = this.spec.attr('data-value-source'),
+            val  = $axel(ptr).text(),
+            url  = this.spec.attr('data-src').replace('$_', val),
+            pane = $('#' + dial + ' .modal-body');
+        if (val) {
+          pane.load(url,
+            function(txt, status, xhr) {
+              if (status !== "success") { pane.html('Error while loading page'); }
+            }
+          );
+        } else {
+          pane.html('You must select a value first');
+        }
+        $('#' + dial).modal('show');
+      }
+    };
+    $axel.command.register('show', ShowCommand, { check : false });
+  }());
 
 }($axel));
 
@@ -752,3 +785,4 @@
   );
 
 }($axel));
+

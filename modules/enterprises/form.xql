@@ -88,7 +88,7 @@ return
         {
         if ($goal = 'create') then 
           <site:field Key="enterprise">
-            { custom:gen-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
+            { custom:filter-select2-tags(custom:gen-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes")) }
           </site:field>
         else
           <site:field Key="enterprise" filter="no">

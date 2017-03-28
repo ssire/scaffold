@@ -24,6 +24,11 @@ Back-end made with [Oppidum](https://www.github.com/ssire/oppidum/) XQuery frame
 
 Front-end made with [AXEL](http://ssire.github.io/axel/), [AXEL-FORMS](http://ssire.github.io/axel/) and [Bootstrap](http://twitter.github.io/bootstrap/) (all embedded inside the `resources` folder)
 
+Compatiblity
+----------
+
+The current version runs inside eXist-DB installed on Linux or Mac OS X environments only. The Windows environment is not yet supported. This requires some adaptations to the Oppidum framework amongst which to generate file paths with the file separator for Windows.
+
 License
 -------
 

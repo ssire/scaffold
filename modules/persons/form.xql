@@ -52,7 +52,7 @@ return
       {
       if ($goal = 'create') then
         <site:field Key="lastname">
-          { custom:gen-person-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes") }
+          { custom:filter-select2-tags(custom:gen-person-enterprise-selector($lang, ";select2_tags=yes;typeahead=yes")) }
         </site:field>
       else
         <site:field Key="lastname" filter="no">
