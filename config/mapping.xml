@@ -452,6 +452,9 @@
     <item name="contacts">
       <model src="models/selectors.xql"/>
     </item>
+    <item name="contracts">
+      <model src="models/selectors.xql"/>
+    </item>
   </item>
   <!-- *************************** -->
   <!-- ** dictionary (optional) ** -->

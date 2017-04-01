@@ -38,6 +38,11 @@ return
       </site:field>
       <site:field Key="contact">
         <xt:use types="choice"
+        param="filter=event optional;class=span12 a-control"
+        ></xt:use>
+      </site:field>
+      <site:field Key="contract">
+        <xt:use types="choice"
         param="filter=optional;class=span12 a-control"
         ></xt:use>
       </site:field>

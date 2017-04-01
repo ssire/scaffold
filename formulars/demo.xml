@@ -44,13 +44,21 @@
     </Cell>
   </Row>
   <Separator/>
-  <Row Class="company">
-    <div id="contact"><Field Key="company" Tag="Company" W="4" Gap="1">Company</Field></div>
-    <Field Key="contact" Tag="Contact" W="4" Gap="1">Contact</Field>
-    <Button Key="information" Class="btn-small btn-primary" W="4">Information</Button>
+  <Row>
+    <div class="contract">
+      <Row Class="company">
+        <div id="contact"><Field Key="company" Tag="Company" W="4" Gap="1">Company</Field></div>
+        <Field Key="contact" Tag="Contact" W="4" Gap="1">Contact</Field>
+        <Button Key="information" Class="btn-small btn-primary" W="4">Information</Button>
+      </Row>
+      <Row>
+        <Field Key="contract" Tag="Contract" W="8" Gap="1">Contract</Field>
+      </Row>
+    </div>
   </Row>
   <Bindings>
     <Ajax data-ajax-scope=".company" Keys="company contact" Source="company" Service="^/selectors/contacts?company=$_"/>
+    <Ajax data-ajax-scope=".contract" Keys="contact contract" Source="contact" Service="^/selectors/contracts?contact=$_"/>
     <Require Keys="name surname"/>
     <Enforce>
       <RegExp Keys="age" Message="Age can only contain numbers" Pattern="[0-9]*">^\s*$|^\d*$</RegExp>
