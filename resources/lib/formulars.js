@@ -48,7 +48,7 @@
     $('#x-display').bind('click', function() { 
       var target = $('#x-simulator').get(0),
           curval = $('#x-formular').val(),
-          tplurl = $('#x-formular option[value="' + curval +'"]').attr('data-display') || curval.replace('forms/', 'templates/') + '?goal=' + $('#x-mode').val();
+          tplurl = ($('#x-formular option[value="' + curval +'"]').attr('data-display') || curval.replace('forms/', 'templates/')) + '?goal=' + $('#x-mode').val();
       // $('body xt\\:use', t).attr('types','t_simulation')
       $axel('#x-simulator').transform(tplurl); 
       $('#c-editor-errors').removeClass('af-validation-failed'); 
