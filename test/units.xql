@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote application
+   Case tracker pilote
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 

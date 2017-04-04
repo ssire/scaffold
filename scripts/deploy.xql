@@ -203,16 +203,16 @@ declare function local:deploy ( $dir as xs:string,  $targets as xs:string*, $bas
       </target>
     else
       (),
+  if ('forms' = $targets) then
+    <target name="forms" base-url="{$base-url}">{ sg:gen-and-save-forms($formulars, $base-url) }</target>
+  else
+    (),
   if ('policies' = $targets) then
     let $refine := 
       for $group in $code/install:group[install:collection/@policy]
       return string($group/@name)
     return
       <target name="policies">{ install:install-policies($refine, $policies, $code, ())}</target>
-  else
-    (),
-  if ('forms' = $targets) then
-    <target name="forms" base-url="{$base-url}">{ sg:gen-and-save-forms($formulars, $base-url) }</target>
   else
     (),
   (:if ('services' = $targets) then

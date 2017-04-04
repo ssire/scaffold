@@ -1,6 +1,6 @@
 xquery version "1.0";
 (:~ 
- : Oppidoc Business Application Development Framework
+ : Case tracker pilote
  :
  : CRUD controller to manage Case document (read and update)
  :

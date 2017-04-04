@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Oppidoc Business Application Development Framework
+   Case tracker pilote
 
    Authors: Stéphane Sire <s.sire@oppidoc.fr>
 

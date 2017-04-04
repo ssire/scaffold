@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Oppidum Case Tracker Application
+   Case tracker pilote
 
    Creation: Stéphane Sire <s.sire@oppidoc.fr>
 

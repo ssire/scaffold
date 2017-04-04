@@ -1,7 +1,6 @@
 xquery version "1.0";
-
 (: ------------------------------------------------------------------
-   Oppidoc Case Tracker application
+   Oppidoc Business Application Development Framework
 
    Creator: Stéphane Sire <s.sire@opppidoc.fr>
 

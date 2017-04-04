@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Case tracker pilote application
+     Case tracker pilote
 
      Creator: Stéphane Sire <s.sire@opppidoc.fr>
 

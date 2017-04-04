@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Case tracker pilote application
+     Oppidoc Business Application Development Framework
 
      Creator: Stéphane Sire <s.sire@opppidoc.fr>
 

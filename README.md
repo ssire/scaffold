@@ -46,7 +46,7 @@ To run the scaffold application you need to
 3. install Oppidum inside your *projects* folder, you can follow [How to install it ?](http://www.github.com/ssire/oppidum/) section of the Oppidum README file
 4. clone this depot into your *projects* folder as a sibling of the *oppidum* folder, then :
     * go to the `scaffold/scripts` folder of this depot and run the *bootstrap.sh* command with the DB admin password as parameter
-    * open the following URL to run the **deployment script** (you can use curl or wget command line too) : `http://localhost:PORT/exist/projects/scaffold/admin/deploy?t=config,data,forms,mesh,templates,stats,users,bootstrap,policies&pwd=[ADMIN PASSWORD]` (note the *policies* target must be located at the end)
+    * open the following URL to run the **deployment script** (you can use curl or wget command line too) : `http://localhost:PORT/exist/projects/scaffold/admin/deploy?t=config,data,forms,mesh,templates,stats,users,bootstrap,policies&pwd=[ADMIN PASSWORD]`
         * this will create a *demo* user (password *test*) that you can use to connect to the application as a system administrator, developer and account manager
         * this will also create a *coach* user (password *test*) that you can use to connect to the application as a coach
 

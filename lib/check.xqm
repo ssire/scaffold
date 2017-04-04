@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: ------------------------------------------------------------------
-   CCTRACKER - Oppidoc Case Tracker
+   Oppidoc Business Application Development Framework
 
    Author: Stéphane Sire <s.sire@opppidoc.fr>
 

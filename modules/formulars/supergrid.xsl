@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Supergird Utility - Case tracker pilote library
+<!--
+     Oppidoc Business Application Development Framework
 
      Author: Stéphane Sire <s.sire@opppidoc.fr>
 

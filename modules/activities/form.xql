@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   CCTRACKER - Oppidoc Case Tracker
+   Case tracker pilote
 
    Creator: Stéphane Sire <s.sire@oppidoc.fr>
 

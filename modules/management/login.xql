@@ -1,6 +1,6 @@
 xquery version "1.0";
 (: --------------------------------------
-   Case tracker pilote application
+   Case tracker pilote
 
    Author: Stéphane Sire <s.sire@opppidoc.fr>
 
