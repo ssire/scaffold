@@ -1,0 +1,21 @@
+<Enterprises>
+  <Enterprise>
+    <Id>1</Id>
+    <Name>Acme SOftware Ltd</Name>
+    <ShortName>Acme</ShortName>
+    <CreationYear>2014</CreationYear>
+    <SizeRef>2</SizeRef>
+    <DomainActivityRef>J62</DomainActivityRef>
+    <MainActivities>web application development</MainActivities>
+    <TargetedMarkets>
+      <TargetedMarketRef>572010</TargetedMarketRef>
+      <TargetedMarketRef>581010</TargetedMarketRef>
+    </TargetedMarkets>
+    <Address>
+      <StreetNameAndNo>Improbable street, 10</StreetNameAndNo>
+      <PostalCode>123 ABC</PostalCode>
+     <Town>Upsala</Town>
+     <Country>SE</Country>
+   </Address>
+  </Enterprise>
+</Enterprises>

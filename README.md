@@ -1,4 +1,4 @@
-Case tracker pilote application
+Case tracker pilote
 =======
 
 The case tracker pilote application is a sample open source database application. It contains all the components of the *Oppidoc Business Application Development Framework* including the *Supergrid* formular generator. You can copy it or fork it to create new applications. For instance this can be used to create a Case Tracker application as documented in this [software documentation manual](https://github.com/ssire/case-tracker-manual).
@@ -18,11 +18,11 @@ The case tracker pilote application is developped and maintained by Stéphane Si
 Dependencies
 ----------
 
-Runs inside [eXist-DB](http://exist-db.org/) ([version 2.2](https://sourceforge.net/projects/exist/files/Stable/2.2/))
+Runs inside [eXist-DB](http://exist-db.org/) (developed with [version 2.2](https://bintray.com/existdb/releases/exist))
 
 Back-end made with [Oppidum](https://www.github.com/ssire/oppidum/) XQuery framework
 
-Front-end made with [AXEL](http://ssire.github.io/axel/), [AXEL-FORMS](http://ssire.github.io/axel/) and [Bootstrap](http://twitter.github.io/bootstrap/) (all embedded inside the `resources` folder)
+Front-end made with [AXEL](http://ssire.github.io/axel/), [AXEL-FORMS](http://ssire.github.io/axel/) and [Bootstrap](http://twitter.github.io/bootstrap/) (all embedded inside the *resources* folder)
 
 Compatiblity
 ----------
@@ -39,91 +39,72 @@ You are welcome to join our efforts to improve the code base at any time and to 
 Installation
 ------------
 
-### 1. Install eXist-DB
+To run the scaffold application you need to 
 
-Follow [exist db installation notes](https://github.com/ssire/oppidum/wiki/exist-db-installation-notes)
+1. install [eXist-DB](https://bintray.com/existdb/releases/exist) (the application has been developed with eXist-DB 2.2), you can follow these [installation notes](https://github.com/ssire/oppidum/wiki/exist-db-installation-notes)
+2. create a projects folder directly inside the webapp folder of your eXist-DB installation, you should call it *projects*
+3. install Oppidum inside your *projects* folder, you can follow [How to install it ?](http://www.github.com/ssire/oppidum/) section of the Oppidum README file
+4. clone this depot into your *projects* folder as a sibling of the *oppidum* folder, then :
+    * go to the `scaffold/scripts` folder of this depot and run the *bootstrap.sh* command with the DB admin password as parameter
+    * open the following URL to run the **deployment script** (you can use curl or wget command line too) : `http://localhost:PORT/exist/projects/scaffold/admin/deploy?t=config,data,forms,mesh,templates,stats,users,bootstrap,policies&pwd=[ADMIN PASSWORD]` (note the *policies* target must be located at the end)
+        * this will create a *demo* user (password *test*) that you can use to connect to the application as a system administrator, developer and account manager
+        * this will also create a *coach* user (password *test*) that you can use to connect to the application as a coach
 
-### 2. Install Oppidum
+Note that in all the instructions above before running the *bootstrap.sh* script always check `EXIST-HOME/client.properties` points to the correct PORT before executing it in case you adjusted the default eXist-DB port (8080).
 
-Follow the [How to install it ?](http://www.github.com/ssire/oppidum/) section of Oppidum README file
+Assuming you installed eXist-DB into `/usr/local/scaffold/lib`, here are the commands to execute to get it running :
 
-Following these instructions you should get Oppidum inside `/usr/local/scaffold/lib/webapp/projects/oppidum` and available at [http://localhost:8080/exist/projects/oppidum]()
-
-Do not forget to execute Oppidum post-installation script _bootstrap.sh_ as explained. Always check `EXIST-HOME/client.properties` points to the correct port before executing it
-
-### 3. Clone case tracker pilote
-
-Note that inherently to Oppidum you need to clone all your projects inside the same _projects_ folder inside eXist-DB _webapp_ folder
-
-#### Using HTTPS
-
-    cd /usr/local/scaffold/lib/webapp/projects
+    cd /usr/local/scaffold/lib
+    ./bin/startup.sh & # starts eXist-DB; skip this if already running !
+    mkdir -p webapp/projects
+    cd webapp/projects
+    git clone https://github.com/ssire/oppidum.git
+    cd oppidum/scripts
+    ./bootstrap.sh "admin PASSWORD"
+    # you can open http://localhost:PORT/exist/projects/oppidum to check Oppidum installation
+    cd ../..
     git clone https://github.com/ssire/scaffold.git
+    cd scaffold/scripts
+    ./bootstrap.sh "admin PASSWORD"
+    curl -D - "http://localhost:PORT/exist/projects/scaffold/admin/deploy?t=config,data,forms,mesh,templates,stats,users,bootstrap,policies&pwd=[admin PASSWORD]"
+    # or wget -O- [same address as the two lines above]
 
-#### Using SSH (if you registered your own SSH key inside your bitbucket profile)
+You can then open [http://localhost:PORT/exist/projects/scaffold]() and login with *demo* (password: *test*). 
 
-    cd /usr/local/cctracker/lib/webapp/projects
-    git clone git@github.com:ssire/scaffold.git
+From there you can create one or more users using the *Add a person* button in the *Community > Persons* area and you can manage user's roles in the *Users* tab in the *Admin* section since the *demo* user is a system administrator. You can also create cases since the *demo* user is also an account manager. Finally you can access the developer's menu since the *demo* user is also a developer.
 
-On Mac OS X you need to configure your SSH-agent to use you SSH Key (see available online tutorials)
-
-### 4. Bootstrap case tracker pilote database
-
-You must start your eXist-DB instance first
-
-##### 4.1 Option 1 : creating an empty database
-
-Execute the bootstrap script to pre-load application configuration data into the database. These files are read from the database when executing the application and not from the file system contrary to most other files (e.g. XQuery scripts).
-
-    cd scripts
-    ./bin/bootstrap.sh {admin-password}
-    
-Then execute the deployment script script/deploy.xql.
-
-You can execute it directly from your browser by entering into the address bar :
-
-    http:127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,stats,policies&pwd=[PASSWORD]&m=dev
-
-or using curl from a terminal if available :
-
-    curl -D - "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,stats,policies&pwd=[PASSWORD]&m=dev"
-
-or using wget from a terminal if available :
-
-    sudo wget --no-check-certificate -O- "http://127.0.0.1:[PORT]/exist/projects/scaffold/admin/deploy?t=mesh,config,data,forms,stats,policies&pwd=[PASSWORD]&m=dev"
-
-PASSWORD is the *admin* database password<br/>
 Read header comments in `scripts/deploy.xql` to learn more about the different deployment targets.
 
-**WARNING**: do not forget the *policies* target, which is required only the first time, to setup collection permissions, in particular for a specific permission category (owner, group or guest) the parent collection must be executable so that files can be read since eXist-DB 2.2.
+## Trouble shooting
 
-##### 4.2 Option 2 : by restoring an existing database backup
+#### Setting up an admin password
 
-You can restore a full database backup.
+You need to setup a database admin password to run the *bootstrap.sh* scripts. In case your forgot it you can quickly use the java admin client in command line mode :
 
-### 5. Open case tracker pilote application
+    $ cd /usr/local/scaffold/lib/
+    $ ./bin/client.sh -s
+    -s
+    Using locale: fr_FR.UTF-8
+    eXist version 2.2 (master-5c5aadc), Copyright (C) 2001-2017 The eXist-db Project
+    eXist-db comes with ABSOLUTELY NO WARRANTY.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; for details read the license file.
 
-You can start at [http://localhost:8080/exist/projects/scaffold]()
 
-You can connect with the *admin* user of the database at first, then create one or more users using the *Add a person* button in the *Community > Persons* area. You can manage user roles in the *Users* tab in the *Admin* area.
+    type help or ? for help.
+    exist:/db>passwd admin
+    password: ***
+    re-enter password: ***
+    exist:/db>quit
 
-Although you could create a case with the *admin* user this is not recommended since it is the only user without any person's record in the persons collection. Thus you should create at least one user with the *System Administrator* role and/or *Account Manager* role for that purpose. Give a user the *Software Developer* role to grant him/her access to the developer's menu.
+#### Running the application deployment script
 
-### 6. Start creating cases and activities
+It seems you must not be logged to the scaffold application to run the deployment script `/admin/deploy`. So in case your try to run it multiple times, if you get an error, logout and run it again. 
 
-If you started from scratch then you can only login with the *admin* user. You must then create a user with the account manager role, and create a login for that user. For that purpose :
-
-* add the person from Community > Persons (click on *Add a person*)
-* assign Account Manager role to that user from Admin > Users (you can also assign her the System Administrator role to allow her to administrate the other users)
-* create a login for that user from Admin > Users 
-
-you can then login with that user to create cases and activities
-
+The *users*, *bootstrap* and *policies* targets are required only the first time, to create the initial `persons.xml` and `enterprises.xml` resources, and to setup collection permissions. DO NOT re-run the *bootstrap* target if you have created more users or enterprises because they would be lost.
 
 Coding conventions
 ---------------------
 
 * _soft tabs_ (2 spaces per tab)
 * no space at end of line (ex. with sed : `sed -E 's/[ ]+$//g'`)
-
-
