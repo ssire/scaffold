@@ -3,8 +3,8 @@ Case tracker pilote (*scaffold* version)
 
 Since April 25th 2017 this project has been splitted into two projects :
 
-* [XQuery Content Management Library](https://github.com/ssire/xquery-cm-library)
-* [Case tracker pilote](https://github.com/ssire/case tracker pilote) demonstration application
+* [XQuery Content Management Library](https://github.com/ssire/xquery-cm-lib)
+* [Case tracker pilote](https://github.com/ssire/case-tracker-pilote) demonstration application
 
 The **XQuery Content Management Library** project contains all the common libraries and data used to create applications with workflow management, semi-structured content editing, formular generation and e-mail output. You can clone it to create content management applications.
 
